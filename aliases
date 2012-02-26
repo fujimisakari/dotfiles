@@ -1,0 +1,59 @@
+
+##------------------------------------------------------------------##
+#                              aliases                               #
+##------------------------------------------------------------------##
+
+## set aliase
+case "${OSTYPE}" in
+  linux*)
+    alias ls='ls -vF --color=auto'
+    alias ll='ls -lavFh --color'
+    alias psa='ps auxwwf | lv'
+    alias w3m='/usr/bin/w3m -B'
+    alias ptree='pstree -acGhlunp | more'
+    alias df='df -h'
+  ;;
+  darwin*)
+    alias ls='ls -FGh'
+    alias ll='ls -GlaFh'
+    alias w3m='/usr/local/bin/w3m -B'
+    alias ptree='pstree | lv'
+    alias updatemacdb='sudo /usr/libexec/locate.updatedb'
+  ;;
+esac
+
+alias h='history -i -D -E -40'
+alias pss='ps -aef | lv'
+alias scrin='screen -U -t $HOST'
+alias ssh='ssh -A -l fujimo'
+alias scp='scp -r'
+alias diff='diff -u'
+alias df='df -h'
+alias du='du -h'
+alias p='pwd'
+alias eng='LANG=C LANGUAGE=C LC_ALL=C LC_TIME=C LC_MESSAGES=C'
+alias euc='LANG=ja_JP.eucJP LANGUAGE=ja LC_ALL=ja_JP.eucJP'
+alias utf='LANG=ja_JP.UTF-8 LANGUAGE=ja LC_ALL=ja_JP.UTF-8'
+alias cpan='perl -MCPAN -e shell'
+alias less='/usr/share/vim/vim[0-9]*/macros/less.sh'
+alias dl='find . -type d | xargs du -hs'
+alias netstat='netstat -antul'
+
+## global aliase
+alias -g X='| xsel --input --clipboard'
+alias -g L='| lv'
+alias -g G='| grep'
+alias -g M='| more'
+alias -g W='| wc'
+alias -g S='| sort'
+alias -g U='| uniq'
+alias -g A='| awk'
+alias -g H='| head'
+alias -g LE='| less'
+alias -g SE='| sed'
+alias -g XA='| xargs'
+
+## fool ploof
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'

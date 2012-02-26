@@ -1,0 +1,101 @@
+
+##------------------------------------------------------------------##
+#                             functions                              #
+##------------------------------------------------------------------##
+
+case "${OSTYPE}" in
+  linux*)
+    ## CPU 使用率の高い方から15つ
+    function psc() {
+      psa | head -n 1
+      psa | sort -r -n -k 3 | grep -v "ps auxww" | grep -v grep | head -n 15
+    }
+
+    ## メモリ占有率の高い方から15つ
+    function psm() {
+      psa | head -n 1
+      psa | sort -r -n -k 4 | grep -v "ps auxww" | grep -v grep | head -n 15
+    }
+
+    ## 全プロセスから引数の文字列を含むものを grep
+    function psg() {
+      psa | head -n 1                                    # ラベルを表示
+      psa | grep $* | grep -v "ps auxww" | grep -v grep  # grep プロセスを除外
+    }
+
+    ## cd の後 ls も実行
+    function chpwd() {
+      ls -F --color=auto
+    }
+  ;;
+  darwin*)
+    ## cd の後 ls も実行
+    function chpwd() { ls -FG }
+  ;;
+esac
+
+## SSHコマンドはscreenの新しい窓で
+if [ $HOST = "gajumaru" -o $HOST = "univers.local" -o $HOST = "jupiter.global-web" ]; then
+  function ssh_screen(){
+    eval server=\${$#}
+    screen -t $server ssh -l fujimo "$@"
+  }
+  if [ x$TERM = xscreen-bce ]; then
+    alias ssh=ssh_screen
+  fi
+fi
+
+## 全履歴一覧を出力する
+function histall { history -i -D -E 1 }
+
+## 引数のファイルを utf8 や euc に変換
+# -w utf8  -e euc -Lu 改行コードをLFにする
+function nkf_utf(){
+  for i in $@; do;
+    nkf -w -Lu --overwrite $i
+  done;
+}
+function nkf_euc(){
+  for i in $@; do;
+      nkf -e -Lu --overwrite $i
+  done;
+}
+
+## 文字列をコメント文字で囲んだりアスキーアートを作ったり
+function art-boxes() {
+  echo $1 | nkf -We | boxes -a c -s $2 -d $3 | nkf -Ew
+}
+
+## ターミナル上の現在のディレクトリをdired で開く
+## Invoke the ``dired'' of current working directory in Emacs buffer.
+function dired() {
+    case "${OSTYPE}" in
+      linux*)
+        emacsclient -e "(dired \"${1:a}\")"
+      ;;
+      darwin*)
+        /Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e "(dired \"${1:a}\")"
+      ;;
+    esac
+}
+
+## Emacs の現在のバッファに対応するディレクトリをターミナル上の zsh で開く
+## Chdir to the ``default-directory'' of currently opened in Emacs buffer.
+function cde() {
+    case "${OSTYPE}" in
+      linux*)
+          EMACS_CWD=`emacsclient -e "
+            (if (featurep 'elscreen)
+                (elscreen-current-directory)
+              (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
+      ;;
+      darwin*)
+          EMACS_CWD=`/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e "
+            (if (featurep 'elscreen)
+                (elscreen-current-directory)
+              (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
+      esac
+
+    echo "chdir to $EMACS_CWD"
+    cd "$EMACS_CWD"
+}
