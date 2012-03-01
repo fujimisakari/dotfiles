@@ -9,7 +9,7 @@ case "${OSTYPE}" in
     PATH=$PATH:/sbin:/usr/sbin:$HOME/misc/bin
   ;;  
   darwin*)
-    PATH=/usr/local/bin:$PATH:/sbin
+    PATH=/usr/local/bin:$PATH:/sbin:$HOME/misc/bin
   ;;  
 esac
 

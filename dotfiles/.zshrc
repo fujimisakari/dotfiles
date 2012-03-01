@@ -18,6 +18,12 @@ if [ -f $ZSHUSERDIR/functions ]; then
     source $ZSHUSERDIR/functions
 fi
 
+## autojump.zsh
+fpath=($fpath $ZSHUSERDIR/lib(N))
+if [ -f $ZSHUSERDIR/autojump.zsh ]; then
+    source $ZSHUSERDIR/autojump.zsh
+fi
+
 ## emacs
 #if [ $HOST = "gajumaru" ]; then
 #    source $ZSHUSERDIR/emacs
