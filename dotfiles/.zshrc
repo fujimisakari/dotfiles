@@ -86,7 +86,7 @@ case "${TERM}" in
 esac
 
 # 端末元が ratpoison or emacs だった場合は screen で立ち上げる
-if [ $TERM = "eterm-color" -o $GDMSESSION = "ratpoison" -o $HOST = "universe.local" -o $HOST = "jupiter.global-web" ]; then
+if [ $TERM = "eterm-color" -o $ALLOW_HOST = "true" ]; then
     if [ $TERM != "screen-bce" ]; then
         scrin
     fi
@@ -165,7 +165,7 @@ esac
 #                         キーチェイン設定                           #
 ##------------------------------------------------------------------##
 
-if [ $HOST = "gajumaru" -o $HOST = "universe.local" -o $HOST = "jupiter.global-web" ]; then
+if [ $ALLOW_HOST = "true" ]; then
     if ssh-add -l > /dev/null 2>&1; [ $? -eq 0  ]; then
         keychain
         . ~/.keychain/$HOST-sh
@@ -214,7 +214,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない�
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 
 # macのターミナルは、uim-skkを利用する
-if [ $HOST = "universe.local" -o $HOST = "jupiter.global-web" ]; then
+if [ `uname` = "Darwin" ]; then
     case "${TERM}" in 
         screen*)
             uim-fep

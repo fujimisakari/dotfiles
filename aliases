@@ -12,6 +12,7 @@ case "${OSTYPE}" in
     alias w3m='/usr/bin/w3m -B'
     alias ptree='pstree -acGhlunp | more'
     alias df='df -h'
+    alias -g C='| xsel --input --clipboard'
   ;;
   darwin*)
     alias ls='ls -FGh'
@@ -19,13 +20,15 @@ case "${OSTYPE}" in
     alias w3m='/usr/local/bin/w3m -B'
     alias ptree='pstree | lv'
     alias updatemacdb='sudo /usr/libexec/locate.updatedb'
+    alias emacsclient='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
+    alias -g C='| /usr/bin/pbcopy'
   ;;
 esac
 
 alias h='history -i -D -E -40'
 alias pss='ps -aef | lv'
 alias scrin='screen -U -t $HOST'
-alias ssh='ssh -A -l fujimo'
+alias ssh='ssh -A -l $USER'
 alias scp='scp -r'
 alias diff='diff -u'
 alias df='df -h'
@@ -40,7 +43,6 @@ alias dl='find . -type d | xargs du -hs'
 alias netstat='netstat -antul'
 
 ## global aliase
-alias -g X='| xsel --input --clipboard'
 alias -g L='| lv'
 alias -g G='| grep'
 alias -g M='| more'

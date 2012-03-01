@@ -35,10 +35,10 @@ case "${OSTYPE}" in
 esac
 
 ## SSHコマンドはscreenの新しい窓で
-if [ $HOST = "gajumaru" -o $HOST = "univers.local" -o $HOST = "jupiter.global-web" ]; then
+if [ $ALLOW_HOST="true" ]; then
   function ssh_screen(){
     eval server=\${$#}
-    screen -t $server ssh -l fujimo "$@"
+    screen -t $server ssh -l $USER "$@"
   }
   if [ x$TERM = xscreen-bce ]; then
     alias ssh=ssh_screen
