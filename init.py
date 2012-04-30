@@ -7,7 +7,7 @@ import  platform
 from os import system
 
 if 'desktop' in sys.argv:
-    dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes']
+    dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore']
 else:
     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc']
 
