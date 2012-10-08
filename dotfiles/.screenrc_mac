@@ -27,7 +27,7 @@ escape ^Zz
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kd} %-w%40L>%{= kb}%n %t%{-}%+w"
+caption always "%{= wk} %-w%40L>%{= bk}%n %t%{-}%+w"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off

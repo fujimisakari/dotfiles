@@ -12,16 +12,24 @@ case "${OSTYPE}" in
     alias w3m='/usr/bin/w3m -B'
     alias ptree='pstree -acGhlunp | more'
     alias df='df -h'
+    alias netstat='netstat -antul'
     alias -g C='| xsel --input --clipboard'
   ;;
   darwin*)
-    alias ls='ls -FGh'
-    alias ll='ls -GlaFh'
+    alias ls='/usr/local/bin/gls -vF --color=auto'
+    alias ll='/usr/local/bin/gls -lavFh --color'
+    alias cp='/usr/local/bin/gcp'
+    alias mv='/usr/local/bin/gmv'
+    alias rm='/usr/local/bin/grm'
+    alias find='/usr/local/bin/gfind'
     alias w3m='/usr/local/bin/w3m -B'
     alias ptree='pstree | lv'
     alias updatemacdb='sudo /usr/libexec/locate.updatedb'
     alias emacsclient='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
     alias -g C='| /usr/bin/pbcopy'
+    alias boxes='/usr/local/bin/boxes'
+    alias finder='open .'
+    alias epylint='/Users/fujimo/.pythonbrew/pythons/Python-2.7.2/bin/epylint'
   ;;
 esac
 
@@ -40,7 +48,6 @@ alias utf='LANG=ja_JP.UTF-8 LANGUAGE=ja LC_ALL=ja_JP.UTF-8'
 alias cpan='perl -MCPAN -e shell'
 alias less='/usr/share/vim/vim[0-9]*/macros/less.sh'
 alias dl='find . -type d | xargs du -hs'
-alias netstat='netstat -antul'
 
 ## global aliase
 alias -g L='| lv'
@@ -59,3 +66,4 @@ alias -g XA='| xargs'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+

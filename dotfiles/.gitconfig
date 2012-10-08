@@ -1,6 +1,6 @@
 [user]
-    name = fujimo
-    email = ryo.fujimoto@fujimo-net.com
+    name = Ryo Fujimoto
+    email = fujimisakari@gmail.com
 [color]
     ui = auto
 [core]
@@ -16,7 +16,7 @@
     sh = show
     so = remote show origin
     ft = fetch
-    up = pull --rebase               # pull rebase
+    pr = pull --rebase               # pull rebase
     rbm = rebase master              # masterへのrebaseはよく使うのでalias
 
     # branch関連
@@ -29,7 +29,8 @@
     wc = whatchanged                 # logに変更されたファイルも一緒に出す
     ls = log --stat                  # logに変更されたファイルも一緒に出す
     lp = log -p                      # diffも一緒に出す
-    la = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --date=short
+    la = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset'
+    laf = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --author=fujimoto
     lo = log origin                  # originのlog
     oneline = log --pretty=oneline
     ranking = shortlog -s -n --no-merges

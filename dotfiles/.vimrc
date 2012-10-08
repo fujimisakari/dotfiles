@@ -12,6 +12,8 @@ set vb t_vb=
 " eol     : 改行
 " start   : 挿入モード開始位置より手前の文字
 set backspace=indent,eol,start
+"タブはスペース4つ
+set expandtab
 
 "----------------------------------------------------
 " バックアップ関係
@@ -63,6 +65,10 @@ set matchtime=2
 syntax on
 " 検索結果文字列のハイライトを有効にする
 set hlsearch
+" 検索ハイラトの色を変える
+hi Search term=reverse ctermbg=11 guibg=Yellow guifg=black
+" 検索ハイライトを消す
+nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 " コメント文の色を変更
 highlight Comment ctermfg=DarkCyan
 " コマンドライン補完を拡張モードにする
@@ -169,3 +175,35 @@ set shortmess+=I
 
 "256色表示設定
 set t_Co=256
+
+"Tabをハイライトさせる
+function! SOLTabHilight()
+    syntax match SOLTabSpace "	" display containedin=ALL
+    highlight SOLTabSpace term=underline ctermbg=DarkCyan
+endf
+
+"行頭のスペースの連続をハイライトさせる
+"Tab文字も区別されずにハイライトされるので、区別したいときはTab文字の表示を別に
+"設定する必要がある。
+function! SOLBackSpaceHilight()
+    syntax match SOLBackSpace "\s\+$" display containedin=ALL
+    highlight SOLBackSpace term=underline ctermbg=Darkgrey
+endf
+
+"全角スペースをハイライトさせる。
+function! JISX0208SpaceHilight()
+    syntax match JISX0208Space "　" display containedin=ALL
+    highlight JISX0208Space term=underline ctermbg=LightCyan
+endf
+"syntaxの有無をチェックし、新規バッファと新規読み込み時にハイライトさせる
+if has("syntax")
+    syntax on
+        augroup invisible
+        autocmd! invisible
+        autocmd BufNew,BufRead * call SOLTabHilight()
+        autocmd BufNew,BufRead * call SOLBackSpaceHilight()
+        autocmd BufNew,BufRead * call JISX0208SpaceHilight()
+    augroup END
+endif
+
+set expandtab

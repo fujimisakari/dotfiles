@@ -1,36 +1,5 @@
 
 ##------------------------------------------------------------------##
-#                         各種設定の読み込み                         #
-##------------------------------------------------------------------##
-
-## colors
-if [ -f $ZSHUSERDIR/colors ]; then
-    source $ZSHUSERDIR/colors
-fi
-
-## aliases
-if [ -f $ZSHUSERDIR/aliases ]; then
-    source $ZSHUSERDIR/aliases
-fi
-
-## functions
-if [ -f $ZSHUSERDIR/functions ]; then
-    source $ZSHUSERDIR/functions
-fi
-
-## autojump.zsh
-fpath=($fpath $ZSHUSERDIR/lib(N))
-if [ -f $ZSHUSERDIR/autojump.zsh ]; then
-    source $ZSHUSERDIR/autojump.zsh
-fi
-
-## emacs
-#if [ $HOST = "gajumaru" ]; then
-#    source $ZSHUSERDIR/emacs
-#fi
-
-
-##------------------------------------------------------------------##
 #                          プロンプト関係                            #
 ##------------------------------------------------------------------##
 
@@ -61,7 +30,7 @@ case "${TERM}" in
                     echo -ne "\ek\e\\"; print -Pn "\e]0; %~\a"
             esac
         }
-        PROMPT=$'$BLUE<$RED%h$BLUE>[$YELLOW%D{%m}$BLUE/$YELLOW%D{%d}$BLUE-$YELLOW%D{%H}$BLUE:$YELLOW%D{%M}$BLUE:$YELLOW%D{%S}$BLUE]($GREEN%/$BLUE)\n$GREEN%m$MAGENTA%# %{$reset_color%}'
+        PROMPT=$'$BLUE<$RED%h$BLUE>`rprompt-git-current-branch`[$YELLOW%D{%m}$BLUE/$YELLOW%D{%d}$BLUE-$YELLOW%D{%H}$BLUE:$YELLOW%D{%M}$BLUE:$YELLOW%D{%S}$BLUE]($GREEN%/$BLUE)\n$GREEN%m$MAGENTA%# %{$reset_color%}'
         PROMPT2="$WHITE%_>%{$reset_color%}"
         SPROMPT="$WHITE%r is correct? [n,y,a,e]: %{$reset_color%}"
 
@@ -84,13 +53,6 @@ case "${TERM}" in
         SPROMPT="$WHITE%r is correct? [n,y,a,e]: %{$reset_color%}"
     ;;
 esac
-
-# 端末元が ratpoison or emacs だった場合は screen で立ち上げる
-if [ $TERM = "eterm-color" -o $ALLOW_HOST = "true" ]; then
-    if [ $TERM != "screen-bce" ]; then
-        scrin
-    fi
-fi
 
 
 ##------------------------------------------------------------------##
@@ -118,6 +80,7 @@ setopt extended_history      # ディレクトリスタックに重複する物�
 
 autoload -U compinit     # 標準の補完設定
 compinit
+
 #setopt auto_cd           # ディレクトリ名を入力するだけでカレントディレクトリを変更
 setopt auto_menu         # タブキー連打で補完候補を順に表示
 setopt correct           # 自動修正機能(候補を表示)
@@ -132,6 +95,13 @@ setopt GLOB_DOTS         # `.' で開始するファイル名にマッチさせ�
 setopt auto_pushd        # cd - と入力してTabキーで今までに移動したディレクトリを一覧表示
 setopt complete_aliases  # 補完される前にエリアスコマンドのオリジナルまで展開してチェックする
 
+## git補完に追加
+if [ -f $ZSHUSERDIR/lib/git-completion.bash ]; then
+    autoload -U bashcompinit
+    bashcompinit
+    source $ZSHUSERDIR/lib/git-completion.bash
+fi
+
 ## 補完候補の矢印キーで移動有効
 zstyle ':completion:*:default' menu select=1
 
@@ -140,7 +110,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## sudoでも補完ができるようにする
 zstyle ':completion:*:sudo:*'\
-command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin 
+command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 ## kill の候補にも色付き表示
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
@@ -209,16 +179,16 @@ unsetopt no_clobber          # リダイレクトで上書きを許可
 umask 022                             # ファイル作成時のパーミッション
 bindkey -e                            # bindkeyはemacs
 bindkey -r "^J"                       # "^J"のキーバインドを削除
+bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
 #bindkey "^h" backward-kill-word      # Ctrl-h で単語ごとに削除
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 
 # macのターミナルは、uim-skkを利用する
-if [ `uname` = "Darwin" ]; then
-    case "${TERM}" in 
-        screen*)
-            uim-fep
-        ;;
-    esac
-fi
-
+# if [ `uname` = "Darwin" ]; then
+#     case "${TERM}" in 
+#         screen*)
+#             uim-fep
+#         ;;
+#     esac
+# fi
