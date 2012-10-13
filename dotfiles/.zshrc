@@ -36,10 +36,10 @@ case "${TERM}" in
 
         ## コマンド実行直後に実行
         preexec() {
-            local HOUR="`date +%k`"
-            local MINUTE="`date +%M`"
-            local SECOND="`date +%S`"
-            echo -e "\e[34m[\e[m\e[1;33m$HOUR\e[m\e[34m:\e[m\e[1;33m$MINUTE\e[m\e[34m:\e[m\e[1;33m$SECOND\e[m\e[34m]\e[m\n"
+            #local HOUR="`date +%k`"
+            #local MINUTE="`date +%M`"
+            #local SECOND="`date +%S`"
+            #echo -e "\e[34m[\e[m\e[1;33m$HOUR\e[m\e[34m:\e[m\e[1;33m$MINUTE\e[m\e[34m:\e[m\e[1;33m$SECOND\e[m\e[34m]\e[m\n"
         }
     ;;
     # trampでの接続用
