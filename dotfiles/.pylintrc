@@ -11,7 +11,10 @@ init-hook='import sys;
            sys.path.append("/Users/fujimo/projects/genju-hime/application/website/");
            sys.path.append("/Users/fujimo/projects/genju-hime/application/submodule/");
            sys.path.append("/Users/fujimo/projects/genju-hime/application/eventmodule/");
-           sys.path.append("/Users/fujimo/.virtualenvs/genju-hime/lib/python2.7/site-packages/");'
+           sys.path.append("/Users/fujimo/.virtualenvs/genju-hime/lib/python2.7/site-packages/");
+           #sys.path.append("/Users/fujimo/dev/my/otherbu/");
+           #sys.path.append("/Users/fujimo/dev/my/otherbu/module/");
+           #sys.path.append("/Users/fujimo/.virtualenvs/otherbu/lib/python2.7/site-packages/");'
 
 # Profiled execution.
 profile=no
@@ -157,7 +160,7 @@ ignore-mixin-members=yes
 
 # List of classes names for which member attributes should not be checked
 # (useful for classes with attributes dynamically set).
-ignored-classes=SQLObject,OpenClass,dict,Information,Event,Inspection,Activity,Callback,BattleMemberBoss,BattleResult,DummyBossCard,BattleMemberPlayer,NullBattleMemberPlayer,DummyCard,ImasGuildMember,ImasGuild,DailyAccessLog
+ignored-classes=SQLObject,OpenClass,dict,Information,Event,Inspection,Activity,Callback,BattleMemberBoss,BattleResult,DummyBossCard,BattleMemberPlayer,NullBattleMemberPlayer,DummyCard,ImasGuildMember,ImasGuild,DailyAccessLog,DateTimeField
 
 # When zope mode is activated, add a predefined set of Zope acquired attributes
 # to generated-members.

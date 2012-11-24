@@ -63,7 +63,7 @@ alias -g SE='| sed'
 alias -g XA='| xargs'
 
 ## fool ploof
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
+#alias cp='/usr/local/bin/gcp -i'
+#alias mv='mv -i'
+#alias rm='rm -i'
 
