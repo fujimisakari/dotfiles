@@ -4,6 +4,7 @@ anything-c-adaptive-history
 auto-save-list
 fujimoto_settings.py
 restart.sh
+mrestart.sh
 all_migrate.sh
 url
 tramp
