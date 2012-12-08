@@ -27,9 +27,9 @@ zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
 zstyle ":vcs_info:git:*" check-for-changes true
 # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
-zstyle ":vcs_info:git:*" formats "${FRAM}[${GREEN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c"
+zstyle ":vcs_info:git:*" formats "${FRAM}[${CYAN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c"
 # gitリポジトリに対して、コンフリクトなどの情報を表示する
-zstyle ":vcs_info:git:*" actionformats "${FRAM}[${GREEN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c${FRAM}<${RED}%a${FRAM}>"
+zstyle ":vcs_info:git:*" actionformats "${FRAM}[${CYAN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c${FRAM}<${RED}%a${FRAM}>"
 # addしていない変更があることを示す文字列
 zstyle ":vcs_info:git:*" unstagedstr "${FRAM}<${RED}U${FRAM}>"
 # commitしていないstageがあることを示す文字列
