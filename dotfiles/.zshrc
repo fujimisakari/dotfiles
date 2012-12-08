@@ -5,15 +5,15 @@
 autoload -U colors
 colors
 
-GRAY=${fg[gray]}
-RED=${fg[red]}
-GREEN=${fg[green]}
-YELLOW=${fg[yellow]}
-BLUE=${fg[blue]}
-MAGENTA=${fg[magenta]}
-CYAN=${fg[cyan]}
-BROWN=${fg[brown]}
-WHITE=${fg[white]}
+GRAY=$'%{\e[1;30m%}'
+RED=$'%{\e[1;31m%}'
+GREEN=$'%{\e[1;32m%}'
+YELLOW=$'%{\e[1;33m%}'
+BLUE=$'%{\e[0;34m%}'
+MAGENTA=$'%{\e[1;35m%}'
+CYAN=$'%{\e[1;36m%}'
+LIGHT_GRAY=$'%{\e[1;37m%}'
+WHITE=$'%{\e[1;37m%}'
 FRAM=${BLUE}
 
 
