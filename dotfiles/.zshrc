@@ -1,20 +1,65 @@
-
 ##------------------------------------------------------------------##
-#                          プロンプト関係                            #
+#                               color                                #
 ##------------------------------------------------------------------##
 
 autoload -U colors
 colors
 
-local GRAY=$'%{\e[1;30m%}'
-local RED=$'%{\e[1;31m%}'
-local GREEN=$'%{\e[1;32m%}'
-local YELLOW=$'%{\e[1;33m%}'
-local BLUE=$'%{\e[0;34m%}'
-local MAGENTA=$'%{\e[1;35m%}'
-local CYAN=$'%{\e[1;36m%}'
-local LIGHT_GRAY=$'%{\e[1;37m%}'
-local WHITE=$'%{\e[1;37m%}'
+GRAY=${fg[gray]}
+RED=${fg[red]}
+GREEN=${fg[green]}
+YELLOW=${fg[yellow]}
+BLUE=${fg[blue]}
+MAGENTA=${fg[magenta]}
+CYAN=${fg[cyan]}
+BROWN=${fg[brown]}
+WHITE=${fg[white]}
+FRAM=${BLUE}
+
+
+##------------------------------------------------------------------##
+#                              vcs-info                              #
+##------------------------------------------------------------------##
+
+autoload vcs_info
+# gitのみ有効にする
+zstyle ":vcs_info:*" enable git
+# commitしていない変更をチェックする
+zstyle ":vcs_info:git:*" check-for-changes true
+# gitリポジトリに対して、変更情報とリポジトリ情報を表示する
+zstyle ":vcs_info:git:*" formats "${FRAM}[${GREEN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c"
+# gitリポジトリに対して、コンフリクトなどの情報を表示する
+zstyle ":vcs_info:git:*" actionformats "${FRAM}[${GREEN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c${FRAM}<${RED}%a${FRAM}>"
+# addしていない変更があることを示す文字列
+zstyle ":vcs_info:git:*" unstagedstr "${FRAM}<${RED}U${FRAM}>"
+# commitしていないstageがあることを示す文字列
+zstyle ":vcs_info:git:*" stagedstr "${FRAM}<${RED}S${FRAM}>"
+
+git_info_push(){
+    if [ "$(git remote 2>/dev/null)" != "" ]; then
+        local head="$(git rev-parse HEAD)"
+        local remote
+        for remote in $(git rev-parse --remotes) ; do
+            if [ "$head" = "$remote" ]; then return 0 ; fi
+        done
+        echo "${FRAM}<${RED}P${FRAM}>"
+    fi
+}
+
+git_info_stash(){
+    if [ "$(git stash list 2>/dev/null)" != "" ]; then
+        echo "${FRAM}{${RED}s${FRAM}}"
+    fi
+}
+
+custom_vcs_info(){
+    vcs_info
+    echo $vcs_info_msg_0_$(git_info_push)
+}
+
+##------------------------------------------------------------------##
+#                          プロンプト関係                            #
+##------------------------------------------------------------------##
 
 case "${TERM}" in
     eterm-color*|kterm*|xterm*|screen*)
@@ -30,9 +75,10 @@ case "${TERM}" in
                     echo -ne "\ek\e\\"; print -Pn "\e]0; %~\a"
             esac
         }
-        PROMPT=$'$BLUE<$RED%h$BLUE>`rprompt-git-current-branch`[$YELLOW%D{%m}$BLUE/$YELLOW%D{%d}$BLUE-$YELLOW%D{%H}$BLUE:$YELLOW%D{%M}$BLUE:$YELLOW%D{%S}$BLUE]($GREEN%/$BLUE)\n$GREEN%m$MAGENTA%# %{$reset_color%}'
-        PROMPT2="$WHITE%_>%{$reset_color%}"
-        SPROMPT="$WHITE%r is correct? [n,y,a,e]: %{$reset_color%}"
+        PROMPT=$'${FRAM}<${YELLOW}%h${FRAM}>$(custom_vcs_info)${FRAM}(${GREEN}%/${FRAM})\n${GREEN}%m${MAGENTA}%# %{$reset_color%}'
+        PROMPT2="${WHITE}%_>%{$reset_color%}"
+        SPROMPT="${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}"
+        RPROMPT=""
 
         ## コマンド実行直後に実行
         preexec() {
@@ -48,9 +94,9 @@ case "${TERM}" in
         unsetopt zle
     ;;
     *)
-        PROMPT="$GREEN%m$MAGENTA%# %{$reset_color%}"
-        PROMPT2="$WHITE%_>%{$reset_color%}"
-        SPROMPT="$WHITE%r is correct? [n,y,a,e]: %{$reset_color%}"
+        PROMPT="${GREEN}%m${MAGENTA}%# %{$reset_color%}"
+        PROMPT2="${WHITE}%_>%{$reset_color%}"
+        SPROMPT="${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}"
     ;;
 esac
 
