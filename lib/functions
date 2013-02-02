@@ -66,6 +66,20 @@ function art-boxes() {
   echo $1 | nkf -We | boxes -a c -s $2 -d $3 | nkf -Ew
 }
 
+## 画像サイズを出力する
+function imgsize() {
+  for i in $@; do;
+    identify $i | awk '{print $1, $3}'
+  done;
+}
+
+## カレント画像サイズを出力する
+function imgsize_all() {
+  for i in `ls`; do
+    identify $i | awk '{print $1, $3}'
+  done
+}
+
 ## ターミナル上の現在のディレクトリをdired で開く
 ## Invoke the ``dired'' of current working directory in Emacs buffer.
 function e() {

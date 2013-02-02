@@ -9,7 +9,7 @@ from os import system
 if 'desktop' in sys.argv:
     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore']
 else:
-    dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc']
+    dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.tigrc']
 
 r = re.compile("Linux")
 for dotfile in dotfiles_list:
@@ -23,4 +23,3 @@ for dotfile in dotfiles_list:
             system("ln -sf ~/misc/dotfiles/.screenrc_mac ~/.screenrc")
         else:
             system("ln -sf ~/misc/dotfiles/" + dotfile + " ~/.")
-

@@ -7,8 +7,8 @@ restart.sh
 mrestart.sh
 all_migrate.sh
 url
+private
 tramp
-eijiro
 skk-jisyo.utf8
 .DS_Store
 *.svn

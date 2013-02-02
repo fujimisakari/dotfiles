@@ -25,7 +25,7 @@ autoload vcs_info
 # gitのみ有効にする
 zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
-zstyle ":vcs_info:git:*" check-for-changes true
+# zstyle ":vcs_info:git:*" check-for-changes true
 # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
 zstyle ":vcs_info:git:*" formats "${FRAM}[${CYAN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c"
 # gitリポジトリに対して、コンフリクトなどの情報を表示する
