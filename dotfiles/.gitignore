@@ -3,6 +3,7 @@ archive-contents
 anything-c-adaptive-history
 auto-save-list
 fujimoto_settings.py
+private_config.py
 restart.sh
 mrestart.sh
 all_migrate.sh
