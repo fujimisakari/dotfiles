@@ -67,7 +67,8 @@ case "${OSTYPE}" in
     PATH=$PATH:/sbin:/usr/sbin:$HOME/misc/bin
   ;;
   darwin*)
-    PATH=/usr/local/bin:$PATH:/sbin:$HOME/misc/bin
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH:/sbin:$HOME/misc/bin
+    export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   ;;
 esac
 

@@ -80,6 +80,15 @@ function imgsize_all() {
   done
 }
 
+## githubへアクセス
+function gh() {
+  if [ $1 ]; then
+    hub browse -- commit/$1
+  else
+    hub browse
+  fi
+}
+
 ## ターミナル上の現在のディレクトリをdired で開く
 ## Invoke the ``dired'' of current working directory in Emacs buffer.
 function e() {
