@@ -26,7 +26,6 @@ case "${OSTYPE}" in
     alias -g C='| /usr/bin/pbcopy'
     alias boxes='/usr/local/bin/boxes'
     alias finder='open .'
-    alias epylint='/Users/fujimo/.pythonbrew/pythons/Python-2.7.2/bin/epylint'
   ;;
 esac
 

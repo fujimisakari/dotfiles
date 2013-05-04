@@ -5,16 +5,19 @@
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-init-hook='import sys;
-           sys.path.append("/Users/fujimo/projects/genju-hime/application/");
-           sys.path.append("/Users/fujimo/projects/genju-hime/application/module/");
-           sys.path.append("/Users/fujimo/projects/genju-hime/application/website/");
-           sys.path.append("/Users/fujimo/projects/genju-hime/application/submodule/");
-           sys.path.append("/Users/fujimo/projects/genju-hime/application/eventmodule/");
-           sys.path.append("/Users/fujimo/.virtualenvs/genju-hime/lib/python2.7/site-packages/");
-           #sys.path.append("/Users/fujimo/dev/my/otherbu/");
-           #sys.path.append("/Users/fujimo/dev/my/otherbu/module/");
-           #sys.path.append("/Users/fujimo/.virtualenvs/otherbu/lib/python2.7/site-packages/");'
+#init-hook='import sys;
+#           sys.path.append("/Users/fujimo/projects/genju-hime/application/");
+#           sys.path.append("/Users/fujimo/projects/genju-hime/application/module/");
+#           sys.path.append("/Users/fujimo/projects/genju-hime/application/website/");
+#           sys.path.append("/Users/fujimo/projects/genju-hime/application/submodule/");
+#           sys.path.append("/Users/fujimo/projects/genju-hime/application/eventmodule/");
+#           sys.path.append("/Users/fujimo/.pyenv/versions/genju/lib/python2.7/site-packages/");'
+#           # sys.path.append("/Users/fujimo/dev/my/otherbu/");
+#           # sys.path.append("/Users/fujimo/dev/my/otherbu/module/");
+#           # sys.path.append("/Users/fujimo/.virtualenvs/otherbu/lib/python2.7/site-packages/");'
+#           # sys.path.append("/Users/fujimo/dev/my/media/");
+#           # sys.path.append("/Users/fujimo/dev/my/media/module/");
+#           # sys.path.append("/Users/fujimo/.virtualenvs/media/lib/python2.7/site-packages/");'
 
 # Profiled execution.
 profile=no

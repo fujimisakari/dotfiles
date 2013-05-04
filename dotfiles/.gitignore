@@ -5,13 +5,16 @@ auto-save-list
 fujimoto_settings.py
 private_config.py
 restart.sh
+demo_reset.sql
 mrestart.sh
 all_migrate.sh
 url
 private
+pylintrc
 tramp
 skk-jisyo.utf8
 .DS_Store
+.python-version
 *.svn
 TAGS
 *.elc
@@ -21,3 +24,6 @@ TAGS
 \#*
 ~$*
 *_flymake.*
+GPATH
+GRTAGS
+GTAGS

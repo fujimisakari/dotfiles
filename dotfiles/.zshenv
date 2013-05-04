@@ -55,11 +55,15 @@ fi
 ##------------------------------------------------------------------##
 
 # 端末元が 開発PC or emacs だった場合は screen で立ち上げる
-if [ $TERM = "eterm-color" -o $ALLOW_HOST = "true" ] && [ $TERM_PROGRAM != "Apple_Terminal" ]; then
-    if [ $TERM != "screen-bce" ]; then
-        scrin
-    fi
+# if [ $TERM = "eterm-color" -o $ALLOW_HOST = "true" ] && [ $TERM_PROGRAM != "Apple_Terminal" ]; then
+#     if [ $TERM != "screen-bce" ]; then
+#         scrin
+#     fi
+# fi
+if [ $TERM != "screen-bce" ]; then
+    scrin
 fi
+
 
 ## パスの追加
 case "${OSTYPE}" in
@@ -67,7 +71,7 @@ case "${OSTYPE}" in
     PATH=$PATH:/sbin:/usr/sbin:$HOME/misc/bin
   ;;
   darwin*)
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH:/sbin:$HOME/misc/bin
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$HOME/.pyenv/bin:/sbin:$HOME/misc/bin:$PATH
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   ;;
 esac
@@ -79,11 +83,6 @@ if [ $HOST = "jupiter.local" ]; then
 
     # python設定
     export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
-
-    [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
-    VIRTUALENVWRAPPER_PYTHON_BIN=${HOME}/.pythonbrew/pythons/Python-2.7.2/bin
-    export VIRTUALENVWRAPPER_PYTHON=${VIRTUALENVWRAPPER_PYTHON_BIN}/python
-    [[ -d ${VIRTUALENVWRAPPER_PYTHON_BIN} ]] && source ${VIRTUALENVWRAPPER_PYTHON_BIN}/virtualenvwrapper.sh
 
     PYTHONPATH=$HOME/misc/lib:$PYTHONPATH
     export PYTHONPATH
@@ -116,3 +115,4 @@ LANG=ja_JP.UTF-8
 LISTMAX=0
 
 export PATH EDITOR SVN_EDITOR LANG LC_ALL LISTMAX PAGER
+eval "$(pyenv init -)"
