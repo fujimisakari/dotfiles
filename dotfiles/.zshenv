@@ -60,7 +60,7 @@ fi
 #         scrin
 #     fi
 # fi
-if [ $TERM != "screen-bce" ]; then
+if [ $TERM != "screen-bce" -a $TERM != "dumb" ]; then
     scrin
 fi
 
@@ -88,11 +88,13 @@ if [ $HOST = "jupiter.local" ]; then
     export PYTHONPATH
 
     # ruby設定
-    [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm  # Load RVM function
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-    # デフォルトのrubyバージョン、gemライブラリ場所を指定
-    # rvm use 1.8.7
-    rvm gemset use default_env
+    if [ $TERM != "dumb" ]; then
+        [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm  # Load RVM function
+        PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+        # デフォルトのrubyバージョン、gemライブラリ場所を指定
+        # rvm use 1.8.7
+        rvm gemset use default_env
+    fi
 fi
 
 ## エディタの指定
