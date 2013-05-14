@@ -6,10 +6,11 @@ import re
 import  platform
 from os import system
 
-if 'desktop' in sys.argv:
-    dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.tigrc']
-else:
-    dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.tigrc']
+# if 'desktop' in sys.argv:
+#     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.globalrc']
+# else:
+#     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.tigrc']
+dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.tigrc', '.globalrc']
 
 r = re.compile("Linux")
 for dotfile in dotfiles_list:
