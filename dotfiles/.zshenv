@@ -3,7 +3,7 @@
 #                           開発環境PC判定                           #
 ##------------------------------------------------------------------##
 
-for host_name in "gajumaru" "jupiter.local" "universe"
+for host_name in "fujimisakari.local" "jupiter.local" "universe"
 do
     if [ $HOST = $host_name ]; then
         ALLOW_HOST="true"
