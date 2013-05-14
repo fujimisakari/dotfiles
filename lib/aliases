@@ -22,7 +22,6 @@ case "${OSTYPE}" in
     alias w3m='/usr/local/bin/w3m -B'
     alias ptree='pstree | lv'
     alias updatemacdb='sudo /usr/libexec/locate.updatedb'
-    alias emacsclient='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
     alias -g C='| /usr/bin/pbcopy'
     alias boxes='/usr/local/bin/boxes'
     alias finder='open .'

@@ -3,7 +3,7 @@
 #                           開発環境PC判定                           #
 ##------------------------------------------------------------------##
 
-for host_name in "fujimisakari.local" "jupiter.local" "universe"
+for host_name in "fujimisakari.local" "jupiter.local"
 do
     if [ $HOST = $host_name ]; then
         ALLOW_HOST="true"
@@ -77,10 +77,7 @@ case "${OSTYPE}" in
 esac
 
 ## 開発環境設定
-if [ $HOST = "jupiter.local" ]; then
-    # gccを指定
-    export CC=/usr/bin/gcc-4.2
-
+if [ $ALLOW_HOST = "true" ]; then
     # python設定
     export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 
