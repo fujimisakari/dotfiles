@@ -1,0 +1,12 @@
+# ~/.screeninator/nfs.yml
+# you can make as many tabs as you wish...
+
+project_name: nfs
+project_root: ~/
+tabs:
+  - nfs: /usr/bin/ssh webapp@gh-nfs.gu3.jp
+  - nfs: /usr/bin/ssh webapp@gh-nfs.gu3.jp
+  - nfs: /usr/bin/ssh webapp@gh-nfs.gu3.jp
+  - nfs: /usr/bin/ssh webapp@gh-nfs.gu3.jp
+  - nfs: /usr/bin/ssh webapp@gh-nfs.gu3.jp
+  - nfs: /usr/bin/ssh webapp@gh-nfs.gu3.jp

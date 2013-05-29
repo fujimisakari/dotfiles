@@ -30,7 +30,7 @@ esac
 
 alias h='history -i -D -E -40'
 alias pss='ps -aef | lv'
-alias scrin='screen -U -t $HOST'
+alias scrin='screen -S $USER -U -t $HOST'
 alias ssh='ssh -A -l $USER'
 alias scp='scp -r'
 alias diff='diff -u'

@@ -29,7 +29,7 @@ sorendition "+r .G"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} Screen %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
+caption always "%{= kb}[%{y} <%= @project_name %> %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -40,7 +40,7 @@ vbell off
 bell_msg "^G"
 
 ## screen起動時に自動的に開く端末
-screen 0
+#screen 0
 #screen 1
 #screen 2
 
@@ -80,3 +80,7 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
+<% @tabs.each do |tab| %>
+screen -t <%= tab.name %> <%= @tabs.index(tab) %>
+stuff "<%= tab.stuff %>\012"
+<% end %>

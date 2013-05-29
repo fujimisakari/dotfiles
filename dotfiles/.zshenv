@@ -60,9 +60,9 @@ fi
 #         scrin
 #     fi
 # fi
-if [ $TERM != "screen-bce" -a $TERM != "dumb" ]; then
-    scrin
-fi
+# if [ $TERM != "screen-bce" -a $TERM != "dumb" ]; then
+#     scrin
+# fi
 
 
 ## パスの追加
@@ -93,6 +93,9 @@ if [ $ALLOW_HOST = "true" ]; then
         rvm gemset use default_env
     fi
 fi
+
+## screeninator
+[[ -s "$HOME/.screeninator/scripts/screeninator" ]] && source "$HOME/.screeninator/scripts/screeninator"
 
 ## エディタの指定
 EDITOR=vim

@@ -122,3 +122,19 @@ function t() {
     echo "chdir to $EMACS_CWD"
     cd "$EMACS_CWD"
 }
+
+## gitの変更差分をplintにかける
+function gpylint() {
+    for file_path in `git diff --name-only HEAD`; do
+        case ${file_path} in
+            *.py)
+                /usr/bin/env pylint --output-format=parseable --include-ids=y --reports=n \
+                    -E --disable=E1101,E1103,E1002,E1001 ${file_path}
+                if [ $? -ne 0 ]
+                then
+                    echo "\033[1;31mpylint がエラーを検出しました\033[m"
+                fi
+            ;;
+        esac
+    done
+}

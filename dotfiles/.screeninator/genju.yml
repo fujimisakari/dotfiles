@@ -1,0 +1,18 @@
+# ~/.screeninator/genju.yml
+# you can make as many tabs as you wish...
+
+project_name: genju
+project_root: ~/projects/genju-hime
+tabs:
+  - gree: mysql -u root genju_hime_gree
+  - part0: mysql -u root genju_hime_part0
+  - event: mysql -u root genju_hime_event
+  - sql: tail -f /tmp/sql.log
+  - runserver:
+    - cd ~/projects/genju-hime/application
+    - ./restart.sh
+  - git: cd ~/projects/genju-hime
+  - genju: cd ~/projects/genju-hime/application
+  - eventmodule: cd ~/projects/genju-hime/application/eventmodule
+  - zsh: cd ~/projects/genju-hime/application
+  - zsh: cd ~/projects/genju-hime/application

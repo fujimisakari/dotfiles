@@ -1,0 +1,14 @@
+# ~/.screeninator/media.yml
+# you can make as many tabs as you wish...
+
+project_name: media
+project_root: ~/dev/my/media
+tabs:
+  - db: mysql -u root media
+  - sql: tail -f /tmp/sql.log
+  - runserver:
+    - cd ~/dev/my/media
+    - ./manage.py runserver localhost:8000
+  - zsh: cd ~/dev/my/media
+  - zsh: cd ~/dev/my/media
+  - home: cd ~/

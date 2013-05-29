@@ -10,7 +10,7 @@ from os import system
 #     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.globalrc']
 # else:
 #     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.tigrc']
-dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.tigrc', '.globalrc']
+dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.screeninator', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.tigrc', '.globalrc']
 
 r = re.compile("Linux")
 for dotfile in dotfiles_list:
