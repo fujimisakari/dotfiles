@@ -45,6 +45,10 @@ if [ $ALLOW_HOST="true" ]; then
   fi
 fi
 
+## screenのショートカットコマンド
+function sl { screen -ls }
+function sr { screen -r $1 }
+
 ## 全履歴一覧を出力する
 function histall { history -i -D -E 1 }
 

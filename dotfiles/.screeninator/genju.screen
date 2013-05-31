@@ -99,15 +99,15 @@ stuff "cd ~/projects/genju-hime/application && ./restart.sh\012"
 screen -t git 5
 stuff "cd ~/projects/genju-hime\012"
 
-screen -t genju 6
+screen -t app 6
 stuff "cd ~/projects/genju-hime/application\012"
 
-screen -t eventmodule 7
-stuff "cd ~/projects/genju-hime/application/eventmodule\012"
-
-screen -t zsh 8
+screen -t zsh 7
 stuff "cd ~/projects/genju-hime/application\012"
 
-screen -t zsh 8
+screen -t zsh 7
+stuff "cd ~/projects/genju-hime/application\012"
+
+screen -t zsh 7
 stuff "cd ~/projects/genju-hime/application\012"
 

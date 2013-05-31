@@ -81,21 +81,36 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 
-screen -t nfs 0
+screen -t part 0
 stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
 
-screen -t nfs 0
+screen -t part 0
 stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
 
-screen -t nfs 0
+screen -t part 0
 stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
 
-screen -t nfs 0
+screen -t part 0
 stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
 
-screen -t nfs 0
+screen -t part 0
 stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
 
-screen -t nfs 0
+screen -t part 0
+stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
+
+screen -t part 0
+stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
+
+screen -t part 0
+stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
+
+screen -t event 8
+stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
+
+screen -t master 9
+stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
+
+screen -t nfs 10
 stuff "/usr/bin/ssh webapp@gh-nfs.gu3.jp\012"
 

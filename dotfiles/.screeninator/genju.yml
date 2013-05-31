@@ -12,7 +12,7 @@ tabs:
     - cd ~/projects/genju-hime/application
     - ./restart.sh
   - git: cd ~/projects/genju-hime
-  - genju: cd ~/projects/genju-hime/application
-  - eventmodule: cd ~/projects/genju-hime/application/eventmodule
+  - app: cd ~/projects/genju-hime/application
+  - zsh: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application

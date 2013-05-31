@@ -94,6 +94,9 @@ if [ $ALLOW_HOST = "true" ]; then
     fi
 fi
 
+## screen セッション保存Dir
+export SCREENDIR=$HOME/.screens
+
 ## screeninator
 [[ -s "$HOME/.screeninator/scripts/screeninator" ]] && source "$HOME/.screeninator/scripts/screeninator"
 
