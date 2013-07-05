@@ -29,7 +29,7 @@ sorendition "+r .G"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} media %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
+caption always "%{= kb}[%{y} otherbu %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -82,20 +82,20 @@ bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 
 
 screen -t db 0
-stuff "mysql -u root media\012"
+stuff "mysql -u root otherbu\012"
 
 screen -t sql 1
 stuff "tail -f /tmp/sql.log\012"
 
 screen -t runserver 2
-stuff "cd ~/dev/my/media && ./manage.py runserver localhost:8000\012"
+stuff "cd ~/dev/my/otherbu && ./manage.py runserver localhost:8001\012"
 
 screen -t zsh 3
-stuff "cd ~/dev/my/media\012"
+stuff "cd ~/dev/my/otherbu\012"
 
 screen -t zsh 3
-stuff "cd ~/dev/my/media\012"
+stuff "cd ~/dev/my/otherbu\012"
 
 screen -t zsh 3
-stuff "cd ~/dev/my/media\012"
+stuff "cd ~/dev/my/otherbu\012"
 

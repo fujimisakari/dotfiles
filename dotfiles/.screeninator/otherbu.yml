@@ -1,0 +1,14 @@
+# ~/.screeninator/otherbu.yml
+# you can make as many tabs as you wish...
+
+project_name: otherbu
+project_root: ~/dev/my/otherbu
+tabs:
+  - db: mysql -u root otherbu
+  - sql: tail -f /tmp/sql.log
+  - runserver:
+    - cd ~/dev/my/otherbu
+    - ./manage.py runserver localhost:8001
+  - zsh: cd ~/dev/my/otherbu
+  - zsh: cd ~/dev/my/otherbu
+  - zsh: cd ~/dev/my/otherbu

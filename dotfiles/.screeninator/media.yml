@@ -11,4 +11,4 @@ tabs:
     - ./manage.py runserver localhost:8000
   - zsh: cd ~/dev/my/media
   - zsh: cd ~/dev/my/media
-  - home: cd ~/
+  - zsh: cd ~/dev/my/media

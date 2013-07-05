@@ -1,3 +1,4 @@
 alias start_genju='if [[ -n `screen -ls | grep genju` ]] ; then `screen -dr genju` ; else `screen -c /Users/fujimo/.screeninator/genju.screen -S genju`; fi'
 alias start_media='if [[ -n `screen -ls | grep media` ]] ; then `screen -dr media` ; else `screen -c /Users/fujimo/.screeninator/media.screen -S media`; fi'
 alias start_nfs='if [[ -n `screen -ls | grep nfs` ]] ; then `screen -dr nfs` ; else `screen -c /Users/fujimo/.screeninator/nfs.screen -S nfs`; fi'
+alias start_otherbu='if [[ -n `screen -ls | grep otherbu` ]] ; then `screen -dr otherbu` ; else `screen -c /Users/fujimo/.screeninator/otherbu.screen -S otherbu`; fi'
