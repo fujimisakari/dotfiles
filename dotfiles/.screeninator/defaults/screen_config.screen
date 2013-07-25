@@ -25,7 +25,7 @@ defscrollback 100000
 ## コマンドキーの指定
 escape ^Zz
 
-sorendition "+r .G"
+sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
