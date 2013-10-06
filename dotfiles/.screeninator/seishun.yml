@@ -1,0 +1,18 @@
+# ~/.screeninator/seishun.yml
+# you can make as many tabs as you wish...
+
+project_name: seishun
+project_root: ~/projects/seishun-hime
+tabs:
+  - gree: mysql -u root seishun_hime_gree
+  - part0: mysql -u root seishun_hime_part0
+  - sql: tail -f /tmp/sql.log
+  - runserver:
+    - cd ~/projects/seishun-hime/application
+    - ./restart.sh
+  - git: cd ~/projects/seishun-hime
+  - app: cd ~/projects/seishun-hime/application
+  - zsh: cd ~/projects/seishun-hime/application
+  - zsh: cd ~/projects/seishun-hime/application
+  - zsh: cd ~/projects/seishun-hime/application
+

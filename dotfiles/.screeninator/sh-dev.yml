@@ -1,0 +1,10 @@
+# ~/.screeninator/sh-dev.yml
+# you can make as many tabs as you wish...
+
+project_name: sh-dev
+project_root: ~/
+tabs:
+  - dev: /usr/bin/ssh webapp@sh.dev2.gu3.jp
+  - dev: /usr/bin/ssh webapp@sh.dev2.gu3.jp
+  - dev: /usr/bin/ssh webapp@sh.dev2.gu3.jp
+  - dev: /usr/bin/ssh webapp@sh.dev2.gu3.jp
