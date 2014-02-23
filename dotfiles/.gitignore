@@ -12,7 +12,9 @@ url
 private
 pylintrc
 tramp
+python2.7
 skk-jisyo.utf8
+.mc-lists.el
 .DS_Store
 .python-version
 *.svn
@@ -27,3 +29,7 @@ TAGS
 GPATH
 GRTAGS
 GTAGS
+punk-csharp.sln
+punk.sln
+Physics2DSettings.asset
+PrincessofKilling.acf

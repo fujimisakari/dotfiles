@@ -2103,4 +2103,29 @@ elastic (n,e,s,w)
 
 END css1
 
+
+#============================================================================
+
+
+Box python1
+
+author "fujimo"
+revision "1.0"
+
+sample
+    =-=-=-=-=-=-=-=       test        =-=-=-=-=-=-=-=
+ends
+
+shapes {
+     w ("=-=-=-=-=-=-=-=  ")  e ("  =-=-=-=-=-=-=-=")
+}
+
+padding {
+    horiz 1
+}
+
+elastic (w,e)
+
+END python1
+
 #EOF                                                  vim: set ai sw=4:

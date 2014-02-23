@@ -1,0 +1,37 @@
+# ~/.screeninator/mgenju.yml
+# you can make as many tabs as you wish...
+
+project_name: mgenju
+project_root: ~/projects/genju-hime
+tabs:
+  - gree:
+    - export OS_CONTAINER=mbga
+    - mysql -u root gh_mbga
+  - part0:
+    - export OS_CONTAINER=mbga
+    - mysql -u root gh_mbga_part0
+  - event:
+    - export OS_CONTAINER=mbga
+    - mysql -u root gh_mbga_event
+  - sql:
+    - export OS_CONTAINER=mbga
+    - tail -f /tmp/sql.log
+  - runserver:
+    - export OS_CONTAINER=mbga
+    - cd ~/projects/genju-hime/application
+    - ./restart.sh
+  - git:
+    - export OS_CONTAINER=mbga
+    - cd ~/projects/genju-hime
+  - app:
+    - export OS_CONTAINER=mbga
+    - cd ~/projects/genju-hime/application
+  - zsh:
+    - export OS_CONTAINER=mbga
+    - cd ~/projects/genju-hime/application
+  - zsh:
+    - export OS_CONTAINER=mbga
+    - cd ~/projects/genju-hime/application
+  - zsh:
+    - export OS_CONTAINER=mbga
+    - cd ~/projects/genju-hime/application
