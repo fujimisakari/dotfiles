@@ -1,37 +1,37 @@
-# ~/.screeninator/mgenju.yml
+# ~/.screeninator/dgenju.yml
 # you can make as many tabs as you wish...
 
-project_name: mgenju
+project_name: dgenju
 project_root: ~/projects/genju-hime
 tabs:
   - master:
-    - export OS_CONTAINER=mbga
-    - mysql -u root gh_mbga
+    - export OS_CONTAINER=dgame
+    - mysql -u root gh_dgame
   - part0:
-    - export OS_CONTAINER=mbga
-    - mysql -u root gh_mbga_part0
+    - export OS_CONTAINER=dgame
+    - mysql -u root gh_dgame_part0
   - event:
-    - export OS_CONTAINER=mbga
-    - mysql -u root gh_mbga_event
+    - export OS_CONTAINER=dgame
+    - mysql -u root gh_dgame_event
   - sql:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - tail -f /tmp/sql.log
   - runserver:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - cd ~/projects/genju-hime/application
     - ./restart.sh
   - git:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - cd ~/projects/genju-hime
   - app:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - cd ~/projects/genju-hime/application
   - zsh:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - cd ~/projects/genju-hime/application
   - zsh:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - cd ~/projects/genju-hime/application
   - zsh:
-    - export OS_CONTAINER=mbga
+    - export OS_CONTAINER=dgame
     - cd ~/projects/genju-hime/application

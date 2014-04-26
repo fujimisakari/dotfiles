@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} punk %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
+caption always "%{= kb}[%{y} dgenju %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -81,24 +81,32 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 
-screen -t root 0
-stuff "cd ~/projects/punk/\012"
+screen -t master 0
+stuff "export OS_CONTAINER=dgame && mysql -u root gh_dgame\012"
 
-screen -t Assets 1
-stuff "cd ~/projects/punk/Assets\012"
+screen -t part0 1
+stuff "export OS_CONTAINER=dgame && mysql -u root gh_dgame_part0\012"
 
-screen -t Scripts 2
-stuff "cd ~/projects/punk/Assets/Scripts\012"
+screen -t event 2
+stuff "export OS_CONTAINER=dgame && mysql -u root gh_dgame_event\012"
 
-screen -t Resources 3
-stuff "cd ~/projects/punk/Assets/Resources\012"
+screen -t sql 3
+stuff "export OS_CONTAINER=dgame && tail -f /tmp/sql.log\012"
 
-screen -t XML 4
-stuff "cd ~/projects/punk/Assets/XML\012"
+screen -t runserver 4
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application && ./restart.sh\012"
 
-screen -t zsh 5
-stuff "\012"
+screen -t git 5
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime\012"
 
-screen -t zsh 5
-stuff "\012"
+screen -t app 6
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application\012"
 
+screen -t zsh 7
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application\012"
+
+screen -t zsh 7
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application\012"
+
+screen -t zsh 7
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application\012"

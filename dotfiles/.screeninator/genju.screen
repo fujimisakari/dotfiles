@@ -81,7 +81,7 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 
-screen -t gree 0
+screen -t master 0
 stuff "mysql -u root genju_hime_gree\012"
 
 screen -t part0 1

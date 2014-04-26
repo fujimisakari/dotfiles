@@ -52,14 +52,22 @@ function sr { screen -r $1 }
 ## 全履歴一覧を出力する
 function histall { history -i -D -E 1 }
 
+## emacsの一括バイトコンパイル
+function batchcompile() {
+  for i in $@; do;
+    # echo $i
+    emacs -batch -f batch-byte-compile $i
+  done;
+}
+
 ## 引数のファイルを utf8 や euc に変換
 # -w utf8  -e euc -Lu 改行コードをLFにする
-function nkf_utf(){
+function nkf_utf() {
   for i in $@; do;
     nkf -w -Lu --overwrite $i
   done;
 }
-function nkf_euc(){
+function nkf_euc() {
   for i in $@; do;
       nkf -e -Lu --overwrite $i
   done;
@@ -101,6 +109,7 @@ function e() {
         emacsclient -e "(dired \"${1:a}\")"
       ;;
       darwin*)
+        echo "chdir to $PWD"
         /usr/local/bin/emacsclient -e "(dired \"${1:a}\")"
       ;;
     esac
@@ -115,12 +124,14 @@ function t() {
             (if (featurep 'elscreen)
                 (elscreen-current-directory)
               (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
+          # EMACS_CWD=`emacsclient -e "(current-directory-to-terminal))" | sed 's/^"\(.*\)"$/\1/'`
       ;;
       darwin*)
           EMACS_CWD=`/usr/local/bin/emacsclient -e "
             (if (featurep 'elscreen)
                 (elscreen-current-directory)
               (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
+          # EMACS_CWD=`/usr/local/bin/emacsclient -e "(current-directory-to-terminal)" | sed 's/^"\(.*\)"$/\1/'`
       esac
 
     echo "chdir to $EMACS_CWD"

@@ -4,8 +4,8 @@
 [color]
     ui = auto
 [core]
+    excludesfile = /Users/fujimo/.gitignore
     pager = "LESS=-R less"
-    excludesfile = ~/.gitignore      # globalな.gitignoreの指定
     autocrlf = input                 # CRLFを自動変換
     quotepath = false                # 日本語ファイル名を表示できるようにする
 [alias]
