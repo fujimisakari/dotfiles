@@ -1,24 +1,6 @@
-##------------------------------------------------------------------##
-#                               color                                #
-##------------------------------------------------------------------##
-
-autoload -U colors
-colors
-
-GRAY=$'%{\e[1;30m%}'
-RED=$'%{\e[1;31m%}'
-GREEN=$'%{\e[1;32m%}'
-YELLOW=$'%{\e[1;33m%}'
-BLUE=$'%{\e[0;34m%}'
-MAGENTA=$'%{\e[1;35m%}'
-CYAN=$'%{\e[1;36m%}'
-LIGHT_GRAY=$'%{\e[1;37m%}'
-WHITE=$'%{\e[1;37m%}'
-FRAM=${BLUE}
-
 
 ##------------------------------------------------------------------##
-#                              vcs-info                              #
+#                          プロンプト関係                            #
 ##------------------------------------------------------------------##
 
 autoload vcs_info
@@ -51,31 +33,27 @@ custom_vcs_info(){
     echo $vcs_info_msg_0_$(git_info_push)
 }
 
-
-##------------------------------------------------------------------##
-#                          プロンプト関係                            #
-##------------------------------------------------------------------##
-
 case "${TERM}" in
     eterm-color*|kterm*|xterm*|screen*)
 
         function _git_info() {
-          if [[ -n $(custom_vcs_info) ]]; then
-            local BG_COLOR=green
+            _vcs_info=$(custom_vcs_info)
+            if [[ -n $_vcs_info ]]; then
+                local BG_COLOR=green
 
-            if [[ -n $(git_info_push) ]]; then
-              BG_COLOR=yellow
-              FG_COLOR=black
+                if [[ -n $(git_info_push) ]]; then
+                  BG_COLOR=yellow
+                  FG_COLOR=black
+                fi
+
+                if [[ -n `echo $_vcs_info | grep "merge" 2> /dev/null` ]]; then
+                    BG_COLOR=red
+                    FG_COLOR=white
+                fi
+                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $(custom_vcs_info) %{%F{$BG_COLOR}%K{blue}%}⮀"
+            else
+               echo "%{%K{blue}%}⮀"
             fi
-
-            # if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-            #     BG_COLOR=red
-            #     FG_COLOR=white
-            # fi
-            echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $(custom_vcs_info) %{%F{$BG_COLOR}%K{blue}%}⮀"
-          else
-            echo "%{%K{blue}%}⮀"
-          fi
         }
 
         function virtualenv_info {
