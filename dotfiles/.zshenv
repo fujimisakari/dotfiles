@@ -44,6 +44,11 @@ if [ -f $ZSHUSERDIR/lib/autojump.zsh ]; then
     source $ZSHUSERDIR/lib/autojump.zsh
 fi
 
+## percol
+if [ -f $ZSHUSERDIR/lib/percol.zsh ]; then
+    source $ZSHUSERDIR/lib/percol.zsh
+fi
+
 ## emacs
 #if [ $HOST = "gajumaru" ]; then
 #    source $ZSHUSERDIR/lib/emacs
