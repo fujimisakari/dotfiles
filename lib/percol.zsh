@@ -12,3 +12,12 @@ function percol-select-history() {
     zle clear-screen
 }
 zle -N percol-select-history
+
+function slist() {
+    hosts=( ${(@)${${(M)${(s:# :)${(zj:# :)${(Lf)"$([[ -f ~/.ssh/config ]] && <~/.ssh/config)"}%%\#*}}##host(|name) *}#host(|name) }/\*} )
+    host=$(echo $hosts | sed 's/ /\
+/g' | percol)
+    if [[ -n $host ]]; then
+        ssh $host
+    fi
+}
