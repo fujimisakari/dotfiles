@@ -50,9 +50,9 @@ case "${TERM}" in
                     BG_COLOR=red
                     FG_COLOR=white
                 fi
-                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $(custom_vcs_info) %{%F{$BG_COLOR}%K{blue}%}⮀"
+                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $(custom_vcs_info) %{%F{$BG_COLOR}%K{magenta}%}⮀"
             else
-               echo "%{%K{blue}%}⮀"
+               echo "%{%K{magenta}%}⮀"
             fi
         }
 
@@ -60,12 +60,12 @@ case "${TERM}" in
             [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
         }
 
-        PROMPT_HOST='%{%b%F{gray}%K{magenta}%} %(?.%{%F{green}%}✔.%{%F{red}%}✘)%{%F{black}%} %n %{%F{magenta}%}'
-        PROMPT_DIR='%{%F{white}%} %~%  '
-        PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{blue}%})⮀%{%f%k%b%}'
+        PROMPT_HOST='%{%b%F{gray}%K{blue}%} %(?.%{%F{green}%}✔.%{%F{red}%}✘)%{%F{black}%} %n %{%F{blue}%}'
+        PROMPT_DIR='%{%F{black}%} %~%  '
+        PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{magenta}%})⮀%{%f%k%b%}'
         PROMPT='
 %{%f%b%k%}$PROMPT_HOST$(_git_info)$PROMPT_DIR$PROMPT_SU
-$(virtualenv_info)❯ '
+%{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}%K{black}%}⮀%{%f%k%b%} '
         SPROMPT='${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}'
     ;;
     # trampでの接続用
