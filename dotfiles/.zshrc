@@ -27,35 +27,30 @@ zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
 # zstyle ":vcs_info:git:*" check-for-changes true
 # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
-zstyle ":vcs_info:git:*" formats "${FRAM}[${CYAN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c"
+zstyle ":vcs_info:git:*" formats "⭠ %r ⮁ %b%u%c"
 # gitリポジトリに対して、コンフリクトなどの情報を表示する
-zstyle ":vcs_info:git:*" actionformats "${FRAM}[${CYAN}%r${FRAM}:${MAGENTA}%b${FRAM}]%u%c${FRAM}<${RED}%a${FRAM}>"
+zstyle ":vcs_info:git:*" actionformats "⭠ %r ⮁ %b%u%c ⮁ %a"
 # addしていない変更があることを示す文字列
-zstyle ":vcs_info:git:*" unstagedstr "${FRAM}<${RED}U${FRAM}>"
+zstyle ":vcs_info:git:*" unstagedstr "<U>"
 # commitしていないstageがあることを示す文字列
-zstyle ":vcs_info:git:*" stagedstr "${FRAM}<${RED}S${FRAM}>"
+zstyle ":vcs_info:git:*" stagedstr "<S>"
 
 git_info_push(){
     if [ "$(git remote 2>/dev/null)" != "" ]; then
         local head="$(git rev-parse HEAD)"
         local remote
         for remote in $(git rev-parse --remotes) ; do
-            if [ "$head" = "$remote" ]; then return 0 ; fi
+            if [ "$head" = "$remote" ]; then return ; fi
         done
-        echo "${FRAM}<${RED}P${FRAM}>"
-    fi
-}
-
-git_info_stash(){
-    if [ "$(git stash list 2>/dev/null)" != "" ]; then
-        echo "${FRAM}{${RED}s${FRAM}}"
+        echo " ⮁ P"
     fi
 }
 
 custom_vcs_info(){
-    vcs_info
+    LANG=en_US.UTF-8 vcs_info
     echo $vcs_info_msg_0_$(git_info_push)
 }
+
 
 ##------------------------------------------------------------------##
 #                          プロンプト関係                            #
@@ -63,30 +58,37 @@ custom_vcs_info(){
 
 case "${TERM}" in
     eterm-color*|kterm*|xterm*|screen*)
-        # プロンプト表示前に実行
-        precmd() {
-            echo ""
-            # ターミナルのタイトル
-            case "${TERM}" in
-                kterm*|xterm*)
-                    echo -n "\e]2;${HOST} : ${PWD}\a"
-                ;;
-                screen*)
-                    echo -ne "\ek\e\\"; print -Pn "\e]0; %~\a"
-            esac
-        }
-        PROMPT=$'${FRAM}<${YELLOW}%h${FRAM}>$(custom_vcs_info)${FRAM}(${GREEN}%/${FRAM})\n${GREEN}%m${MAGENTA}%# %{$reset_color%}'
-        PROMPT2="${WHITE}%_>%{$reset_color%}"
-        SPROMPT="${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}"
-        RPROMPT=""
 
-        ## コマンド実行直後に実行
-        preexec() {
-            #local HOUR="`date +%k`"
-            #local MINUTE="`date +%M`"
-            #local SECOND="`date +%S`"
-            #echo -e "\e[34m[\e[m\e[1;33m$HOUR\e[m\e[34m:\e[m\e[1;33m$MINUTE\e[m\e[34m:\e[m\e[1;33m$SECOND\e[m\e[34m]\e[m\n"
+        function _git_info() {
+          if [[ -n $(custom_vcs_info) ]]; then
+            local BG_COLOR=green
+
+            if [[ -n $(git_info_push) ]]; then
+              BG_COLOR=yellow
+              FG_COLOR=black
+            fi
+
+            # if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+            #     BG_COLOR=red
+            #     FG_COLOR=white
+            # fi
+            echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $(custom_vcs_info) %{%F{$BG_COLOR}%K{blue}%}⮀"
+          else
+            echo "%{%K{blue}%}⮀"
+          fi
         }
+
+        function virtualenv_info {
+            [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
+        }
+
+        PROMPT_HOST='%{%b%F{gray}%K{magenta}%} %(?.%{%F{green}%}✔.%{%F{red}%}✘)%{%F{black}%} %n %{%F{magenta}%}'
+        PROMPT_DIR='%{%F{white}%} %~%  '
+        PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{blue}%})⮀%{%f%k%b%}'
+        PROMPT='
+%{%f%b%k%}$PROMPT_HOST$(_git_info)$PROMPT_DIR$PROMPT_SU
+$(virtualenv_info)❯ '
+        SPROMPT='${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}'
     ;;
     # trampでの接続用
     dumb*)
@@ -225,16 +227,9 @@ unsetopt no_clobber          # リダイレクトで上書きを許可
 umask 022                             # ファイル作成時のパーミッション
 bindkey -e                            # bindkeyはemacs
 bindkey -r "^J"                       # "^J"のキーバインドを削除
+bindkey -r "^G"                       # "^J"のキーバインドを削除
 bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
 #bindkey "^h" backward-kill-word      # Ctrl-h で単語ごとに削除
+bindkey '^R' percol-select-history
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
-
-# macのターミナルは、uim-skkを利用する
-# if [ `uname` = "Darwin" ]; then
-#     case "${TERM}" in 
-#         screen*)
-#             uim-fep
-#         ;;
-#     esac
-# fi
