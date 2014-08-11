@@ -38,7 +38,8 @@ esac
 if [ $ALLOW_HOST="true" ]; then
   function ssh_screen(){
     eval server=\${$#}
-    screen -t $server ssh -l $USER "$@"
+    name="$(echo $server | cut -d '@' -f 2)"
+    screen -t $name ssh -l $USER "$@"
   }
   if [ x$TERM = xscreen-bce ]; then
     alias ssh=ssh_screen

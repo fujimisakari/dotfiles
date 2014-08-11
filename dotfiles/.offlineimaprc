@@ -1,0 +1,42 @@
+[general]
+metadata = ~/.offlineimap
+accounts = Gmail_fujimisakari, Gmail_gu3
+
+#
+# fujimisakari config
+#
+[Account Gmail_fujimisakari]
+localrepository = localGmail_fujimisakari
+remoterepository = remoteGmail_fujimisakari
+
+[Repository localGmail_fujimisakari]
+type = Maildir
+localfolders = ~/Maildir/fujimisakari/
+
+[Repository remoteGmail_fujimisakari]
+type = Gmail
+remoteuser = fujimisakari@gmail.com
+remotepass = fujimo@1214
+folderfilter = lambda foldername: foldername in ['Amazon', 'Facebook', 'Twitter', 'YouTube', 'apple', 'github', 'iTunes_Store', 'INBOX', 'ocn', 'job', 'yukari', 'qiita', 'send', 'sakura', 'rubikitch', 'RSS/kiwanami', 'RSS/sheephead:myuhe', 'RSS/nippondanji', 'RSS/rubikich', 'RSS/kitokitoki', 'RSS/sugyan', 'RSS/syohex', 'RSS/tomoya', 'RSS/shibayu', 'RSS/peccu', 'RSS/youhei', 'RSS/yonchu', 'RSS/isoparametric', 'RSS/cooldaemon', 'RSS/slashdotjp', 'RSS/engineer', 'RSS/paper.li', 'RSS/gigazine', 'RSS/gizmodo', 'RSS/kachibito', 'RSS/goo', 'RSS/yahoo']
+
+sslcacertfile = /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
+#
+# gu3 config
+#
+[Account Gmail_gu3]
+localrepository = localGmail_gu3
+remoterepository = remoteGmail_gu3
+
+[Repository localGmail_gu3]
+type = Maildir
+localfolders = ~/Maildir/gu3/
+
+[Repository remoteGmail_gu3]
+type = Gmail
+remoteuser = ryo.fujimoto@gu3.co.jp
+remotepass = fujimo@1214
+# 招待: +YttfhQ
+# echo "招待" | iconv -t UTF-7
+folderfilter = lambda foldername: foldername in ['INBOX', 'mail-all', 'mail-west', 'my-mail', 'gree', 'health', 'introduction', 'invite', 'kintai', 'trouble', 'x-point', 'ui-schedule', 'gh','gh-cs', 'gh-schedule', 'gh-pt-query-digest', 'gh-bad-url-check', 'gh-alert', 'gh-cron', 'gh-nagios', 'send', 'sentry', 'newrelic', 'punk', 'sh', 'sh-cs', 'sh-schedule', 'sh-pt-query-digest', 'sh-bad-url-check', 'sh-alert', 'sh-cron', 'sh-nagios', 'sh-tutorial-report']
+sslcacertfile = /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt

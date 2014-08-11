@@ -125,4 +125,6 @@ LANG=ja_JP.UTF-8
 LISTMAX=0
 
 export PATH EDITOR SVN_EDITOR LANG LC_ALL LISTMAX PAGER
-eval "$(pyenv init -)"
+
+## pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi

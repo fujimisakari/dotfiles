@@ -60,6 +60,18 @@ case "${TERM}" in
             [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
         }
 
+        # プロンプト詳細
+        #   %{%B%}...%{%b%}: 「...」を太字にする。
+        #   %K{red}...%{%k%}: 「...」を赤の背景色にする。
+        #   %{%F{cyan}%}...%{%f%}: 「...」をシアン色の文字にする。
+        #   %n: ユーザ名
+        #   %?: 最後に実行したコマンドの終了ステータス
+        #   %(x.true-text.false-text): xが真のときはtrue-textになり
+        #                              偽のときはfalse-textになる。
+        #   %{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%f%k%b%}:
+        #                           最後に実行したコマンドが正常終了していれば
+        #                           太字で白文字で緑背景にして異常終了していれば
+        #                           太字で白文字で赤背景にする。
         PROMPT_HOST='%{%b%F{gray}%K{blue}%} %(?.%{%F{green}%}✔.%{%F{red}%}✘)%{%F{black}%} %n %{%F{blue}%}'
         PROMPT_DIR='%{%F{black}%} %~%  '
         PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{magenta}%})⮀%{%f%k%b%}'
@@ -85,7 +97,14 @@ esac
 #                             履歴関係                               #
 ##------------------------------------------------------------------##
 
-HISTFILE=~/.zsh_history      # ヒストリファイルを指定
+
+## ヒストリファイルを指定(Dropboxがあれば履歴はそちらに残す)
+if [ -f ~/Dropbox/private/zsh_history ]; then
+    HISTFILE=~/Dropbox/private/zsh_history
+else
+    HISTFILE=~/.zsh_history
+fi
+
 HISTSIZE=100000              # ヒストリに保存するコマンド数
 SAVEHIST=100000              # ヒストリファイルに保存するコマンド数
 setopt hist_ignore_all_dups  # 重複するコマンド行は古い方を削除
@@ -208,6 +227,7 @@ bindkey -r "^J"                       # "^J"のキーバインドを削除
 bindkey -r "^G"                       # "^J"のキーバインドを削除
 bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
 #bindkey "^h" backward-kill-word      # Ctrl-h で単語ごとに削除
-bindkey '^R' percol-select-history
+bindkey '^R' percol-select-history    # percolでコマンド履歴
+bindkey '^Xs' ssh_list                # percolでssh対象参照
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除

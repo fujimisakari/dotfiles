@@ -13,11 +13,9 @@ function percol-select-history() {
 }
 zle -N percol-select-history
 
-function slist() {
-    hosts=( ${(@)${${(M)${(s:# :)${(zj:# :)${(Lf)"$([[ -f ~/.ssh/config ]] && <~/.ssh/config)"}%%\#*}}##host(|name) *}#host(|name) }/\*} )
-    host=$(echo $hosts | sed 's/ /\
-/g' | percol)
-    if [[ -n $host ]]; then
-        ssh $host
-    fi
+function ssh_list() {
+    BUFFER=$(grep '^HOST\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print "ssh " $i;}' | percol)
+    CURSOR=$#BUFFER
+    zle clear-screen
 }
+zle -N ssh_list
