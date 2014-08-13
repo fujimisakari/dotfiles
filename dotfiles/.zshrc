@@ -77,7 +77,7 @@ case "${TERM}" in
         PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{magenta}%})⮀%{%f%k%b%}'
         PROMPT='
 %{%f%b%k%}$PROMPT_HOST$(_git_info)$PROMPT_DIR$PROMPT_SU
-%{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}%K{black}%}⮀%{%f%k%b%} '
+%{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}⮀%{%f%k%b%} '
         SPROMPT='${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}'
     ;;
     # trampでの接続用
@@ -164,6 +164,13 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31
 hosts=( ${(@)${${(M)${(s:# :)${(zj:# :)${(Lf)"$([[ -f ~/.ssh/config ]] && <~/.ssh/config)"}%%\#*}}##host(|name) *}#host(|name) }/\*} )
 zstyle ':completion:*:hosts' hosts $hosts
 
+# 最近行ったディレクトリに移動することができるようにするcdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 5000
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':completion:*' recent-dirs-insert both
+
 ## 補完候補に色をつける
 case "${OSTYPE}" in
     linux*)
@@ -227,7 +234,8 @@ bindkey -r "^J"                       # "^J"のキーバインドを削除
 bindkey -r "^G"                       # "^J"のキーバインドを削除
 bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
 #bindkey "^h" backward-kill-word      # Ctrl-h で単語ごとに削除
-bindkey '^R' percol-select-history    # percolでコマンド履歴
-bindkey '^Xs' ssh_list                # percolでssh対象参照
+bindkey '^R' percol-select-history    # コマンド履歴
+bindkey '^Xs' percol-ssh              # ssh対象参照
+bindkey "^L" percol-cdr               # 最近行ったディレクトへcd
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除

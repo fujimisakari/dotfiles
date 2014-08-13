@@ -13,9 +13,21 @@ function percol-select-history() {
 }
 zle -N percol-select-history
 
-function ssh_list() {
+
+function percol-ssh() {
     BUFFER=$(grep '^HOST\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print "ssh " $i;}' | percol)
     CURSOR=$#BUFFER
     zle clear-screen
 }
-zle -N ssh_list
+zle -N percol-ssh
+
+
+function percol-cdr () {
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | percol --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N percol-cdr

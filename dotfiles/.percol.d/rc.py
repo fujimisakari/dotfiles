@@ -5,7 +5,8 @@ percol.view.__class__.PROMPT = property(
     else ur"<bold><green>QUERY </green>[A]:</bold> %q"
 )
 percol.view.prompt_replacees["F"] = lambda self, **args: self.model.finder.get_name()
-percol.view.RPROMPT = ur"(%F) (%i/%I) [%n/%N]"
+percol.view.RPROMPT = ur"<bold><green>(%F) (%i/%I) [%n/%N]</green></bold>"
+percol.view.CANDIDATES_LINE_SELECTED = ("on_magenta", "black")
 
 percol.import_keymap({
     "C-a": lambda percol: percol.command.beginning_of_line(),
