@@ -17,20 +17,33 @@ zstyle ":vcs_info:git:*" unstagedstr "<U>"
 # commitしていないstageがあることを示す文字列
 zstyle ":vcs_info:git:*" stagedstr "<S>"
 
+git_info_pull(){
+    if [ "$(git remote 2>/dev/null)" != "" ]; then
+        local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+        local origin_rev="$(git rev-parse origin/$current_branch)"
+        local remote_rev
+        for remote_rev in $(git rev-parse --remotes) ; do
+            if [ "$origin_rev" != "$remote_rev" ]; then
+                echo " %{%F{black}%}⮁ %{%F{red}%}Can Be Pulled%{%f%}"
+                return
+            fi
+        done
+    fi
+}
+
 git_info_push(){
     if [ "$(git remote 2>/dev/null)" != "" ]; then
-        local head="$(git rev-parse HEAD)"
-        local remote
-        for remote in $(git rev-parse --remotes) ; do
-            if [ "$head" = "$remote" ]; then return ; fi
-        done
-        echo " ⮁ P"
+        local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+        local push_count=$(git rev-list origin/"$current_branch".."$current_branch" 2>/dev/null | wc -l)
+        if [[ "$push_count" > 0 ]]; then
+            echo " ⮁ %{%F{red}%}Can Be Pushed($push_count)%{%f%}"
+        fi
     fi
 }
 
 custom_vcs_info(){
     LANG=en_US.UTF-8 vcs_info
-    echo $vcs_info_msg_0_$(git_info_push)
+    echo $vcs_info_msg_0_$(git_info_push)$(git_info_pull)
 }
 
 case "${TERM}" in
@@ -41,7 +54,7 @@ case "${TERM}" in
             if [[ -n $_vcs_info ]]; then
                 local BG_COLOR=green
 
-                if [[ -n $(git_info_push) ]]; then
+                if [[ -n $(git_info_push) ]] || [[ -n $(git_info_pull) ]]; then
                   BG_COLOR=yellow
                   FG_COLOR=black
                 fi
