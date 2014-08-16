@@ -7,32 +7,41 @@ autoload vcs_info
 # gitのみ有効にする
 zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
-# zstyle ":vcs_info:git:*" check-for-changes true
+zstyle ":vcs_info:git:*" check-for-changes true
 # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
 zstyle ":vcs_info:git:*" formats "⭠ %r ⮁ %b%u%c"
 # gitリポジトリに対して、コンフリクトなどの情報を表示する
 zstyle ":vcs_info:git:*" actionformats "⭠ %r ⮁ %b%u%c ⮁ %a"
 # addしていない変更があることを示す文字列
-zstyle ":vcs_info:git:*" unstagedstr "<U>"
+zstyle ":vcs_info:git:*" unstagedstr " ⮁ Unstaged"
 # commitしていないstageがあることを示す文字列
-zstyle ":vcs_info:git:*" stagedstr "<S>"
+zstyle ":vcs_info:git:*" stagedstr " ⮁ Staged"
 
-git_info_pull(){
+_is_track_branch(){
     if [ "$(git remote 2>/dev/null)" != "" ]; then
-        local current_branch="$(git rev-parse --abbrev-ref HEAD)"
-        local origin_rev="$(git rev-parse origin/$current_branch)"
-        local remote_rev
-        for remote_rev in $(git rev-parse --remotes) ; do
-            if [ "$origin_rev" != "$remote_rev" ]; then
-                echo " %{%F{black}%}⮁ %{%F{red}%}Can Be Pulled%{%f%}"
-                return
+        local target_tracking_branch="origin/$(git rev-parse --abbrev-ref HEAD)"
+        for tracking_branch in $(git branch -ar) ; do
+            if [ "$target_tracking_branch" = "$tracking_branch" ]; then
+                return true;
             fi
         done
     fi
 }
 
+git_info_pull(){
+    if [[ -n $(_is_track_branch) ]]; then
+        local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+        local head_rev="$(git rev-parse HEAD)"
+        local origin_rev="$(git rev-parse origin/$current_branch)"
+        if [ "$head_rev" != "$origin_rev" ] && [[ $(git_info_pull) = "" ]]; then
+            echo " %{%F{black}%}⮁ %{%F{red}%}Can Be Pulled%{%f%}"
+            return
+        fi
+    fi
+}
+
 git_info_push(){
-    if [ "$(git remote 2>/dev/null)" != "" ]; then
+    if [[ -n $(_is_track_branch) ]]; then
         local current_branch="$(git rev-parse --abbrev-ref HEAD)"
         local push_count=$(git rev-list origin/"$current_branch".."$current_branch" 2>/dev/null | wc -l)
         if [[ "$push_count" > 0 ]]; then
@@ -43,7 +52,11 @@ git_info_push(){
 
 custom_vcs_info(){
     LANG=en_US.UTF-8 vcs_info
-    echo $vcs_info_msg_0_$(git_info_push)$(git_info_pull)
+    echo $vcs_info_msg_0_$(git_info_pull)$(git_info_push)
+}
+
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
 }
 
 case "${TERM}" in
@@ -59,18 +72,14 @@ case "${TERM}" in
                   FG_COLOR=black
                 fi
 
-                if [[ -n `echo $_vcs_info | grep "merge" 2> /dev/null` ]]; then
+                if [[ -n `echo $_vcs_info | grep -Ei "merge|unstaged|staged" 2> /dev/null` ]]; then
                     BG_COLOR=red
                     FG_COLOR=white
                 fi
-                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $(custom_vcs_info) %{%F{$BG_COLOR}%K{magenta}%}⮀"
+                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $_vcs_info %{%F{$BG_COLOR}%K{magenta}%}⮀"
             else
                echo "%{%K{magenta}%}⮀"
             fi
-        }
-
-        function virtualenv_info {
-            [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
         }
 
         # プロンプト詳細
