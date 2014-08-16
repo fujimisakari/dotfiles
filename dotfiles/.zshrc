@@ -7,7 +7,7 @@ autoload vcs_info
 # gitのみ有効にする
 zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
-zstyle ":vcs_info:git:*" check-for-changes true
+#zstyle ":vcs_info:git:*" check-for-changes true
 # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
 zstyle ":vcs_info:git:*" formats "⭠ %r ⮁ %b%u%c"
 # gitリポジトリに対して、コンフリクトなどの情報を表示する
@@ -17,57 +17,50 @@ zstyle ":vcs_info:git:*" unstagedstr " ⮁ Unstaged"
 # commitしていないstageがあることを示す文字列
 zstyle ":vcs_info:git:*" stagedstr " ⮁ Staged"
 
-_is_track_branch(){
+git_is_track_branch(){
     if [ "$(git remote 2>/dev/null)" != "" ]; then
         local target_tracking_branch="origin/$(git rev-parse --abbrev-ref HEAD)"
         for tracking_branch in $(git branch -ar) ; do
             if [ "$target_tracking_branch" = "$tracking_branch" ]; then
-                return true;
+                echo "true"
             fi
         done
     fi
 }
 
 git_info_pull(){
-    if [[ -n $(_is_track_branch) ]]; then
+    if [ -n "$(git_is_track_branch)" ]; then
         local current_branch="$(git rev-parse --abbrev-ref HEAD)"
         local head_rev="$(git rev-parse HEAD)"
         local origin_rev="$(git rev-parse origin/$current_branch)"
-        if [ "$head_rev" != "$origin_rev" ] && [[ $(git_info_pull) = "" ]]; then
-            echo " %{%F{black}%}⮁ %{%F{red}%}Can Be Pulled%{%f%}"
-            return
+        if [ "$head_rev" != "$origin_rev" ] && [ "$(git_info_push)" = "" ]; then
+                echo " ⮁ Can Be Pulled"
         fi
     fi
 }
 
 git_info_push(){
-    if [[ -n $(_is_track_branch) ]]; then
+    if [ -n "$(git_is_track_branch)" ]; then
         local current_branch="$(git rev-parse --abbrev-ref HEAD)"
         local push_count=$(git rev-list origin/"$current_branch".."$current_branch" 2>/dev/null | wc -l)
-        if [[ "$push_count" > 0 ]]; then
-            echo " ⮁ %{%F{red}%}Can Be Pushed($push_count)%{%f%}"
+        if [ "$push_count" -gt 0 ]; then
+            echo " ⮁ Can Be Pushed($push_count)"
         fi
     fi
-}
-
-custom_vcs_info(){
-    LANG=en_US.UTF-8 vcs_info
-    echo $vcs_info_msg_0_$(git_info_pull)$(git_info_push)
-}
-
-function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
 }
 
 case "${TERM}" in
     eterm-color*|kterm*|xterm*|screen*)
 
-        function _git_info() {
-            _vcs_info=$(custom_vcs_info)
-            if [[ -n $_vcs_info ]]; then
+        function update_git_info() {
+            LANG=en_US.UTF-8 vcs_info
+            _vcs_info=$vcs_info_msg_0_
+            _git_info_push=$(git_info_push)
+            _git_info_pull=$(git_info_pull)
+            if [ -n "$_vcs_info" ]; then
                 local BG_COLOR=green
 
-                if [[ -n $(git_info_push) ]] || [[ -n $(git_info_pull) ]]; then
+                if [ -n "$_git_info_push" ] || [ -n "$_git_info_pull" ]; then
                   BG_COLOR=yellow
                   FG_COLOR=black
                 fi
@@ -76,9 +69,21 @@ case "${TERM}" in
                     BG_COLOR=red
                     FG_COLOR=white
                 fi
-                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $_vcs_info %{%F{$BG_COLOR}%K{magenta}%}⮀"
+                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $_vcs_info$_git_info_push$_git_info_pull %{%F{$BG_COLOR}%K{magenta}%}⮀"
             else
                echo "%{%K{magenta}%}⮀"
+            fi
+        }
+
+        function virtualenv_info {
+            [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
+        }
+
+        precmd() {
+            if [[ -n `pwd | grep project 2> /dev/null` ]]; then
+                zstyle ":vcs_info:git:*" check-for-changes false
+            else
+                zstyle ":vcs_info:git:*" check-for-changes true
             fi
         }
 
@@ -98,7 +103,7 @@ case "${TERM}" in
         PROMPT_DIR='%{%F{black}%} %~%  '
         PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{magenta}%})⮀%{%f%k%b%}'
         PROMPT='
-%{%f%b%k%}$PROMPT_HOST$(_git_info)$PROMPT_DIR$PROMPT_SU
+%{%f%b%k%}$PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
 %{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}⮀%{%f%k%b%} '
         SPROMPT='${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}'
     ;;
@@ -210,14 +215,14 @@ esac
 ##------------------------------------------------------------------##
 
 if [ $ALLOW_HOST = "true" ]; then
-    if ssh-add -l > /dev/null 2>&1; [ $? -eq 0  ]; then
+    if ssh-add -l > /dev/null 2>&1; [ $? -eq 0 ]; then
         keychain
         . ~/.keychain/$HOST-sh
-    elif ssh-add -l > /dev/null 2>&1; [ $? -eq 1  ]; then
+    elif ssh-add -l > /dev/null 2>&1; [ $? -eq 1 ]; then
         echo "Please input the passphrase to ssh-agent"
         ssh-add ~/.ssh/id_rsa
         keychain
-    elif psg ssh-agent > /dev/null 2>&1; [ $? -eq 0  ]; then
+    elif psg ssh-agent > /dev/null 2>&1; [ $? -eq 0 ]; then
         . ~/.keychain/$HOST-sh
     else
         echo "Please input the passphrase to ssh-agent"
