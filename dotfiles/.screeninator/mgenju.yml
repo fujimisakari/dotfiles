@@ -4,19 +4,22 @@
 project_name: mgenju
 project_root: ~/projects/genju-hime
 tabs:
-  - master:
+  - mas:
     - export OS_CONTAINER=mbga
     - mysql -u root gh_mbga
-  - part0:
+  - p0:
     - export OS_CONTAINER=mbga
     - mysql -u root gh_mbga_part0
-  - event:
+  - eve:
     - export OS_CONTAINER=mbga
     - mysql -u root gh_mbga_event
   - sql:
     - export OS_CONTAINER=mbga
     - tail -f /tmp/sql.log
-  - runserver:
+  - slow:
+    - export OS_CONTAINER=mbga
+    - tail -f /tmp/slow_sql.log
+  - run:
     - export OS_CONTAINER=mbga
     - cd ~/projects/genju-hime/application
     - ./restart.sh
@@ -24,9 +27,6 @@ tabs:
     - export OS_CONTAINER=mbga
     - cd ~/projects/genju-hime
   - app:
-    - export OS_CONTAINER=mbga
-    - cd ~/projects/genju-hime/application
-  - zsh:
     - export OS_CONTAINER=mbga
     - cd ~/projects/genju-hime/application
   - zsh:

@@ -83,7 +83,7 @@ case "${TERM}" in
             if [[ -n `pwd | grep project 2> /dev/null` ]]; then
                 zstyle ":vcs_info:git:*" check-for-changes false
             else
-                zstyle ":vcs_info:git:*" check-for-changes true
+                # zstyle ":vcs_info:git:*" check-for-changes true
             fi
         }
 

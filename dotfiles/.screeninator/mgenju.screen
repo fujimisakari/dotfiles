@@ -81,33 +81,32 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 
-screen -t master 0
+screen -t mas 0
 stuff "export OS_CONTAINER=mbga && mysql -u root gh_mbga\012"
 
-screen -t part0 1
+screen -t p0 1
 stuff "export OS_CONTAINER=mbga && mysql -u root gh_mbga_part0\012"
 
-screen -t event 2
+screen -t eve 2
 stuff "export OS_CONTAINER=mbga && mysql -u root gh_mbga_event\012"
 
 screen -t sql 3
 stuff "export OS_CONTAINER=mbga && tail -f /tmp/sql.log\012"
 
-screen -t runserver 4
+screen -t slow 4
+stuff "export OS_CONTAINER=mbga && tail -f /tmp/slow_sql.log\012"
+
+screen -t run 5
 stuff "export OS_CONTAINER=mbga && cd ~/projects/genju-hime/application && ./restart.sh\012"
 
-screen -t git 5
+screen -t git 6
 stuff "export OS_CONTAINER=mbga && cd ~/projects/genju-hime\012"
 
-screen -t app 6
+screen -t app 7
 stuff "export OS_CONTAINER=mbga && cd ~/projects/genju-hime/application\012"
 
-screen -t zsh 7
+screen -t zsh 8
 stuff "export OS_CONTAINER=mbga && cd ~/projects/genju-hime/application\012"
 
-screen -t zsh 7
+screen -t zsh 9
 stuff "export OS_CONTAINER=mbga && cd ~/projects/genju-hime/application\012"
-
-screen -t zsh 7
-stuff "export OS_CONTAINER=mbga && cd ~/projects/genju-hime/application\012"
-

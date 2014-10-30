@@ -1,10 +1,11 @@
 [user]
     name = Ryo Fujimoto
-    email = fujimisakari@gmail.com
+#    email = fujimisakari@gmail.com
+    email = ryo.fujimoto@gu3.co.jp
 [color]
     ui = auto
 [core]
-    excludesfile = /Users/fujimo/.gitignore
+    excludesfile = ~/.gitignore
     pager = "LESS=-R less"
     autocrlf = input                 # CRLFを自動変換
     quotepath = false                # 日本語ファイル名を表示できるようにする
@@ -13,6 +14,7 @@
     cam = commit -a --amend          # 直前のcommitを修正
     co = checkout
     st = status
+    cst = status .
     sh = show
     so = remote show origin
     ft = fetch
@@ -29,8 +31,8 @@
     wc = whatchanged                 # logに変更されたファイルも一緒に出す
     ls = log --stat                  # logに変更されたファイルも一緒に出す
     lp = log -p                      # diffも一緒に出す
-    la = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset'
-    lac = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' master..`f`"
+    la = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --date=iso
+    lac = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --date=iso --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' master..`f`"
     laf = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --author=fujimoto
     lo = log origin                  # originのlog
     oneline = log --pretty=oneline

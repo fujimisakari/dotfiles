@@ -4,15 +4,15 @@
 project_name: genju
 project_root: ~/projects/genju-hime
 tabs:
-  - master: mysql -u root genju_hime_gree
-  - part0: mysql -u root genju_hime_part0
-  - event: mysql -u root genju_hime_event
+  - mas: mysql -u root genju_hime_gree
+  - p0: mysql -u root genju_hime_part0
+  - eve: mysql -u root genju_hime_event
   - sql: tail -f /tmp/sql.log
-  - runserver:
+  - slow: tail -f /tmp/slow_sql.log
+  - run:
     - cd ~/projects/genju-hime/application
     - ./restart.sh
   - git: cd ~/projects/genju-hime
   - app: cd ~/projects/genju-hime/application
-  - zsh: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application
