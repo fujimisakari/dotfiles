@@ -34,6 +34,13 @@ case "${OSTYPE}" in
   ;;
 esac
 
+## 上の階層へ移動
+function up-dir() {
+    cd ../
+    zle accept-line
+}
+zle -N up-dir
+
 ## SSHコマンドはscreenの新しい窓で
 if [ $ALLOW_HOST="true" ]; then
   function ssh_screen(){

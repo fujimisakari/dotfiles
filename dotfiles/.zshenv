@@ -97,6 +97,11 @@ if [ $ALLOW_HOST = "true" ]; then
         # rvm use 1.8.7
         rvm gemset use default_env
     fi
+
+    # node.js設定
+    if [[ -s ~/.nvm/nvm.sh ]];
+      then source ~/.nvm/nvm.sh
+    fi
 fi
 
 ## screen セッション保存Dir
