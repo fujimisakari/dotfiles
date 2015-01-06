@@ -8,6 +8,7 @@ tabs:
   - p0: mysql -u root genju_hime_part0
   - eve: mysql -u root genju_hime_event
   - sql: tail -f /tmp/sql.log
+  - for: tail -f /tmp/sql.log | grep 'FOR UPDATE'
   - slow: tail -f /tmp/slow_sql.log
   - run:
     - cd ~/projects/genju-hime/application

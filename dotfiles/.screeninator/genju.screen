@@ -93,20 +93,23 @@ stuff "mysql -u root genju_hime_event\012"
 screen -t sql 3
 stuff "tail -f /tmp/sql.log\012"
 
-screen -t slow 4
+screen -t for 4
+stuff "tail -f /tmp/sql.log | grep 'FOR UPDATE'\012"
+
+screen -t slow 5
 stuff "tail -f /tmp/slow_sql.log\012"
 
-screen -t run 5
+screen -t run 6
 stuff "cd ~/projects/genju-hime/application && ./restart.sh\012"
 
-screen -t git 6
+screen -t git 7
 stuff "cd ~/projects/genju-hime\012"
 
-screen -t app 7
-stuff "cd ~/projects/genju-hime/application\012"
-
-screen -t zsh 8
+screen -t app 8
 stuff "cd ~/projects/genju-hime/application\012"
 
 screen -t zsh 9
+stuff "cd ~/projects/genju-hime/application\012"
+
+screen -t zsh 10
 stuff "cd ~/projects/genju-hime/application\012"

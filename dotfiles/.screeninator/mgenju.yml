@@ -16,6 +16,9 @@ tabs:
   - sql:
     - export OS_CONTAINER=mbga
     - tail -f /tmp/sql.log
+  - for:
+    - export OS_CONTAINER=mbga
+    - tail -f /tmp/sql.log | grep 'FOR UPDATE'
   - slow:
     - export OS_CONTAINER=mbga
     - tail -f /tmp/slow_sql.log
