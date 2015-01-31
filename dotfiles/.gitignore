@@ -1,17 +1,11 @@
-ac-comphist.dat
 archive-contents
-anything-c-adaptive-history
-auto-save-list
 fujimoto_settings.py
 private_config.py
 restart.sh
 demo_reset.sql
-mrestart.sh
+restart.sh
 all_migrate.sh
-url
-private
 pylintrc
-tramp
 python2.7
 skk-jisyo.utf8
 .mc-lists.el
@@ -34,7 +28,5 @@ punk.sln
 Physics2DSettings.asset
 PrincessofKilling.acf
 UnityKeyRemapEditor*
-el-get
-semanticdb
 my_all_load.sh
 src
