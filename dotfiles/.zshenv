@@ -102,6 +102,15 @@ if [ $ALLOW_HOST = "true" ]; then
     if [[ -s ~/.nvm/nvm.sh ]];
       then source ~/.nvm/nvm.sh
     fi
+
+    # go設定
+    export GOPATH=$HOME/dev/go
+    export PATH=$PATH:/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin
+
+    # docker設定
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+    export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
 fi
 
 ## screen セッション保存Dir

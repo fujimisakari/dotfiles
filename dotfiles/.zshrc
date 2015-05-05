@@ -267,3 +267,8 @@ bindkey "^L" percol-cdr               # 最近行ったディレクトへcd
 bindkey '\033^m' up-dir               # 一つ上の階層へcd
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
+
+## create emacs env file
+perl -wle \
+    'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
+    PATH > ~/.emacs.d/shellenv.el
