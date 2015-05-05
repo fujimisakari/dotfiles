@@ -1,0 +1,40 @@
+# ~/.screeninator/cgenju.yml
+# you can make as many tabs as you wish...
+
+project_name: cgenju
+project_root: ~/projects/genju-hime
+tabs:
+  - mas:
+    - export OS_CONTAINER=colopl
+    - mysql -u root gh_colopl
+  - p0:
+    - export OS_CONTAINER=colopl
+    - mysql -u root gh_colopl_part0
+  - eve:
+    - export OS_CONTAINER=colopl
+    - mysql -u root gh_colopl_event
+  - sql:
+    - export OS_CONTAINER=colopl
+    - tail -f /tmp/sql.log
+  - for:
+    - export OS_CONTAINER=colopl
+    - tail -f /tmp/sql.log | grep 'FOR UPDATE'
+  - slow:
+    - export OS_CONTAINER=colopl
+    - tail -f /tmp/slow_sql.log
+  - run:
+    - export OS_CONTAINER=colopl
+    - cd ~/projects/genju-hime/application
+    - ./restart.sh plus
+  - git:
+    - export OS_CONTAINER=colopl
+    - cd ~/projects/genju-hime
+  - app:
+    - export OS_CONTAINER=colopl
+    - cd ~/projects/genju-hime/application
+  - zsh:
+    - export OS_CONTAINER=colopl
+    - cd ~/projects/genju-hime/application
+  - zsh:
+    - export OS_CONTAINER=colopl
+    - cd ~/projects/genju-hime/application
