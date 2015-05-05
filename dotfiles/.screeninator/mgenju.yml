@@ -25,7 +25,7 @@ tabs:
   - run:
     - export OS_CONTAINER=mbga
     - cd ~/projects/genju-hime/application
-    - ./restart.sh
+    - ./restart.sh plus
   - git:
     - export OS_CONTAINER=mbga
     - cd ~/projects/genju-hime

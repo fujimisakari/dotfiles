@@ -1,6 +1,7 @@
 alias start_default='if [[ -n `screen -ls | grep default` ]] ; then `screen -dr default` ; else `screen -c ~/.screeninator/default.screen -S default`; fi'
 alias start_dgenju='if [[ -n `screen -ls | grep dgenju` ]] ; then `screen -dr dgenju` ; else `screen -c ~/.screeninator/dgenju.screen -S dgenju`; fi'
 alias start_genju='if [[ -n `screen -ls | grep genju` ]] ; then `screen -dr genju` ; else `screen -c ~/.screeninator/genju.screen -S genju`; fi'
+alias start_cgenju='if [[ -n `screen -ls | grep cgenju` ]] ; then `screen -dr cgenju` ; else `screen -c ~/.screeninator/cgenju.screen -S cgenju`; fi'
 alias start_gh-dev='if [[ -n `screen -ls | grep gh-dev` ]] ; then `screen -dr gh-dev` ; else `screen -c ~/.screeninator/gh-dev.screen -S gh-dev`; fi'
 alias start_media='if [[ -n `screen -ls | grep media` ]] ; then `screen -dr media` ; else `screen -c ~/.screeninator/media.screen -S media`; fi'
 alias start_mgenju='if [[ -n `screen -ls | grep mgenju` ]] ; then `screen -dr mgenju` ; else `screen -c ~/.screeninator/mgenju.screen -S mgenju`; fi'

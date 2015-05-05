@@ -12,7 +12,7 @@ tabs:
   - slow: tail -f /tmp/slow_sql.log
   - run:
     - cd ~/projects/genju-hime/application
-    - ./restart.sh
+    - ./restart.sh plus
   - git: cd ~/projects/genju-hime
   - app: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application

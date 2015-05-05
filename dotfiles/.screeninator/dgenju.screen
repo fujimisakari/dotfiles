@@ -100,7 +100,7 @@ screen -t slow 5
 stuff "export OS_CONTAINER=dgame && tail -f /tmp/slow_sql.log\012"
 
 screen -t run 6
-stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application && ./restart.sh\012"
+stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime/application && ./restart.sh plus\012"
 
 screen -t git 7
 stuff "export OS_CONTAINER=dgame && cd ~/projects/genju-hime\012"
