@@ -119,6 +119,9 @@ export SCREENDIR=$HOME/.screens
 ## screeninator
 [[ -s "$HOME/.screeninator/scripts/screeninator" ]] && source "$HOME/.screeninator/scripts/screeninator"
 
+## HOMEBREW CASKのインストール先
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 ## エディタの指定
 EDITOR=vim
 
