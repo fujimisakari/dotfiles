@@ -271,4 +271,4 @@ typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 ## create emacs env file
 perl -wle \
     'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
-    PATH > ~/.emacs.d/shellenv.el
+    PATH > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
