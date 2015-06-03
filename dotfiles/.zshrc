@@ -58,20 +58,23 @@ case "${TERM}" in
             _git_info_push=$(git_info_push)
             _git_info_pull=$(git_info_pull)
             if [ -n "$_vcs_info" ]; then
-                local BG_COLOR=green
+                local BG_COLOR=034
+                local FG_COLOR=016
 
                 if [ -n "$_git_info_push" ] || [ -n "$_git_info_pull" ]; then
-                  BG_COLOR=yellow
-                  FG_COLOR=black
+                  BG_COLOR=178
+                  FG_COLOR=016
                 fi
 
                 if [[ -n `echo $_vcs_info | grep -Ei "merge|unstaged|staged" 2> /dev/null` ]]; then
-                    BG_COLOR=red
-                    FG_COLOR=white
+                    BG_COLOR=160
+                    FG_COLOR=255
                 fi
-                echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $_vcs_info$_git_info_push$_git_info_pull %{%F{$BG_COLOR}%K{magenta}%}⮀"
+                # echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $_vcs_info$_git_info_push$_git_info_pull %{%F{$BG_COLOR}%K{magenta}%}⮀"
+                echo "%{\e[48;5;${BG_COLOR}m%}%{\e[38;5;057m%}⮀%{\e[m%}%{\e[48;5;${BG_COLOR}m%} %{\e[38;5;${FG_COLOR}m%}$_vcs_info$_git_info_push$_git_info_pull %{\e[m%}%{\e[m%}%{\e[48;5;237m%}%{\e[38;5;${BG_COLOR}m%}⮀%{\e[m%}%{\e[m%}"
             else
-               echo "%{%K{magenta}%}⮀"
+               # echo "%{%K{magenta}%}⮀"
+               echo -n "%{\e[48;5;237m%}%{\e[38;5;057m%}⮀%{\e[m%}%{\e[m%}"
             fi
         }
 
@@ -99,12 +102,19 @@ case "${TERM}" in
         #                           最後に実行したコマンドが正常終了していれば
         #                           太字で白文字で緑背景にして異常終了していれば
         #                           太字で白文字で赤背景にする。
-        PROMPT_HOST='%{%b%F{gray}%K{blue}%} %(?.%{%F{green}%}✔.%{%F{red}%}✘)%{%F{black}%} %n %{%F{blue}%}'
-        PROMPT_DIR='%{%F{black}%} %~%  '
-        PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{magenta}%})⮀%{%f%k%b%}'
-        PROMPT='
-%{%f%b%k%}$PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
-%{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}⮀%{%f%k%b%} '
+#         PROMPT_HOST='%{%b%F{gray}%K{blue}%} %(?.%{%F{green}%}✔.%{%F{red}%}✘)%{%F{black}%} %n %{%F{blue}%}'
+#         PROMPT_DIR='%{%F{black}%} %~%  '
+#         PROMPT_SU='%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{%k%F{magenta}%})⮀%{%f%k%b%}'
+#         PROMPT='
+# %{%f%b%k%}$PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
+# %{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}⮀%{%f%k%b%} '
+        PROMPT_HOST=$'%{\e[48;5;057m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;255m%}%n %{\e[m%}%{\e[m%}'
+        PROMPT_DIR=$'%{\e[48;5;237m%} %{\e[38;5;226m%}%~ %{\e[m%}% %{\e[m%}'
+        PROMPT_SU=$'%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;237m%}⮀%{\e[m%})'
+        PROMPT_SHELL=$'%{\e[48;5;057m%} %{\e[38;5;255m%}$ %{\e[m%}%{\e[m%}%{\e[38;5;057m%}⮀%{\e[m%}'
+        PROMPT=$'
+$PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
+$PROMPT_SHELL%{%f%k%b%} '
         SPROMPT='${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}'
     ;;
     # trampでの接続用
