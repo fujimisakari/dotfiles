@@ -3,7 +3,7 @@
 #                           開発環境PC判定                           #
 ##------------------------------------------------------------------##
 
-for host_name in "fujimisakari.local" "jupiter.local" "000276-m3.local"
+for host_name in "fujimisakari.local" "jupiter.local" "000276-m3.local" "000276-M.local"
 do
     if [ $HOST = $host_name ]; then
         ALLOW_HOST="true"
