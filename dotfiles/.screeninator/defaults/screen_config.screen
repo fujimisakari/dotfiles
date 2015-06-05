@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} <%= @project_name %> %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{r} %m/%d(%D) %c %{b}]"
+caption always "%{= kb}[%{y} <%= @project_name %> %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
