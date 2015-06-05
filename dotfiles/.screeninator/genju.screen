@@ -111,5 +111,9 @@ stuff "cd ~/projects/genju-hime/application\012"
 screen -t zsh 9
 stuff "cd ~/projects/genju-hime/application\012"
 
-screen -t zsh 10
+screen -t zsh 9
 stuff "cd ~/projects/genju-hime/application\012"
+
+screen -t zsh 9
+stuff "cd ~/projects/genju-hime/application\012"
+

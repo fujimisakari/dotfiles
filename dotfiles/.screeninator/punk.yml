@@ -4,10 +4,8 @@
 project_name: punk
 project_root: ~/projects/punk
 tabs:
-  - root: cd ~/projects/punk/
-  - Assets: cd ~/projects/punk/Assets
-  - Scripts: cd ~/projects/punk/Assets/Scripts
-  - Resources: cd ~/projects/punk/Assets/Resources
-  - XML: cd ~/projects/punk/Assets/XML
-  - zsh:
-  - zsh:
+  - omni: cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe ~/projects/punk/punk/GameServer/GameServer.sln
+  - git: cd ~/projects/punk/
+  - Assets: cd ~/projects/punk/punk/Assets
+  - Assets: cd ~/projects/punk/punk/Assets
+  - Assets: cd ~/projects/punk/punk/Assets

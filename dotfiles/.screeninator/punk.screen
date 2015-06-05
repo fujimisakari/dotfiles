@@ -81,24 +81,18 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 
-screen -t root 0
+screen -t omni 0
+stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe ~/projects/punk/punk/GameServer/GameServer.sln\012"
+
+screen -t git 1
 stuff "cd ~/projects/punk/\012"
 
-screen -t Assets 1
-stuff "cd ~/projects/punk/Assets\012"
+screen -t Assets 2
+stuff "cd ~/projects/punk/punk/Assets\012"
 
-screen -t Scripts 2
-stuff "cd ~/projects/punk/Assets/Scripts\012"
+screen -t Assets 2
+stuff "cd ~/projects/punk/punk/Assets\012"
 
-screen -t Resources 3
-stuff "cd ~/projects/punk/Assets/Resources\012"
-
-screen -t XML 4
-stuff "cd ~/projects/punk/Assets/XML\012"
-
-screen -t zsh 5
-stuff "\012"
-
-screen -t zsh 5
-stuff "\012"
+screen -t Assets 2
+stuff "cd ~/projects/punk/punk/Assets\012"
 

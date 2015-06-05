@@ -17,3 +17,4 @@ tabs:
   - app: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application
   - zsh: cd ~/projects/genju-hime/application
+  - zsh: cd ~/projects/genju-hime/application
