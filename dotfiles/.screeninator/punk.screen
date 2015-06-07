@@ -82,7 +82,7 @@ bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 
 
 screen -t omni 0
-stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe ~/projects/punk/punk/GameServer/GameServer.sln\012"
+stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/punk/punk/punk.sln\012"
 
 screen -t git 1
 stuff "cd ~/projects/punk/\012"
