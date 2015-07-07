@@ -80,19 +80,21 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
-
 screen -t omni 0
 stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/punk/punk/punk.sln\012"
 
-screen -t git 1
+screen -t master 1
+stuff "cd ~/projects/punk_masterdata/\012"
+
+screen -t git 2
 stuff "cd ~/projects/punk/\012"
 
-screen -t Assets 2
+screen -t Assets 3
 stuff "cd ~/projects/punk/punk/Assets\012"
 
-screen -t Assets 2
+screen -t Assets 3
 stuff "cd ~/projects/punk/punk/Assets\012"
 
-screen -t Assets 2
+screen -t Assets 3
 stuff "cd ~/projects/punk/punk/Assets\012"
 

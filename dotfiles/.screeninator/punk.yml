@@ -5,6 +5,7 @@ project_name: punk
 project_root: ~/projects/punk
 tabs:
   - omni: cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/punk/punk/punk.sln
+  - master: cd ~/projects/punk_masterdata/
   - git: cd ~/projects/punk/
   - Assets: cd ~/projects/punk/punk/Assets
   - Assets: cd ~/projects/punk/punk/Assets
