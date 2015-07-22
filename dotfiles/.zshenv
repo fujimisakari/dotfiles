@@ -90,8 +90,8 @@ if [ $ALLOW_HOST = "true" ]; then
     export PYTHONPATH
 
     # ruby設定
-    if [ $TERM != "dumb" ]; then
-        [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm  # Load RVM function
+    if [[ -s $HOME/.rvm/scripts/rvm ]]; then
+        source $HOME/.rvm/scripts/rvm  # Load RVM function
         PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
         # デフォルトのrubyバージョン、gemライブラリ場所を指定
         # rvm use 1.8.7
