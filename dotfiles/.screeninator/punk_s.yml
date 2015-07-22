@@ -1,0 +1,16 @@
+# ~/.screeninator/punk_s.yml
+# you can make as many tabs as you wish...
+
+project_name: punk_s
+project_root: ~/projects/punk_server
+tabs:
+  - shard1: mysql -ukill -phime punk_shard1
+  - sql: tail -f /tmp/sql.log
+  - for: tail -f /tmp/sql.log | grep 'FOR UPDATE'
+  - slow: tail -f /tmp/slow_sql.log
+  - runserver: cd ~/projects/punk_server/application && ./manage.py runserver
+  - json: cd ~/projects/punk_server/application/resource/data/server/json
+  - git: cd ~/projects/punk_server
+  - punk: cd ~/projects/punk_server/application
+  - punk: cd ~/projects/punk_server/application
+  - punk: cd ~/projects/punk_server/application
