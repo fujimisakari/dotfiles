@@ -84,7 +84,7 @@ screen -t omni 0
 stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/punk/punk/punk.sln\012"
 
 screen -t master 1
-stuff "cd ~/projects/punk_masterdata/\012"
+stuff "cd ~/projects/punk_resource/data/xls\012"
 
 screen -t git 2
 stuff "cd ~/projects/punk/\012"
