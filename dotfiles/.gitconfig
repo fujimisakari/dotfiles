@@ -32,7 +32,8 @@
     ls = log --stat                  # logに変更されたファイルも一緒に出す
     lp = log -p                      # diffも一緒に出す
     la = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --date=iso
-    lac = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --date=iso --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' master..`f`"
+    lac = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --date=iso --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' origin/master..`f`"
+    lad = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --date=iso --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' origin/develop..`f`"
     laf = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --author=fujimoto
     lo = log origin                  # originのlog
     oneline = log --pretty=oneline
