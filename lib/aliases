@@ -27,6 +27,7 @@ case "${OSTYPE}" in
     alias finder='open .'
     alias ssh='ssh -A -l $USER'
     alias netstat='netstat -n -p tcp'
+    alias ql='qlmanage -p "$@" >& /dev/null'
   ;;
 esac
 
