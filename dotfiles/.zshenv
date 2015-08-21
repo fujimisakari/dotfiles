@@ -95,7 +95,7 @@ if [ $ALLOW_HOST = "true" ]; then
         PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
         # デフォルトのrubyバージョン、gemライブラリ場所を指定
         # rvm use 1.8.7
-        rvm gemset use default_env
+        rvm gemset use default_env > /dev/null 2>&1
     fi
 
     # node.js設定

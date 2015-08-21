@@ -279,7 +279,8 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない�
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 
 ## create emacs env file
-~/.emacs.d/bin/shellenv_genarator.py > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
+~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
+~/.emacs.d/bin/env_genarator.py pylint > ~/.emacs.d/share/shellenv/`echo $USER`_pylintenv.py
 # perl -wle \
 #     'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
 #     PATH > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
