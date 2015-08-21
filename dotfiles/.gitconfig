@@ -35,6 +35,8 @@
     lac = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --date=iso --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' origin/master..`f`"
     lad = "!f() { git rev-parse --abbrev-ref HEAD ; }; git log --date=iso --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' origin/develop..`f`"
     laf = log --pretty='format:%C(magenta)%cd%Creset %C(yellow)%h%Creset %Cgreen(%an)%Creset %s %Cred%d%Creset' --author=fujimoto
+    dfm = "!f() { git rev-parse --abbrev-ref HEAD ; }; git diff origin/master..`f`"
+    dfd = "!f() { git rev-parse --abbrev-ref HEAD ; }; git diff origin/develop..`f`"
     lo = log origin                  # originのlog
     oneline = log --pretty=oneline
     ranking = shortlog -s -n --no-merges
