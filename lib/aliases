@@ -28,6 +28,7 @@ case "${OSTYPE}" in
     alias ssh='ssh -A -l $USER'
     alias netstat='netstat -n -p tcp'
     alias ql='qlmanage -p "$@" >& /dev/null'
+    alias updatesb='find . -name "*.storyboard" -or -name "*.xib"  | xargs -IFILE xcrun ibtool --upgrade FILE --write FILE'
   ;;
 esac
 

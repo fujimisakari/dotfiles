@@ -1,6 +1,4 @@
 alias start_default='if [[ -n `screen -ls | grep default` ]] ; then `screen -dr default` ; else `screen -c ~/.screeninator/default.screen -S default`; fi'
-alias start_genju='if [[ -n `screen -ls | grep genju` ]] ; then `screen -dr genju` ; else `screen -c ~/.screeninator/genju.screen -S genju`; fi'
 alias start_media='if [[ -n `screen -ls | grep media` ]] ; then `screen -dr media` ; else `screen -c ~/.screeninator/media.screen -S media`; fi'
 alias start_otherbu='if [[ -n `screen -ls | grep otherbu` ]] ; then `screen -dr otherbu` ; else `screen -c ~/.screeninator/otherbu.screen -S otherbu`; fi'
-alias start_punk='if [[ -n `screen -ls | grep punk` ]] ; then `screen -dr punk` ; else `screen -c ~/.screeninator/punk.screen -S punk`; fi'
-alias start_punk_server='if [[ -n `screen -ls | grep punk_s` ]] ; then `screen -dr punk_s` ; else `screen -c ~/.screeninator/punk_s.screen -S punk_s`; fi'
+alias start_todo='if [[ -n `screen -ls | grep todo` ]] ; then `screen -dr todo` ; else `screen -c ~/.screeninator/todo.screen -S todo`; fi'

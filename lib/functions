@@ -60,6 +60,12 @@ function sr { screen -r $1 }
 ## 全履歴一覧を出力する
 function histall { history -i -D -E 1 }
 
+## graph serverの立ち上げ
+function graph {
+  cd $HOME/dev/graphviz_web/src
+  go run server.go
+}
+
 ## emacsの一括バイトコンパイル
 function batchcompile() {
   for i in $@; do;
@@ -98,6 +104,15 @@ function imgsize_all() {
   for i in `ls`; do
     identify $i | awk '{print $1, $3}'
   done
+}
+
+## Qiitaへ投稿してるマークダウン取得
+function qiita_md() {
+  if [ $1 ]; then
+    curl -s https://qiita.com/api/v1/items/$1 | php -R 'print_r(json_decode($argn)->raw_body);'
+  else
+    echo "QiitaHash of the argument does not exist"
+  fi
 }
 
 ## githubへアクセス

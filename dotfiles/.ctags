@@ -13,3 +13,10 @@
 --regex-Go=/var[ \t]+([a-zA-Z_][a-zA-Z0-9_]+)/\1/d,var/
 --regex-Go=/const[ \t]+([a-zA-Z_][a-zA-Z0-9_]+)/\1/d,const/
 --regex-Go=/type[ \t]+([a-zA-Z_][a-zA-Z0-9_]+)/\1/d,type/
+
+--langdef=Swift
+--langmap=Swift:.swift
+--regex-Swift=/(var|let)[ \t]+([^:=]+).*$/\2/,variable/
+--regex-Swift=/func[ \t]+([^\(\)]+)\([^\(\)]*\)/\1/,function/
+--regex-Swift=/class[ \t]+([^:\{]+).*$/\1/,class/
+--regex-Swift=/protocol[ \t]+([^:\{]+).*$/\1/,protocol/

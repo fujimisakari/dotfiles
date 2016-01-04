@@ -19,7 +19,7 @@ zstyle ":vcs_info:git:*" stagedstr " ⮁ Staged"
 
 git_is_track_branch(){
     if [ "$(git remote 2>/dev/null)" != "" ]; then
-        local target_tracking_branch="origin/$(git rev-parse --abbrev-ref HEAD)"
+        local target_tracking_branch="origin/$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
         for tracking_branch in $(git branch -ar) ; do
             if [ "$target_tracking_branch" = "$tracking_branch" ]; then
                 echo "true"

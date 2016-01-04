@@ -103,14 +103,17 @@ if [ $ALLOW_HOST = "true" ]; then
       then source ~/.nvm/nvm.sh
     fi
 
+    # common lisp設定
+    PATH=$PATH:$HOME/.roswell/bin
+
     # go設定
     export GOPATH=$HOME/dev/go
     export PATH=$PATH:/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin
 
     # docker設定
-    export DOCKER_HOST=tcp://192.168.59.103:2376
-    export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-    export DOCKER_TLS_VERIFY=1
+    # export DOCKER_HOST=tcp://192.168.59.103:2376
+    # export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+    # export DOCKER_TLS_VERIFY=1
 fi
 
 ## screen セッション保存Dir
@@ -144,4 +147,8 @@ LISTMAX=0
 export PATH EDITOR SVN_EDITOR LANG LC_ALL LISTMAX PAGER
 
 ## pyenv
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if [ -e "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi

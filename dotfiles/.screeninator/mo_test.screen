@@ -1,0 +1,100 @@
+
+##------------------------------------------------------------------##
+#                              基本設定                              #
+##------------------------------------------------------------------##
+
+## 256色表示設定
+termcapinfo xterm* 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
+attrcolor b ".I"
+defbce "on"
+
+## 起動時のライセンス画面を表示させない
+startup_message off
+
+## 日本語対応
+defkanji UTF-8
+defencoding UTF-8
+encoding UTF-8
+
+## Screen終了時に自動的にデタッチするか
+autodetach off
+
+## スクロールバックできる行数
+defscrollback 100000
+
+## コマンドキーの指定
+escape ^Zz
+
+sorendition "+r .M"
+
+## ステータス行の設定(X端末のタイトルを動的に変更)
+hardstatus string "%t : %h"
+caption always "%{= kb}[%{y} mo_test %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+
+## 現在のウィンドウに対して可視ベルの設定するか
+vbell off
+
+## ベル文字がバックグラウンドに送られたときの挙動
+## ^Gは通常は音声ベル
+## メッセージを表示しない場合には""を指定する
+bell_msg "^G"
+
+## screen起動時に自動的に開く端末
+#screen 0
+#screen 1
+#screen 2
+
+## ウィンドウの切り替え（Ctrl+矢印キー）
+# GNOME terminal
+#bindkey "^[[1;5C" next
+#bindkey "^[[1;5D" prev
+
+# putty bindings
+# bindkey "^[OC" next
+# bindkey "^[OD" prev
+
+bindkey "\033^l" next
+bindkey "\033^h" prev
+
+##------------------------------------------------------------------##
+#                          キーバインド設定                          #
+##------------------------------------------------------------------##
+
+bind l windowlist
+bind s
+bind u encoding UTF-8
+bind i encoding eucJP
+
+## 画面制御をEmacs風にする
+bind -c REGION 2 split
+bind -c REGION 1 only
+bind -c REGION 0 remove
+bind -c REGION o focus
+bind -c REGION \^ resize
+bind x command -c REGION
+
+## screenバッファからへクリップボードへコピーする
+bufferfile $HOME/.screen-exchange
+bindkey -m ' ' eval 'msgwait 0' 'stuff \040' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
+bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
+bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
+bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
+
+screen -t omni 0
+stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/samurai/mo_test/unity/unity.sln\012"
+
+screen -t server 1
+stuff "cd ~/projects/samurai/mo_test && make server\012"
+
+screen -t git 2
+stuff "cd ~/projects/samurai/mo_test\012"
+
+screen -t Assets 3
+stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
+
+screen -t Assets 3
+stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
+
+screen -t Assets 3
+stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
+

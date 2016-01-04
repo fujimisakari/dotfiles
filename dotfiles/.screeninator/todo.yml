@@ -1,0 +1,14 @@
+# ~/.screeninator/todo.yml
+# you can make as many tabs as you wish...
+
+project_name: todo
+project_root: ~/dev/todo/server
+tabs:
+  - db: mysql -u root todo
+  - sql: tail -f /tmp/sql.log
+  - runserver:
+    - cd ~/dev/todo/server
+    - ./manage.py runserver localhost:8000
+  - zsh: cd ~/dev/todo/server
+  - zsh: cd ~/dev/todo/server
+  - zsh: cd ~/dev/todo/server 

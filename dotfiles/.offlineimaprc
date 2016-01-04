@@ -1,6 +1,7 @@
 [general]
 metadata = ~/.offlineimap
-accounts = Gmail_fujimisakari, Gmail_gu3
+accounts = Gmail_fujimisakari
+#accounts = Gmail_fujimisakari, Gmail_gu3
 
 #
 # fujimisakari config
@@ -17,7 +18,7 @@ localfolders = ~/Maildir/fujimisakari/
 type = Gmail
 remoteuser = fujimisakari@gmail.com
 remotepass = fujimo@1214
-folderfilter = lambda foldername: foldername in ['Amazon', 'Facebook', 'Twitter', 'YouTube', 'apple', 'github', 'iTunes_Store', 'INBOX', 'ocn', 'job', 'yukari', 'qiita', 'send', 'sakura', 'rubikitch', 'onamae', 'paiza', 'shopping', 'recruit', 'account', 'RSS/kiwanami', 'RSS/sheephead:myuhe', 'RSS/nippondanji', 'RSS/rubikich', 'RSS/kitokitoki', 'RSS/sugyan', 'RSS/syohex', 'RSS/tomoya', 'RSS/shibayu', 'RSS/peccu', 'RSS/youhei', 'RSS/isoparametric', 'RSS/cooldaemon', 'RSS/slashdotjp', 'RSS/engineer', 'RSS/github', 'RSS/paper.li', 'RSS/gigazine', 'RSS/gizmodo', 'RSS/kachibito', 'RSS/goo', 'RSS/yahoo', 'RSS/gossipssu', 'RSS/pain_news', 'RSS/warotter', 'RSS/Qiita:fujimisakari', 'RSS/Qiita:hirokidaichi', 'RSS/Qiita:syui', 'RSS/Qiita:Emacs', 'RSS/Qiita:Unity', 'RSS/Qiita:Git', 'RSS/Qiita:Python', 'RSS/Qiita:Django', 'RSS/Qiita:Zsh', 'RSS/Qiita:Mac', 'RSS/Qiita:iOS', 'RSS/Qiita:Objective-C', 'RSS/Qiita:Csharp', 'RSS/Qiita:Programming', 'RSS/Qiita:DesignPattern', 'RSS.kachibito']
+folderfilter = lambda foldername: foldername in ['Amazon', 'Facebook', 'Twitter', 'YouTube', 'apple', 'github', 'iTunes_Store', 'INBOX', 'ocn', 'yukari', 'qiita', 'send', 'sakura', 'rubikitch', 'onamae', 'paiza', 'shopping', 'recruit', 'account', 'WorkShop', 'charge', 'RSS/rubikich', 'RSS/kitokitoki', 'RSS/sugyan', 'RSS/syohex', 'RSS/tomoya', 'RSS/shibayu', 'RSS/peccu', 'RSS/youhei', 'RSS/engineer', 'RSS/github', 'RSS/paper.li', 'RSS/gigazine', 'RSS/yahoo', 'RSS/gossipssu', 'RSS/pain_news', 'RSS/fujimisakari', 'RSS/shu223', 'RSS/Qiita:fujimisakari', 'RSS/Qiita:Emacs', 'RSS/Qiita:Git', 'RSS/Qiita:Python', 'RSS/Qiita:Django', 'RSS/Qiita:Zsh', 'RSS/Qiita:Mac', 'RSS/Qiita:iOS', 'RSS/Qiita:Objective-C', 'RSS/Qiita:Programming', 'RSS/Qiita:DesignPattern', 'RSS/Qiita:Go', 'RSS/Qiita:Lisp', 'RSS/Qiita:CommonLisp', 'RSS/Qiita:Docker', 'RSS/Qiita:Vim', 'RSS/Qiita:JavaScript', 'RSS/Qiita:Swift', 'RSS/Qiita:AngularJS']
 
 #sslcacertfile = /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 sslcacertfile = ~/Dropbox/private/ca-bundle.crt
@@ -25,20 +26,20 @@ sslcacertfile = ~/Dropbox/private/ca-bundle.crt
 #
 # gu3 config
 #
-[Account Gmail_gu3]
-localrepository = localGmail_gu3
-remoterepository = remoteGmail_gu3
-
-[Repository localGmail_gu3]
-type = Maildir
-localfolders = ~/Maildir/gu3/
-
-[Repository remoteGmail_gu3]
-type = Gmail
-remoteuser = ryo.fujimoto@gu3.co.jp
-remotepass = fujimo@1214
-# 招待: +YttfhQ
-# echo "招待" | iconv -t UTF-7
-folderfilter = lambda foldername: foldername in ['INBOX', 'mail-all', 'mail-west', 'my-mail', 'gree', 'health', 'introduction', 'invite', 'kintai', 'trouble', 'x-point', 'ui-schedule', 'gh','gh-cs', 'gh-schedule', 'gh-pt-query-digest', 'gh-bad-url-check', 'gh-alert', 'gh-cron', 'gh-nagios', 'send', 'sentry', 'newrelic', 'HipChat']
-#sslcacertfile = /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
-sslcacertfile = ~/Dropbox/private/ca-bundle.crt
+#[Account Gmail_gu3]
+#localrepository = localGmail_gu3
+#remoterepository = remoteGmail_gu3
+#
+#[Repository localGmail_gu3]
+#type = Maildir
+#localfolders = ~/Maildir/gu3/
+#
+#[Repository remoteGmail_gu3]
+#type = Gmail
+#remoteuser = ryo.fujimoto@gu3.co.jp
+#remotepass = fujimo@1214
+## 招待: +YttfhQ
+## echo "招待" | iconv -t UTF-7
+#folderfilter = lambda foldername: foldername in ['INBOX', 'mail-all', 'mail-west', 'my-mail', 'gree', 'health', 'introduction', 'invite', 'kintai', 'trouble', 'x-point', 'ui-schedule', 'gh','gh-cs', 'gh-schedule', 'gh-pt-query-digest', 'gh-bad-url-check', 'gh-alert', 'gh-cron', 'gh-nagios', 'send', 'sentry', 'newrelic', 'HipChat']
+##sslcacertfile = /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+#sslcacertfile = ~/Dropbox/private/ca-bundle.crt
