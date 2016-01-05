@@ -80,21 +80,32 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
+screen -t graph 0
+stuff "graph\012"
 
-screen -t db 0
+screen -t db 1
 stuff "mysql -u root todo\012"
 
-screen -t sql 1
+screen -t sql 2
 stuff "tail -f /tmp/sql.log\012"
 
-screen -t runserver 2
-stuff "cd ~/dev/todo/server && ./manage.py runserver localhost:8000\012"
+screen -t slow 3
+stuff "tail -f /tmp/slow_sql.log\012"
 
-screen -t zsh 3
-stuff "cd ~/dev/todo/server\012"
+screen -t websocket 4
+stuff "cd ~/dev/python/todo/application && ./server.py\012"
 
-screen -t zsh 3
-stuff "cd ~/dev/todo/server\012"
+screen -t runserver 5
+stuff "cd ~/dev/python/todo/application && ./manage.py runserver localhost:8000\012"
 
-screen -t zsh 3
-stuff "cd ~/dev/todo/server\012"
+screen -t git 6
+stuff "cd ~/dev/python/todo\012"
+
+screen -t zsh 7
+stuff "cd ~/dev/python/todo/application\012"
+
+screen -t zsh 7
+stuff "cd ~/dev/python/todo/application\012"
+
+screen -t zsh 7
+stuff "cd ~/dev/python/todo/application\012"

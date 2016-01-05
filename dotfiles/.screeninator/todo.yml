@@ -4,11 +4,17 @@
 project_name: todo
 project_root: ~/dev/todo/server
 tabs:
+  - graph: graph
   - db: mysql -u root todo
   - sql: tail -f /tmp/sql.log
+  - slow: tail -f /tmp/slow_sql.log
+  - websocket:
+    - cd ~/dev/python/todo/application
+    - ./server.py
   - runserver:
-    - cd ~/dev/todo/server
+    - cd ~/dev/python/todo/application
     - ./manage.py runserver localhost:8000
-  - zsh: cd ~/dev/todo/server
-  - zsh: cd ~/dev/todo/server
-  - zsh: cd ~/dev/todo/server 
+  - git: cd ~/dev/python/todo
+  - zsh: cd ~/dev/python/todo/application
+  - zsh: cd ~/dev/python/todo/application
+  - zsh: cd ~/dev/python/todo/application

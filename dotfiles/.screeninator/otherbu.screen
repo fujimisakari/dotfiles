@@ -88,14 +88,14 @@ screen -t sql 1
 stuff "tail -f /tmp/sql.log\012"
 
 screen -t runserver 2
-stuff "cd ~/dev/otherbu && ./manage.py runserver localhost:8001\012"
+stuff "cd ~/dev/python/otherbu && ./manage.py runserver localhost:8001\012"
 
 screen -t zsh 3
-stuff "cd ~/dev/otherbu\012"
+stuff "cd ~/dev/python/otherbu\012"
 
 screen -t zsh 3
-stuff "cd ~/dev/otherbu\012"
+stuff "cd ~/dev/python/otherbu\012"
 
 screen -t zsh 3
-stuff "cd ~/dev/otherbu\012"
+stuff "cd ~/dev/python/otherbu\012"
 
