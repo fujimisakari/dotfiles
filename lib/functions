@@ -62,7 +62,7 @@ function histall { history -i -D -E 1 }
 
 ## graph serverの立ち上げ
 function graph {
-  cd $HOME/dev/graphviz_web/src
+  cd $HOME/dev/go/graphviz_web/src
   go run server.go
 }
 
