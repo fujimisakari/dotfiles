@@ -271,11 +271,9 @@ bindkey -r "^J"                       # "^J"のキーバインドを削除
 bindkey -r "^G"                       # "^J"のキーバインドを削除
 bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
 #bindkey "^h" backward-kill-word      # Ctrl-h で単語ごとに削除
-if [ $ALLOW_HOST = "true" ]; then
-    bindkey '^R' percol-select-history    # コマンド履歴
-    bindkey '^Xs' percol-ssh              # ssh対象参照
-    bindkey "^L" percol-cdr               # 最近行ったディレクトへcd
-fi
+bindkey '^R' percol-select-history    # コマンド履歴
+bindkey '^Xs' percol-ssh              # ssh対象参照
+bindkey "^L" percol-cdr               # 最近行ったディレクトへcd
 bindkey '\033^m' up-dir               # 一つ上の階層へcd
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
