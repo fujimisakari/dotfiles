@@ -147,6 +147,7 @@ fi
 
 ## ロケール設定
 LANG=ja_JP.UTF-8
+export LC_ALL=$LANG
 
 ## 補完リストが多いときに尋ねる数
 ## -1 : 尋ねない
