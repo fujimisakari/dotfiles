@@ -2,3 +2,4 @@ alias start_default='if [[ -n `screen -ls | grep default` ]] ; then `screen -dr 
 alias start_media='if [[ -n `screen -ls | grep media` ]] ; then `screen -dr media` ; else `screen -c ~/.screeninator/media.screen -S media`; fi'
 alias start_otherbu='if [[ -n `screen -ls | grep otherbu` ]] ; then `screen -dr otherbu` ; else `screen -c ~/.screeninator/otherbu.screen -S otherbu`; fi'
 alias start_todo='if [[ -n `screen -ls | grep todo` ]] ; then `screen -dr todo` ; else `screen -c ~/.screeninator/todo.screen -S todo`; fi'
+alias start_mister='if [[ -n `screen -ls | grep mister` ]] ; then `screen -dr mister` ; else `screen -c ~/.screeninator/mister.screen -S mister`; fi'

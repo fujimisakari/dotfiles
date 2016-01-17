@@ -3,7 +3,7 @@
 #                           開発環境PC判定                           #
 ##------------------------------------------------------------------##
 
-for host_name in "fujimisakari.local" "jupiter.local" "000276-m3.local" "000276-M2.local"
+for host_name in "fujimisakari.local" "000276-m3.local" "000276-M2.local"
 do
     if [ $HOST = $host_name ]; then
         ALLOW_HOST="true"
@@ -69,11 +69,10 @@ fi
 #     scrin
 # fi
 
-
 ## パスの追加
 case "${OSTYPE}" in
   linux*)
-    PATH=$PATH:/sbin:/usr/sbin:$HOME/misc/bin
+    PATH=$HOME/misc/bin:$HOME/.pyenv/bin:$PATH:/sbin:/usr/sbin
   ;;
   darwin*)
     PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$HOME/.pyenv/bin:/sbin:$HOME/misc/bin:$PATH
@@ -82,39 +81,49 @@ case "${OSTYPE}" in
 esac
 
 ## 開発環境設定
-if [ $ALLOW_HOST = "true" ]; then
-    # python設定
-    export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 
-    PYTHONPATH=$HOME/misc/lib:$PYTHONPATH
-    export PYTHONPATH
+# python設定
+export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 
-    # ruby設定
-    if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-        source $HOME/.rvm/scripts/rvm  # Load RVM function
-        PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-        # デフォルトのrubyバージョン、gemライブラリ場所を指定
-        # rvm use 1.8.7
-        rvm gemset use default_env > /dev/null 2>&1
-    fi
+PYTHONPATH=$HOME/misc/lib:$PYTHONPATH
+export PYTHONPATH
 
-    # node.js設定
-    if [[ -s ~/.nvm/nvm.sh ]];
-      then source ~/.nvm/nvm.sh
-    fi
+## pyenv
+if [ -e "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
-    # common lisp設定
+# ruby設定
+if [[ -s $HOME/.rvm/scripts/rvm ]]; then
+    source $HOME/.rvm/scripts/rvm  # Load RVM function
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    # デフォルトのrubyバージョン、gemライブラリ場所を指定
+    # rvm use 1.8.7
+    rvm gemset use default_env > /dev/null 2>&1
+fi
+
+# node.js設定
+if [[ -s ~/.nvm/nvm.sh ]];
+    then source ~/.nvm/nvm.sh
+fi
+
+# common lisp設定
+if [[ -s $HOME/.roswell ]]; then
     PATH=$PATH:$HOME/.roswell/bin
+fi
 
-    # go設定
+# go設定
+if [[ -s $HOME/dev/go ]]; then
     export GOPATH=$HOME/dev/go
     export PATH=$PATH:/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin
-
-    # docker設定
-    # export DOCKER_HOST=tcp://192.168.59.103:2376
-    # export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-    # export DOCKER_TLS_VERIFY=1
 fi
+
+# docker設定
+# export DOCKER_HOST=tcp://192.168.59.103:2376
+# export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+# export DOCKER_TLS_VERIFY=1
 
 ## screen セッション保存Dir
 export SCREENDIR=$HOME/.screens
@@ -145,10 +154,3 @@ LANG=ja_JP.UTF-8
 LISTMAX=0
 
 export PATH EDITOR SVN_EDITOR LANG LC_ALL LISTMAX PAGER
-
-## pyenv
-if [ -e "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi

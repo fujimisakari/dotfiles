@@ -142,8 +142,8 @@ else
     HISTFILE=~/.zsh_history
 fi
 
-HISTSIZE=100000              # ヒストリに保存するコマンド数
-SAVEHIST=100000              # ヒストリファイルに保存するコマンド数
+HISTSIZE=200000              # ヒストリに保存するコマンド数
+SAVEHIST=200000              # ヒストリファイルに保存するコマンド数
 setopt hist_ignore_all_dups  # 重複するコマンド行は古い方を削除
 setopt hist_ignore_dups      # 直前と同じコマンドラインはヒストリに追加しない
 setopt share_history         # コマンド履歴ファイルを共有する
@@ -279,7 +279,9 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない�
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 
 ## create emacs env file
-~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
+if [[ -s $HOME/.emacs.d ]]; then
+    ~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
+fi
 # perl -wle \
 #     'do { print qq/(setenv "$_" "$ENV{$_}")/ if exists $ENV{$_} } for @ARGV' \
 #     PATH > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
