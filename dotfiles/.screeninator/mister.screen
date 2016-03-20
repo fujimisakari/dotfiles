@@ -90,7 +90,7 @@ screen -t slow 2
 stuff "tail -f /tmp/slow_sql.log\012"
 
 screen -t runserver 3
-stuff "cd ~/dev/python/mister-suite/mister-suite && ./manage.py runserver\012"
+stuff "cd ~/dev/python/mister-suite && ./manage.py runserver\012"
 
 screen -t git 4
 stuff "cd ~/dev/python/mister-suite\012"

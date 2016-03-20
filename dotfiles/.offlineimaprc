@@ -1,7 +1,7 @@
 [general]
 metadata = ~/.offlineimap
-accounts = Gmail_fujimisakari
-#accounts = Gmail_fujimisakari, Gmail_gu3
+#accounts = Gmail_fujimisakari
+accounts = Gmail_fujimisakari, Gmail_Squeeze
 
 #
 # fujimisakari config
@@ -18,9 +18,27 @@ localfolders = ~/Maildir/fujimisakari/
 type = Gmail
 remoteuser = fujimisakari@gmail.com
 remotepass = fujimo@1214
-folderfilter = lambda foldername: foldername in ['Amazon', 'Facebook', 'Twitter', 'YouTube', 'apple', 'github', 'iTunes_Store', 'INBOX', 'ocn', 'yukari', 'qiita', 'send', 'sakura', 'rubikitch', 'onamae', 'paiza', 'shopping', 'recruit', 'account', 'WorkShop', 'charge', 'RSS/rubikich', 'RSS/kitokitoki', 'RSS/sugyan', 'RSS/syohex', 'RSS/tomoya', 'RSS/shibayu', 'RSS/peccu', 'RSS/youhei', 'RSS/engineer', 'RSS/github', 'RSS/paper.li', 'RSS/gigazine', 'RSS/yahoo', 'RSS/gossipssu', 'RSS/pain_news', 'RSS/fujimisakari', 'RSS/shu223', 'RSS/Qiita:fujimisakari', 'RSS/Qiita:Emacs', 'RSS/Qiita:Git', 'RSS/Qiita:Python', 'RSS/Qiita:Django', 'RSS/Qiita:Zsh', 'RSS/Qiita:Mac', 'RSS/Qiita:iOS', 'RSS/Qiita:Objective-C', 'RSS/Qiita:Programming', 'RSS/Qiita:DesignPattern', 'RSS/Qiita:Go', 'RSS/Qiita:Lisp', 'RSS/Qiita:CommonLisp', 'RSS/Qiita:Docker', 'RSS/Qiita:Vim', 'RSS/Qiita:JavaScript', 'RSS/Qiita:Swift', 'RSS/Qiita:AngularJS']
+folderfilter = lambda foldername: foldername in ['Amazon', 'Facebook', 'Twitter', 'YouTube', 'apple', 'github', 'iTunes_Store', 'INBOX', 'ocn', 'yukari', 'qiita', 'send', 'sakura', 'rubikitch', 'onamae', 'paiza', 'shopping', 'recruit', 'account', 'WorkShop', 'charge', 'CI', 'DMM', 'RSS/rubikich', 'RSS/kitokitoki', 'RSS/sugyan', 'RSS/syohex', 'RSS/tomoya', 'RSS/shibayu', 'RSS/peccu', 'RSS/youhei', 'RSS/engineer', 'RSS/github', 'RSS/paper.li', 'RSS/gigazine', 'RSS/yahoo', 'RSS/gossipssu', 'RSS/pain_news', 'RSS/fujimisakari', 'RSS/shu223', 'RSS/Qiita:fujimisakari', 'RSS/Qiita:Emacs', 'RSS/Qiita:Git', 'RSS/Qiita:Python', 'RSS/Qiita:Django', 'RSS/Qiita:Zsh', 'RSS/Qiita:Mac', 'RSS/Qiita:iOS', 'RSS/Qiita:Objective-C', 'RSS/Qiita:Programming', 'RSS/Qiita:DesignPattern', 'RSS/Qiita:Go', 'RSS/Qiita:Lisp', 'RSS/Qiita:CommonLisp', 'RSS/Qiita:Docker', 'RSS/Qiita:Vim', 'RSS/Qiita:JavaScript', 'RSS/Qiita:Swift', 'RSS/Qiita:AngularJS']
 
 #sslcacertfile = /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+sslcacertfile = ~/Dropbox/private/ca-bundle.crt
+
+#
+# Squeeze config
+#
+[Account Gmail_Squeeze]
+localrepository = localGmail_squeeze
+remoterepository = remoteGmail_squeeze
+
+[Repository localGmail_squeeze]
+type = Maildir
+localfolders = ~/Maildir/squeeze/
+
+[Repository remoteGmail_squeeze]
+type = Gmail
+remoteuser = rfujimoto@squeeze-inc.co.jp
+remotepass = imdg7501
+folderfilter = lambda foldername: foldername in ['INBOX', 'send', 'Slack', 'GoogleCalendar']
 sslcacertfile = ~/Dropbox/private/ca-bundle.crt
 
 #

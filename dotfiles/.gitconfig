@@ -1,7 +1,7 @@
 [user]
     name = Ryo Fujimoto
 #    email = fujimisakari@gmail.com
-    email = ryo.fujimoto@gu3.co.jp
+    email = rfujimoto@squeeze-inc.co.jp
 [color]
     ui = auto
 [core]
@@ -66,3 +66,5 @@
     edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
     # mergeの際にconflictが起きたファイルをadd
     add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+[commit]
+	template = /Users/fujimo/.gitmessage.txt
