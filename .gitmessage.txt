@@ -1,7 +1,7 @@
 
 
 # fix, add, changeといった事実ではなく、このcommitで実現する要件や仕様を書きましょう。（リファクタなどは除く）
-# 
+#
 # 例文）
 # - Fix typo in docs
 # - Remove unused code

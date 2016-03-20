@@ -18,10 +18,10 @@ done
 ##------------------------------------------------------------------##
 
 ## 個人設定ファイルパス
-ZSHUSERDIR=$HOME/misc
+ZSHUSERDIR=$HOME/dotfiles
 
 ## zsh補完アーカイブパス
-COMPLETIONDIR=$HOME/misc/completion
+COMPLETIONDIR=$HOME/dotfiles/completion
 fpath=($fpath $COMPLETIONDIR)
 
 ## colors
