@@ -39,11 +39,6 @@ if [ -f $ZSHUSERDIR/lib/functions ]; then
     source $ZSHUSERDIR/lib/functions
 fi
 
-## autojump
-if [ -f $ZSHUSERDIR/lib/autojump.zsh ]; then
-    source $ZSHUSERDIR/lib/autojump.zsh
-fi
-
 ## percol
 if [ -f $ZSHUSERDIR/lib/percol.zsh ]; then
     source $ZSHUSERDIR/lib/percol.zsh
@@ -95,6 +90,15 @@ if [ -e "$HOME/.pyenv" ]; then
   eval "$(pyenv init -)"
 fi
 
+## google app engin
+export CLOUDSDK_PYTHON=/usr/bin/python
+
+# The next line updates PATH for the Google Cloud SDK.
+source "$HOME/dev/google-cloud-platform/google-cloud-sdk/path.zsh.inc"
+
+# The next line enables shell command completion for gcloud.
+source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
+
 # ruby設定
 if [[ -s $HOME/.rvm/scripts/rvm ]]; then
     source $HOME/.rvm/scripts/rvm  # Load RVM function
@@ -130,6 +134,9 @@ export SCREENDIR=$HOME/.screens
 
 ## screeninator
 [[ -s "$HOME/.screeninator/scripts/screeninator" ]] && source "$HOME/.screeninator/scripts/screeninator"
+
+## autojump
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 ## HOMEBREW CASKのインストール先
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
