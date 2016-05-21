@@ -10,7 +10,7 @@
 #set line-number-interval = 1
 #set horizontal-scroll = 20%
 #set author-width = 20
-#set line-graphics = "utf8"
+set line-graphics = ascii
 #set status-untracked-dirs = off
 #set diff-context = 2
 
@@ -42,48 +42,48 @@ bind log  o !@hub browse -- commit/%(commit)
 #==================================
 
 ## Diff colors
-#color diff-header    yellow  default
-#color diff-index     blue    default
-#color diff-chunk     magenta default
-#color diff-add       green   default
-#color diff-del       red     default
-#color diff-oldmode   yellow  default
-#color diff-newmode   yellow  default
+#color diff-header        yellow  default
+#color diff-index         blue    default
+#color diff-chunk         magenta default
+#color diff-add           green   default
+#color diff-del           red     default
+#color diff-oldmode       yellow  default
+#color diff-newmode       yellow  default
 #color diff-copy-from     yellow  default
-#color diff-copy-to   yellow  default
+#color diff-copy-to       yellow  default
 #color diff-rename-from   yellow  default
 #color diff-rename-to     yellow  default
 #color diff-similarity    yellow  default
 #color diff-dissimilarity yellow  default
-#color diff-tree      blue    default
-#
+#color diff-tree          blue    default
+
 ## Pretty print commit header
-#color pp-author cyan	default
-#color pp-commit		magenta	default
-#color pp-merge		blue	default
-#color pp-date		yellow	default
-#color pp-adate		yellow	default
-#color pp-cdate		yellow	default
-#
+#color pp-author    cyan    default
+#color pp-commit    magenta default
+#color pp-merge     blue    default
+#color pp-date      yellow  default
+#color pp-adate     yellow  default
+#color pp-cdate     yellow  default
+
 ## Raw commit header
-#color commit		green	default
-#color parent		blue	default
-#color tree		blue	default
-#color author		cyan	default
-#color committer		magenta	default
-#
+#color commit       green   default
+#color parent       blue    default
+#color tree         blue    default
+#color author       cyan    default
+#color committer    magenta default
+
 ## Misc
-#color signoff		yellow	default
-#
+#color signoff      yellow  default
+
 ## UI colors
-#color default		default	default
-#color cursor		white	green
-#color status		green	default
-#color title-blur	white	blue
-#color title-focus	white	blue	bold
-#color main-date		blue	default
-#color main-author	green	default
-#color main-commit	default	default
-#color main-delim	magenta	default
-#color main-tag		magenta	default	bold
-#color main-ref		cyan	default	bold
+#color default      default default
+#color cursor       white   green
+#color status       green   default
+#color title-blur   white   blue
+#color title-focus  white   blue    bold
+#color main-date    blue    default
+#color main-author  green   default
+#color main-commit  default default
+#color main-delim   magenta default
+#color main-tag     magenta default bold
+#color main-ref     cyan    default bold
