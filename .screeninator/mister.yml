@@ -4,8 +4,8 @@
 project_name: todo
 project_root: ~/dev/todo/server
 tabs:
-  - db: mysql -u root mister
-  - sql: tail -f /tmp/sql.log
+  - db: mysql -u root mistersuite
+  - sql: tail -f /tmp/app_sql.log
   - slow: tail -f /tmp/slow_sql.log
   - runserver:
     - cd ~/dev/python/mister-suite
