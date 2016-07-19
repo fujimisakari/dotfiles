@@ -19,11 +19,11 @@ set line-graphics = ascii
 # KEYBINDINGS SETTINGS
 # Syntax: bind <keymap> <key> <request>
 #==================================
-bind generic ^E move-last-line
-bind generic ^A move-first-line
-bind generic ^E move-last-line
-bind generic ^B scroll-page-up
-bind generic ^F scroll-page-down
+bind generic <Ctrl-E> move-last-line
+bind generic <Ctrl-A> move-first-line
+bind generic <Ctrl-E> move-last-line
+bind generic <Ctrl-B> scroll-page-up
+bind generic <Ctrl-F> scroll-page-down
 
 bind main o !@hub browse -- commit/%(commit)
 bind diff o !@hub browse -- commit/%(commit)

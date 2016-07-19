@@ -83,6 +83,8 @@ export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 PYTHONPATH=$HOME/misc/lib:$PYTHONPATH
 export PYTHONPATH
 
+export WERKZEUG_DEBUG_PIN='off'
+
 ## pyenv
 if [ -e "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
@@ -125,9 +127,13 @@ if [[ -s $HOME/dev/go ]]; then
 fi
 
 # docker設定
-# export DOCKER_HOST=tcp://192.168.59.103:2376
-# export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
+if [[ -s $HOME/.docker ]]; then
+    export DOCKER_HOST="tcp://192.168.99.100:2376"
+    export DOCKER_MACHINE_NAME="default"
+    export DOCKER_TLS_VERIFY="1"
+    export DOCKER_CERT_PATH="$HOME/.docker/machine/machines/default"
+fi
+
 
 ## screen セッション保存Dir
 export SCREENDIR=$HOME/.screens
@@ -135,8 +141,8 @@ export SCREENDIR=$HOME/.screens
 ## screeninator
 [[ -s "$HOME/.screeninator/scripts/screeninator" ]] && source "$HOME/.screeninator/scripts/screeninator"
 
-## autojump
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+# ## autojump
+# [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 ## HOMEBREW CASKのインストール先
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"

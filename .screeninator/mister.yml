@@ -7,10 +7,11 @@ tabs:
   - db: mysql -u root mistersuite
   - sql: tail -f /tmp/app_sql.log
   - slow: tail -f /tmp/slow_sql.log
+  - log: tail -f /tmp/django_action.log
   - runserver:
-    - cd ~/dev/python/mister-suite
-    - ./manage.py runserver
-  - git: cd ~/dev/python/mister-suite
-  - zsh: cd ~/dev/python/mister-suite/mister_suite
-  - zsh: cd ~/dev/python/mister-suite/mister_suite
-  - zsh: cd ~/dev/python/mister-suite/mister_suite
+    - cd ~/dev/python/mistersuite
+    - ./manage.py runserver_plus
+  - git: cd ~/dev/python/mistersuite
+  - zsh: cd ~/dev/python/mistersuite/mister_suite
+  - zsh: cd ~/dev/python/mistersuite/mister_suite
+  - zsh: cd ~/dev/python/mistersuite/mister_suite

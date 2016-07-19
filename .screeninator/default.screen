@@ -90,3 +90,8 @@ stuff "\012"
 screen -t zsh 0
 stuff "\012"
 
+screen -t zsh 0
+stuff "\012"
+
+screen -t zsh 0
+stuff "\012"
