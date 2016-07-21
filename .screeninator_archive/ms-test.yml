@@ -1,0 +1,14 @@
+# ~/.screeninator/ms-test.yml
+# you can make as many tabs as you wish...
+
+project_name: ms-test
+project_root: ~/dev/python/ms-docker
+tabs:
+  - docker:
+    - cd ~/dev/python/ms-docker
+    - ./docker-compose.sh test up
+  - test: cd ~/dev/python/ms-docker
+    - cd ~/dev/python/ms-docker
+    - docker exec -it test_app ./scripts/mistersuite_test.py
+  - zsh: cd ~/dev/python/ms-docker/mistersuite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite

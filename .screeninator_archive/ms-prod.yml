@@ -1,0 +1,17 @@
+# ~/.screeninator/ms-prod.yml
+# you can make as many tabs as you wish...
+
+project_name: ms-prod
+project_root: ~/dev/python/ms-docker
+tabs:
+  - db: mysql -u root mistersuite -h docker-machine
+  - sql: docker exec -it prod_app tail -f /tmp/app_sql.log
+  - slow: docker exec -it prod_mysql tail -f /tmp/slow_sql.log
+  - log: docker exec -it prod_app tail -f /tmp/django_action.log
+  - docker:
+    - cd ~/dev/python/ms-docker
+    - ./docker-compose.sh prod up
+  - top: cd ~/dev/python/ms-docker
+  - zsh: cd ~/dev/python/ms-docker/mistersuite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite

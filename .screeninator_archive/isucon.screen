@@ -42,7 +42,7 @@ bell_msg "^G"
 #                              Keybinding Setting                              #
 ##----------------------------------------------------------------------------##
 
-## ウィンドウの切り替え(Ctrl + Alt + [l|h])
+## ウィンドウの切り替え（Ctrl+矢印キー）
 bindkey \033^l next
 bindkey \033^h prev
 
@@ -66,15 +66,26 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' writebuf 'exec !!! xclip -selection clip
 bindkey -m y eval 'msgwait 0' 'stuff y' writebuf 'exec !!! xclip -selection clipboard$HOME/.screen-exchange' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' writebuf 'exec !!! xclip -selection clippboard $HOME/.screen-exchange' 'msgwait 0'
 
-## screen起動時に自動的に開く端末
-screen -t zsh 0
-stuff "\012"
+screen -t redis 0
+stuff "redis-cli\012"
 
-screen -t zsh 1
-stuff "\012"
+screen -t sql 1
+stuff "tail -f /tmp/sql.log\012"
 
-screen -t zsh 2
-stuff "\012"
+screen -t slow 2
+stuff "tail -f /tmp/slow_sql.log\012"
 
-screen -t zsh 3
-stuff "\012"
+screen -t uwsgi 3
+stuff "cd ~/work/ISHOCON1/webapp/python\012"
+
+screen -t bench 4
+stuff "cd ~/work/ISHOCON1/admin\012"
+
+screen -t zsh 5
+stuff "cd ~/work/ISHOCON1/webapp/python\012"
+
+screen -t zsh 6
+stuff "cd ~/work/ISHOCON1/webapp/python\012"
+
+screen -t zsh 7
+stuff "cd ~/work/ISHOCON1/webapp/python\012"

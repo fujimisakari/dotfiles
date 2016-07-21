@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} media %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+caption always "%{b B}[%{b Y} mo_test %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -80,22 +80,21 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
+screen -t omni 0
+stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/samurai/mo_test/unity/unity.sln\012"
 
-screen -t db 0
-stuff "mysql -u root media\012"
+screen -t server 1
+stuff "cd ~/projects/samurai/mo_test && make server\012"
 
-screen -t sql 1
-stuff "tail -f /tmp/sql.log\012"
+screen -t git 2
+stuff "cd ~/projects/samurai/mo_test\012"
 
-screen -t runserver 2
-stuff "cd ~/dev/python/media && ./manage.py runserver localhost:8000\012"
+screen -t Assets 3
+stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
 
-screen -t zsh 3
-stuff "cd ~/dev/python/media\012"
+screen -t Assets 3
+stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
 
-screen -t zsh 3
-stuff "cd ~/dev/python/media\012"
-
-screen -t zsh 3
-stuff "cd ~/dev/python/media\012"
+screen -t Assets 3
+stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
 

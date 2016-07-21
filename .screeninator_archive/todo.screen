@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} mister %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+caption always "%{b B}[%{b Y} todo %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -81,28 +81,28 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 screen -t db 0
-stuff "mysql -u root mistersuite\012"
+stuff "mysql -u root todo\012"
 
 screen -t sql 1
-stuff "tail -f /tmp/app_sql.log\012"
+stuff "tail -f /tmp/sql.log\012"
 
 screen -t slow 2
 stuff "tail -f /tmp/slow_sql.log\012"
 
-screen -t log 3
-stuff "tail -f /tmp/django_action.log\012"
+screen -t websocket 3
+stuff "cd ~/dev/python/todo/application && ./server.py\012"
 
 screen -t runserver 4
-stuff "cd ~/dev/python/mistersuite && ./manage.py runserver_plus\012"
+stuff "cd ~/dev/python/todo/application && ./manage.py runserver localhost:8000\012"
 
 screen -t git 5
-stuff "cd ~/dev/python/mistersuite\012"
+stuff "cd ~/dev/python/todo\012"
 
 screen -t zsh 6
-stuff "cd ~/dev/python/mistersuite/mister_suite\012"
+stuff "cd ~/dev/python/todo/application\012"
 
-screen -t zsh 7
-stuff "cd ~/dev/python/mistersuite/mister_suite\012"
+screen -t zsh 6
+stuff "cd ~/dev/python/todo/application\012"
 
-screen -t zsh 8
-stuff "cd ~/dev/python/mistersuite/mister_suite\012"
+screen -t zsh 6
+stuff "cd ~/dev/python/todo/application\012"

@@ -2,7 +2,7 @@
 # you can make as many tabs as you wish...
 
 project_name: ms-dev
-project_root: ~/dev/python/mistersuite-docker
+project_root: ~/dev/python/ms-docker
 tabs:
   - db: mysql -u root mistersuite -h docker-machine
   - sql: docker exec -it dev_app tail -f /tmp/app_sql.log
@@ -11,7 +11,7 @@ tabs:
   - docker:
     - cd ~/dev/python/mistersuite-docker
     - ./docker-compose.sh dev up
-  - top: cd ~/dev/python/mistersuite-docker
-  - zsh: cd ~/dev/python/mistersuite-docker/mistersuite
-  - zsh: cd ~/dev/python/mistersuite-docker/mistersuite
-  - zsh: cd ~/dev/python/mistersuite-docker/mistersuite
+  - top: cd ~/dev/python/ms-docker
+  - zsh: cd ~/dev/python/ms-docker/mistersuite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite

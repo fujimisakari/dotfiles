@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} ms-dev %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+caption always "%{b B}[%{b Y} ms %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -81,28 +81,28 @@ bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
 screen -t db 0
-stuff "mysql -u root mistersuite -h docker-machine"
+stuff "mysql -u root mistersuite\012"
 
 screen -t sql 1
-stuff "docker exec -it dev_app tail -f /tmp/app_sql.log"
+stuff "tail -f /tmp/app_sql.log\012"
 
 screen -t slow 2
-stuff "docker exec -it dev_mysql tail -f /tmp/slow_sql.log"
+stuff "tail -f /tmp/slow_sql.log\012"
 
 screen -t log 3
-stuff "docker exec -it dev_app tail -f /tmp/django_action.log"
+stuff "tail -f /tmp/django_action.log\012"
 
-screen -t docker 4
-stuff "cd ~/dev/python/mistersuite-docker && ./docker-compose.sh dev up\012"
+screen -t runserver 4
+stuff "cd ~/dev/python/ms-docker/mistersuite && ./manage.py runserver_plus\012"
 
-screen -t top 5
-stuff "cd ~/dev/python/mistersuite-docker/mistersuite\012"
+screen -t git 5
+stuff "cd ~/dev/python/ms-docker/mistersuite\012"
 
 screen -t zsh 6
-stuff "cd ~/dev/python/mistersuite-docker/mistersuite/mister_suite\012"
+stuff "cd ~/dev/python/ms-docker/mistersuite/mister_suite\012"
 
 screen -t zsh 7
-stuff "cd ~/dev/python/mistersuite-docker/mistersuite/mister_suite\012"
+stuff "cd ~/dev/python/ms-docker/mistersuite/mister_suite\012"
 
 screen -t zsh 8
-stuff "cd ~/dev/python/mistersuite-docker/mistersuite/mister_suite\012"
+stuff "cd ~/dev/python/ms-docker/mistersuite/mister_suite\012"

@@ -1,0 +1,17 @@
+# ~/.screeninator/todo.yml
+# you can make as many tabs as you wish...
+
+project_name: mistersuite
+project_root: ~/dev/python/ms-docker/mistersuite
+tabs:
+  - db: mysql -u root mistersuite
+  - sql: tail -f /tmp/app_sql.log
+  - slow: tail -f /tmp/slow_sql.log
+  - log: tail -f /tmp/django_action.log
+  - runserver:
+    - cd ~/dev/python/ms-docker/mistersuite
+    - ./manage.py runserver_plus
+  - git: cd ~/dev/python/ms-docker/mistersuite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite/mister_suite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite/mister_suite
+  - zsh: cd ~/dev/python/ms-docker/mistersuite/mister_suite

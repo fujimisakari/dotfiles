@@ -1,6 +1,7 @@
-##----------------------------------------------------------------------------##
-#                                Basic Setting                                 #
-##----------------------------------------------------------------------------##
+
+##------------------------------------------------------------------##
+#                              基本設定                              #
+##------------------------------------------------------------------##
 
 ## 256色表示設定
 termcapinfo xterm* 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
@@ -28,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{b B}[%{b Y} default %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
+caption always "%{b B}[%{b Y} ms-dev %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -38,13 +39,26 @@ vbell off
 ## メッセージを表示しない場合には""を指定する
 bell_msg "^G"
 
-##----------------------------------------------------------------------------##
-#                              Keybinding Setting                              #
-##----------------------------------------------------------------------------##
+## screen起動時に自動的に開く端末
+#screen 0
+#screen 1
+#screen 2
 
-## ウィンドウの切り替え(Ctrl + Alt + [l|h])
-bindkey \033^l next
-bindkey \033^h prev
+## ウィンドウの切り替え（Ctrl+矢印キー）
+# GNOME terminal
+#bindkey "^[[1;5C" next
+#bindkey "^[[1;5D" prev
+
+# putty bindings
+# bindkey "^[OC" next
+# bindkey "^[OD" prev
+
+bindkey "\033^l" next
+bindkey "\033^h" prev
+
+##------------------------------------------------------------------##
+#                          キーバインド設定                          #
+##------------------------------------------------------------------##
 
 bind l windowlist
 bind s
@@ -66,15 +80,29 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
-## screen起動時に自動的に開く端末
-screen -t zsh 0
-stuff "\012"
+screen -t db 0
+stuff "mysql -u root mistersuite -h docker-machine"
 
-screen -t zsh 1
-stuff "\012"
+screen -t sql 1
+stuff "docker exec -it dev_app tail -f /tmp/app_sql.log"
 
-screen -t zsh 2
-stuff "\012"
+screen -t slow 2
+stuff "docker exec -it dev_mysql tail -f /tmp/slow_sql.log"
 
-screen -t zsh 3
-stuff "\012"
+screen -t log 3
+stuff "docker exec -it dev_app tail -f /tmp/django_action.log"
+
+screen -t docker 4
+stuff "cd ~/dev/python/ms-docker && ./docker-compose.sh dev up"
+
+screen -t top 5
+stuff "cd ~/dev/python/ms-docker\012"
+
+screen -t zsh 6
+stuff "cd ~/dev/python/ms-docker/mistersuite\012"
+
+screen -t zsh 7
+stuff "cd ~/dev/python/ms-docker/mistersuite\012"
+
+screen -t zsh 8
+stuff "cd ~/dev/python/ms-docker/mistersuite\012"

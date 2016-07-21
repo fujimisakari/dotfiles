@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} <%= @project_name %> %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+caption always "%{b B}[%{b Y} ms-test %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -80,7 +80,14 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
-<% @tabs.each do |tab| %>
-screen -t <%= tab.name %> <%= @tabs.index(tab) %>
-stuff "<%= tab.stuff %>\012"
-<% end %>
+screen -t docker 0
+stuff "cd ~/dev/python/ms-docker && ./docker-compose.sh test up"
+
+screen -t test 1
+stuff "cd ~/dev/python/ms-docker && docker exec -it test_app ./scripts/mistersuite_test.py"
+
+screen -t zsh 2
+stuff "cd ~/dev/python/ms-docker\012"
+
+screen -t zsh 3
+stuff "cd ~/dev/python/ms-docker\012"

@@ -1,0 +1,17 @@
+# ~/.screeninator/fuel.yml
+# you can make as many tabs as you wish...
+
+project_name: fuel
+project_root: ~/dev/php/fuel-php-docker/fuel_project
+tabs:
+  - db: mysql -u root fuel_poll
+  - sql: tail -f /tmp/sql.log
+  - slow: tail -f /tmp/slow_sql.log
+  - log: tail -f /tmp/fuel_app.log
+  - runserver:
+    - cd ~/dev/php/fuel-php-docker/fuel_project
+    - php oil server
+  - pro: cd ~/dev/php/fuel-php-docker/fuel_project
+  - app: cd ~/dev/php/fuel-php-docker/fuel_project/fuel/app
+  - core: cd ~/dev/php/fuel-php-docker/fuel_project/fuel/core
+  - zsh: cd ~/dev/php/fuel-php-docker/fuel_project/fuel

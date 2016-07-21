@@ -29,7 +29,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} genju %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+caption always "%{b B}[%{b Y} fuel %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -80,40 +80,29 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
+screen -t db 0
+stuff "mysql -u root fuel_poll\012"
 
-screen -t mas 0
-stuff "mysql -u root genju_hime_gree\012"
-
-screen -t p0 1
-stuff "mysql -u root genju_hime_part0\012"
-
-screen -t eve 2
-stuff "mysql -u root genju_hime_event\012"
-
-screen -t sql 3
+screen -t sql 1
 stuff "tail -f /tmp/sql.log\012"
 
-screen -t for 4
-stuff "tail -f /tmp/sql.log | grep 'FOR UPDATE'\012"
-
-screen -t slow 5
+screen -t slow 2
 stuff "tail -f /tmp/slow_sql.log\012"
 
-screen -t run 6
-stuff "cd ~/projects/genju-hime/application && ./restart.sh plus\012"
+screen -t log 3
+stuff "tail -f /tmp/fuel_app.log\012"
 
-screen -t git 7
-stuff "cd ~/projects/genju-hime\012"
+screen -t runserver 4
+stuff "cd ~/dev/php/fuel-php-docker/fuel_project && php oil server\012"
 
-screen -t app 8
-stuff "cd ~/projects/genju-hime/application\012"
+screen -t pro 5
+stuff "cd ~/dev/php/fuel-php-docker/fuel_project\012"
 
-screen -t zsh 9
-stuff "cd ~/projects/genju-hime/application\012"
+screen -t app 6
+stuff "cd ~/dev/php/fuel-php-docker/fuel_project/fuel/app\012"
 
-screen -t zsh 9
-stuff "cd ~/projects/genju-hime/application\012"
+screen -t core 7
+stuff "cd ~/dev/php/fuel-php-docker/fuel_project/fuel/core\012"
 
-screen -t zsh 9
-stuff "cd ~/projects/genju-hime/application\012"
-
+screen -t zsh 8
+stuff "cd ~/dev/php/fuel-php-docker/fuel_project/fuel/\012"

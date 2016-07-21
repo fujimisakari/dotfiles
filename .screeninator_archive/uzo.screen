@@ -1,7 +1,6 @@
-
-##------------------------------------------------------------------##
-#                              基本設定                              #
-##------------------------------------------------------------------##
+##----------------------------------------------------------------------------##
+#                                Basic Setting                                 #
+##----------------------------------------------------------------------------##
 
 ## 256色表示設定
 termcapinfo xterm* 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
@@ -29,7 +28,7 @@ sorendition "+r .M"
 
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kb}[%{y} mo_test %{b}][ %{g}%-w%{m}(%{g}%n %t%{m})%{g}%+w%= %{b}][%{m} %m/%d(%D) %c %{b}]"
+caption always "%{b B}[%{b Y} uzo %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -39,26 +38,13 @@ vbell off
 ## メッセージを表示しない場合には""を指定する
 bell_msg "^G"
 
-## screen起動時に自動的に開く端末
-#screen 0
-#screen 1
-#screen 2
+##----------------------------------------------------------------------------##
+#                              Keybinding Setting                              #
+##----------------------------------------------------------------------------##
 
-## ウィンドウの切り替え（Ctrl+矢印キー）
-# GNOME terminal
-#bindkey "^[[1;5C" next
-#bindkey "^[[1;5D" prev
-
-# putty bindings
-# bindkey "^[OC" next
-# bindkey "^[OD" prev
-
-bindkey "\033^l" next
-bindkey "\033^h" prev
-
-##------------------------------------------------------------------##
-#                          キーバインド設定                          #
-##------------------------------------------------------------------##
+## ウィンドウの切り替え(Ctrl + Alt + [l|h])
+bindkey \033^l next
+bindkey \033^h prev
 
 bind l windowlist
 bind s
@@ -80,21 +66,21 @@ bindkey -m Y eval 'msgwait 0' 'stuff Y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy 
 bindkey -m y eval 'msgwait 0' 'stuff y' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' 'writebuf' 'exec sh -c "/usr/bin/pbcopy < $HOME/.screen-exchange"' 'msgwait 0'
 
-screen -t omni 0
-stuff "cd ~/projects/OmniSharpServer && mono OmniSharp/bin/Debug/OmniSharp.exe -s ~/projects/samurai/mo_test/unity/unity.sln\012"
 
-screen -t server 1
-stuff "cd ~/projects/samurai/mo_test && make server\012"
+screen -t server 0
+stuff "cd ~/dev/go/src/github.com/speee/wm-uzo-delivery && ./uzou-run.sh\012"
 
-screen -t git 2
-stuff "cd ~/projects/samurai/mo_test\012"
+screen -t delivery 1
+stuff "cd ~/dev/go/src/github.com/speee/wm-uzo-delivery\012"
 
-screen -t Assets 3
-stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
+screen -t batch 2
+stuff "cd ~/dev/go/src/github.com/speee/dc-uzo-batch\012"
 
-screen -t Assets 3
-stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
+screen -t lib 3
+stuff "cd ~/dev/go/src/github.com/speee/dc-uzo-lib-go\012"
 
-screen -t Assets 3
-stuff "cd ~/projects/samurai/mo_test/unity/Assets\012"
+screen -t zsh 4
+stuff "\012"
 
+screen -t zsh 5
+stuff "\012"

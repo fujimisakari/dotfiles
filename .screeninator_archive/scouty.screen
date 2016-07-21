@@ -1,7 +1,6 @@
-
-##------------------------------------------------------------------##
-#                              基本設定                              #
-##------------------------------------------------------------------##
+##----------------------------------------------------------------------------##
+#                                Basic Setting                                 #
+##----------------------------------------------------------------------------##
 
 ## 256色表示設定
 termcapinfo xterm* 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
@@ -25,9 +24,11 @@ defscrollback 100000
 ## コマンドキーの指定
 escape ^Zz
 
+sorendition "+r .M"
+
 ## ステータス行の設定(X端末のタイトルを動的に変更)
 hardstatus string "%t : %h"
-caption always "%{= kd} %-w%40L>%{= kb}%n %t%{-}%+w"
+caption always "%{b B}[%{b Y} scouty %{b B}][ %{b G}%-w%{b M}(%{b G}%n %t%{b M})%{b G}%+w%= %{b B}][%{b M} %m/%d %c %{b B}]"
 
 ## 現在のウィンドウに対して可視ベルの設定するか
 vbell off
@@ -37,26 +38,13 @@ vbell off
 ## メッセージを表示しない場合には""を指定する
 bell_msg "^G"
 
-## screen起動時に自動的に開く端末
-screen 0
-#screen 1
-#screen 2
+##----------------------------------------------------------------------------##
+#                              Keybinding Setting                              #
+##----------------------------------------------------------------------------##
 
 ## ウィンドウの切り替え（Ctrl+矢印キー）
-# GNOME terminal
-#bindkey "^[[1;5C" next
-#bindkey "^[[1;5D" prev
-
-# putty bindings
-# bindkey "^[OC" next
-# bindkey "^[OD" prev
-
 bindkey \033^l next
 bindkey \033^h prev
-
-##------------------------------------------------------------------##
-#                          キーバインド設定                          #
-##------------------------------------------------------------------##
 
 bind l windowlist
 bind s
@@ -77,3 +65,36 @@ bindkey -m ' ' eval 'msgwait 0' 'stuff \040' writebuf 'exec !!! xclip -selection
 bindkey -m Y eval 'msgwait 0' 'stuff Y' writebuf 'exec !!! xclip -selection clippboard $HOME/.screen-exchange' 'msgwait 0'
 bindkey -m y eval 'msgwait 0' 'stuff y' writebuf 'exec !!! xclip -selection clipboard$HOME/.screen-exchange' 'msgwait 0'
 bindkey -m W eval 'msgwait 0' 'stuff W' writebuf 'exec !!! xclip -selection clippboard $HOME/.screen-exchange' 'msgwait 0'
+
+screen -t docker 0
+stuff "cd ~/projects/scouty && docker-compose up\012"
+
+screen -t db 1
+stuff "cd ~/projects/scouty\012docker exec -it scouty_db_1 mysql -udocker -pdocker ebdb"
+
+screen -t sql 2
+stuff "docker exec -it scouty_db_1 tail -f /tmp/sql.log"
+
+screen -t slow 3
+stuff "docker exec -it scouty_db_1 tail -f /tmp/slow_sql.log"
+
+screen -t runserver 4
+stuff "cd ~/projects/scouty\012./mymanage.py runserver_plus 0.0.0.0:4000"
+
+screen -t test 4
+stuff "cd ~/projects/scouty\012./mymanage.py test -v1 --keepdb application.sc_tests.modules.tag.service"
+
+screen -t git 5
+stuff "cd ~/projects/scouty\012"
+
+screen -t app 6
+stuff "cd ~/projects/scouty/application\012"
+
+screen -t zsh 7
+stuff "cd ~/projects/scouty\012"
+
+screen -t zsh 8
+stuff "cd ~/projects/scouty\012"
+
+screen -t zsh 9
+stuff "cd ~/projects/scouty\012"
