@@ -1,8 +1,4 @@
 
-##------------------------------------------------------------------##
-#                             functions                              #
-##------------------------------------------------------------------##
-
 case "${OSTYPE}" in
   linux*)
     ## CPU 使用率の高い方から15つ
@@ -42,15 +38,13 @@ function up-dir() {
 zle -N up-dir
 
 ## SSHコマンドはscreenの新しい窓で
-if [ $ALLOW_HOST="true" ]; then
+if [ x$TERM = xscreen-bce ]; then
   function ssh_screen(){
     eval server=\${$#}
     name="$(echo $server | cut -d '@' -f 2)"
     screen -t $name ssh -l $USER "$@"
   }
-  if [ x$TERM = xscreen-bce ]; then
-    alias ssh=ssh_screen
-  fi
+  alias ssh=ssh_screen
 fi
 
 ## screenのショートカットコマンド
@@ -59,20 +53,6 @@ function sr { screen -r $1 }
 
 ## 全履歴一覧を出力する
 function histall { history -i -D -E 1 }
-
-## graph serverの立ち上げ
-function graph {
-  cd $HOME/dev/go/graphviz_web/src
-  go run server.go
-}
-
-## emacsの一括バイトコンパイル
-function batchcompile() {
-  for i in $@; do;
-    # echo $i
-    emacs -batch -f batch-byte-compile $i
-  done;
-}
 
 ## 引数のファイルを utf8 や euc に変換
 # -w utf8  -e euc -Lu 改行コードをLFにする
@@ -124,43 +104,6 @@ function gh() {
   fi
 }
 
-## ターミナル上の現在のディレクトリをdired で開く
-## Invoke the ``dired'' of current working directory in Emacs buffer.
-function e() {
-    case "${OSTYPE}" in
-      linux*)
-        emacsclient -e "(dired \"${1:a}\")"
-      ;;
-      darwin*)
-        echo "chdir to $PWD"
-        /usr/local/bin/emacsclient -e "(dired \"${1:a}\")"
-      ;;
-    esac
-}
-
-## Emacs の現在のバッファに対応するディレクトリをターミナル上の zsh で開く
-## Chdir to the ``default-directory'' of currently opened in Emacs buffer.
-function t() {
-    case "${OSTYPE}" in
-      linux*)
-          EMACS_CWD=`emacsclient -e "
-            (if (featurep 'elscreen)
-                (elscreen-current-directory)
-              (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
-          # EMACS_CWD=`emacsclient -e "(current-directory-to-terminal))" | sed 's/^"\(.*\)"$/\1/'`
-      ;;
-      darwin*)
-          EMACS_CWD=`/usr/local/bin/emacsclient -e "
-            (if (featurep 'elscreen)
-                (elscreen-current-directory)
-              (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
-          # EMACS_CWD=`/usr/local/bin/emacsclient -e "(current-directory-to-terminal)" | sed 's/^"\(.*\)"$/\1/'`
-      esac
-
-    echo "chdir to $EMACS_CWD"
-    cd "$EMACS_CWD"
-}
-
 ## gitの変更差分をplintにかける
 function gpylint() {
     for file_path in `git diff --name-only HEAD`; do
@@ -176,10 +119,3 @@ function gpylint() {
         esac
     done
 }
-
-## docker
-dstop() { docker stop $(docker ps -a -q);}
-
-drm() { docker rm $(docker ps -a -q); }
-
-drmi() { docker rmi $(docker images -q); }

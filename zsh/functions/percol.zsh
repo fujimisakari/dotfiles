@@ -1,3 +1,4 @@
+
 function percol-select-history() {
     local tac
     if which tac > /dev/null; then
@@ -31,3 +32,15 @@ function percol-cdr () {
     zle clear-screen
 }
 zle -N percol-cdr
+
+
+function percol-go-src () {
+    local selected_dir=$(ghq list | percol --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        selected_dir="$GOPATH/src/$selected_dir"
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N percol-go-src

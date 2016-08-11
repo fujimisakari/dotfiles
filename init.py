@@ -9,7 +9,7 @@ from os import system
 #     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.globalrc']
 # else:
 #     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.tigrc']
-DOTFILES_LIST = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.screeninator', '.boxes', '.gitconfig', '.gitignore',
+DOTFILES_LIST = ['.screenrc', '.vimrc', '.screeninator', '.boxes', '.gitconfig', '.gitignore',
                  '.aspell.conf', '.tigrc', '.globalrc', '.offlineimaprc', '.percol.d', '.ctags', '.my.cnf', '.gitmessage.txt',
                  '.swiftlint.yml']
 
@@ -26,3 +26,7 @@ for dotfile in DOTFILES_LIST:
             system('ln -sf ~/dotfiles/.screenrc_mac ~/.screenrc')
         else:
             system('ln -sf ~/dotfiles/' + dotfile + ' ~/.')
+
+
+system('ln -sf ~/dotfiles/zsh/.zshenv ~/.')
+system('ln -sf ~/dotfiles/zsh/.zshrc ~/.')
