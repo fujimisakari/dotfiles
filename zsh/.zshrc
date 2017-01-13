@@ -156,7 +156,7 @@ bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
 bindkey "^R" percol-select-history    # コマンド履歴
 bindkey "^Xs" percol-ssh              # ssh対象参照
 bindkey "^L" percol-cdr               # 最近行ったディレクトへcd
-bindkey "^Xl" percol-go-src           # go関連のリポジトリを参照
+bindkey "^X'" percol-go-src           # go関連のリポジトリを参照
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 
