@@ -20,3 +20,7 @@
 --regex-Swift=/func[ \t]+([^\(\)]+)\([^\(\)]*\)/\1/,function/
 --regex-Swift=/class[ \t]+([^:\{]+).*$/\1/,class/
 --regex-Swift=/protocol[ \t]+([^:\{]+).*$/\1/,protocol/
+
+--langdef=JSX
+--langmap=JSX:.jsx
+--regex-JSX=/^[ \t]*([a-z]+[ \t]+)*class[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/c,class,classes/
