@@ -8,7 +8,7 @@ case "${OSTYPE}" in
     PATH=$HOME/misc/bin:$HOME/.pyenv/bin:$PATH:/sbin:/usr/sbin
   ;;
   darwin*)
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$HOME/.pyenv/bin:/sbin:$HOME/misc/bin:$PATH
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$HOME/.pyenv/bin:/sbin:/usr/sbin:$HOME/misc/bin:$PATH
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   ;;
 esac
@@ -23,6 +23,16 @@ if [ -e "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
+fi
+
+## PHP
+if [ -e "$HOME/.phpenv" ]; then
+    PATH="$HOME/.phpenv/bin:$PATH"
+    eval "$(phpenv init -)"
+fi
+
+if [ -e "$HOME/dev/php/bin" ]; then
+    PATH="$HOME/dev/php/bin:$PATH"
 fi
 
 ## Google App Engin
@@ -41,10 +51,11 @@ if [[ -s $HOME/.rvm/scripts/rvm ]]; then
     rvm gemset use default_env > /dev/null 2>&1
 fi
 
-## Node.js
-if [[ -s ~/.nvm/nvm.sh ]];
-    then source ~/.nvm/nvm.sh
-fi
+## Node.js(nodebrew)
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+# if [[ -s ~/.nvm/nvm.sh ]];
+#     then source ~/.nvm/nvm.sh
+# fi
 
 ## Common Lisp
 if [[ -s $HOME/.roswell ]]; then

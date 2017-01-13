@@ -119,3 +119,7 @@ function gpylint() {
         esac
     done
 }
+
+function mypylint() {
+    find . -name '*.py' | grep -v '__init__' | grep -v 'accounts' | grep -v 'static' | grep -v 'test' | xargs pylint --output-format=parseable -E --disable=E1101,E1103,E1002,E1001
+}

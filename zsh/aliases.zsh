@@ -15,8 +15,8 @@ case "${OSTYPE}" in
     alias -g C='| xsel --input --clipboard'
   ;;
   darwin*)
-    alias ls='ls -vF --color=auto'
-    alias ll='ls -lavFh --color'
+    alias ls='/usr/local/bin/gls -vF --color=auto'
+    alias ll='/usr/local/bin/gls -lavFh --color'
     alias find='/usr/local/bin/gfind'
     alias w3m='/usr/local/bin/w3m -B'
     alias ptree='pstree | lv'

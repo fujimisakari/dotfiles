@@ -24,7 +24,7 @@ loadlib $ZSHUSERDIR/prompt.zsh
 ###  Key Chain Setting
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-for host_name in "fujimisakari.local" "fujimotoryou-no-MacBook-Pro.local"
+for host_name in "fujimisakaris-MacBook-Air.local" "fujimotoryou-no-MacBook-Pro.local"
 do
     if [ $HOST = $host_name ]; then
         if ssh-add -l > /dev/null 2>&1; [ $? -eq 0 ]; then
