@@ -1,32 +1,36 @@
 #! /usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import re
 import platform
 from os import system
 
-# if 'desktop' in sys.argv:
-#     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.boxes', '.gitconfig', '.gitignore', '.aspell.conf', '.globalrc']
-# else:
-#     dotfiles_list = ['.zshrc', '.zshenv', '.screenrc', '.vimrc', '.tigrc']
-DOTFILES_LIST = ['.screenrc', '.vimrc', '.screeninator', '.boxes', '.gitconfig', '.gitignore',
-                 '.aspell.conf', '.tigrc', '.globalrc', '.offlineimaprc', '.percol.d', '.ctags', '.my.cnf', '.gitmessage.txt',
-                 '.swiftlint.yml']
+dotfiles_list = [
+    'zsh/.zshenv',
+    'zsh/.zshrc',
+    '.vimrc',
+    '.tigrc',
+    '.gitconfig',
+    '.gitignore',
+    '.gitmessage.txt',
+    '.pylintrc',
+    '.globalrc',
+    '.ctags',
+    '.peco',
+    '.boxes',
+    '.aspell.conf',
+    '.my.cnf',
+    '.keysnail.js',
+]
+for dotfile in dotfiles_list:
+    system('ln -sf ~/dotfiles/{} ~/.'.format(dotfile))
 
-REGEXP = re.compile("Linux")
+platform = platform.system()
+if platform == 'Darwin':
+    system('ln -sf ~/dotfiles/.screenrc_mac ~/.screenrc')
+    system('ln -sf ~/dotfiles/.screeninator_mac ~/.screeninator')
+    system('ln -sf ~/dotfiles/.swiftlint.yml ~/.')
+elif platform == 'Linux':
+    system('ln -sf ~/dotfiles/.screenrc_linux ~/.screenrc')
+    system('ln -sf ~/dotfiles/.screeninator_linux ~/.screeninator')
 
-for dotfile in DOTFILES_LIST:
-    if REGEXP.match(platform.system()):
-        if dotfile == '.screenrc':
-            system('ln -sf ~/dotfiles/.screenrc_linux ~/.screenrc')
-        else:
-            system('ln -sf ~/dotfiles/' + dotfile + ' ~/.')
-    else:
-        if dotfile == '.screenrc':
-            system('ln -sf ~/dotfiles/.screenrc_mac ~/.screenrc')
-        else:
-            system('ln -sf ~/dotfiles/' + dotfile + ' ~/.')
-
-
-system('ln -sf ~/dotfiles/zsh/.zshenv ~/.')
-system('ln -sf ~/dotfiles/zsh/.zshrc ~/.')
+system('touch $HOME/.screen-exchange')
