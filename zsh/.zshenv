@@ -36,11 +36,13 @@ if [ -e "$HOME/dev/php/bin" ]; then
 fi
 
 ## Google App Engin
-export CLOUDSDK_PYTHON=/usr/bin/python
-# The next line updates PATH for the Google Cloud SDK.
-source "$HOME/dev/google-cloud-platform/google-cloud-sdk/path.zsh.inc"
-# The next line enables shell command completion for gcloud.
-source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
+if [ -e "$HOME/dev/google-cloud-platform" ]; then
+    export CLOUDSDK_PYTHON=/usr/bin/python
+    # The next line updates PATH for the Google Cloud SDK.
+    source "$HOME/dev/google-cloud-platform/google-cloud-sdk/path.zsh.inc"
+    # The next line enables shell command completion for gcloud.
+    source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
+fi
 
 ## Ruby
 if [[ -s $HOME/.rvm/scripts/rvm ]]; then
