@@ -35,6 +35,12 @@ if [ -e "$HOME/dev/php/bin" ]; then
     PATH="$HOME/dev/php/bin:$PATH"
 fi
 
+## anyenv
+if [ -e "$HOME/.anyenv" ]; then
+    PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
+
 ## Google App Engin
 if [ -e "$HOME/dev/google-cloud-platform" ]; then
     export CLOUDSDK_PYTHON=/usr/bin/python
