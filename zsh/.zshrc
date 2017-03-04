@@ -50,8 +50,8 @@ done
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 HISTFILE=~/.zsh_history
-HISTSIZE=200000              # ヒストリに保存するコマンド数
-SAVEHIST=200000              # ヒストリファイルに保存するコマンド数
+HISTSIZE=250000              # ヒストリに保存するコマンド数
+SAVEHIST=250000              # ヒストリファイルに保存するコマンド数
 setopt hist_ignore_all_dups  # 重複するコマンド行は古い方を削除
 setopt hist_ignore_dups      # 直前と同じコマンドラインはヒストリに追加しない
 setopt share_history         # コマンド履歴ファイルを共有する
