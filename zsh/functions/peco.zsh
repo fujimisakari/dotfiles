@@ -1,5 +1,5 @@
 
-function percol-select-history() {
+function peco-select-history() {
     local tac
     if which tac > /dev/null; then
         tac="tac"
@@ -8,34 +8,34 @@ function percol-select-history() {
     fi
     BUFFER=$(history -n 1 | \
         eval $tac | \
-        percol --query "$LBUFFER")
+        peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     zle clear-screen
 }
-zle -N percol-select-history
+zle -N peco-select-history
 
 
-function percol-ssh() {
-    BUFFER=$(grep '^HOST\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print "ssh " $i;}' | percol)
+function peco-ssh() {
+    BUFFER=$(grep '^HOST\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print "ssh " $i;}' | peco)
     CURSOR=$#BUFFER
     zle clear-screen
 }
-zle -N percol-ssh
+zle -N peco-ssh
 
 
-function percol-cdr () {
-    local selected_dir=$(cdr -l | awk '{ print $2 }' | percol --query "$LBUFFER")
+function peco-cdr () {
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
     fi
     zle clear-screen
 }
-zle -N percol-cdr
+zle -N peco-cdr
 
 
-function percol-go-src () {
-    local selected_dir=$(ghq list | percol --query "$LBUFFER")
+function peco-go-src () {
+    local selected_dir=$(ghq list | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         selected_dir="$GOPATH/src/$selected_dir"
         BUFFER="cd ${selected_dir}"
@@ -43,4 +43,4 @@ function percol-go-src () {
     fi
     zle clear-screen
 }
-zle -N percol-go-src
+zle -N peco-go-src

@@ -1,0 +1,27 @@
+{
+    "Style": {
+        "Basic": ["on_default", "default"],
+        "SavedSelection": ["bold", "on_yellow", "white"],
+        "Selected": ["underline", "on_white", "black"],
+        "Query": ["yellow", "bold"],
+        "Matched": ["blue", "bold"]
+    },
+    "Keymap": {
+        "C-f": "peco.ForwardChar",
+        "C-b": "peco.BackwardChar",
+        "M-f": "peco.ForwardWord",
+        "M-b": "peco.BackwardWord",
+        "C-a": "peco.BeginningOfLine",
+        "C-e": "peco.EndOfLine",
+        "C-d": "peco.DeleteForwardChar",
+        "C-h": "peco.DeleteBackwardChar",
+        "C-k": "peco.KillEndOfLine",
+        "C-p": "peco.SelectUp",
+        "C-n": "peco.SelectDown",
+        "M-v": "peco.ScrollPageUp",
+        "C-v": "peco.ScrollPageDown",
+        "C-m": "peco.Finish",
+        "C-g": "peco.Cancel",
+        "C-;": "peco.ToggleSingleKeyJump"
+    }
+}
