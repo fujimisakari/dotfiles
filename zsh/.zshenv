@@ -63,7 +63,7 @@ fi
 
 ## Go
 if [[ -s $HOME/dev/go ]]; then
-    GOPATH=$HOME/dev/go
+    export GOPATH=$HOME/dev/go
     PATH=/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin:$PATH
 fi
 
