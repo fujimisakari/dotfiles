@@ -18,9 +18,15 @@ export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 export WERKZEUG_DEBUG_PIN='off'   # for Django-extentions
 
 if [ -e "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  PATH=$PYENV_ROOT/bin:$PATH
-  eval "$(pyenv init -)"
+    export PYENV_ROOT="$HOME/.pyenv"
+    PATH=$PYENV_ROOT/bin:$PATH
+    eval "$(pyenv init -)"
+fi
+
+## Elixir
+if [[ -e "$HOME/.exenv" ]]; then
+    PATH=$HOME/.exenv/bin:$PATH
+    eval "$(exenv init -)"
 fi
 
 ## PHP
