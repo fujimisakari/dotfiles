@@ -5,7 +5,7 @@
 
 case "${OSTYPE}" in
   linux*)
-    PATH=$HOME/dotfiles/bin:$HOME/.pyenv/bin:$PATH:/sbin:/usr/sbin
+    PATH=$HOME/dotfiles/bin:$PATH:/sbin:/usr/sbin
   ;;
   darwin*)
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
@@ -24,19 +24,15 @@ if [ -e "$HOME/.pyenv" ]; then
 fi
 
 ## Elixir
-if [[ -e "$HOME/.exenv" ]]; then
-    PATH=$HOME/.exenv/bin:$PATH
-    eval "$(exenv init -)"
-fi
+# if [[ -e "$HOME/.exenv" ]]; then
+#     PATH=$HOME/.exenv/bin:$PATH
+#     eval "$(exenv init -)"
+# fi
 
 ## PHP
 if [ -e "$HOME/.phpenv" ]; then
     PATH=$HOME/.phpenv/bin:$PATH
     eval "$(phpenv init -)"
-fi
-
-if [ -e "$HOME/dev/php/bin" ]; then
-    PATH=$HOME/dev/php/bin:$PATH
 fi
 
 ## anyenv

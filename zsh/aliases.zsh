@@ -31,8 +31,6 @@ case "${OSTYPE}" in
   ;;
 esac
 
-alias lst='ll $HOME/s/today'
-alias cdt='cd $HOME/s/today'
 alias h='history -i -D -E -40'
 alias pss='ps -aef | lv'
 alias scrin='screen -S $USER -U -t $HOST'

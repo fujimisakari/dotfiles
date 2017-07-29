@@ -104,7 +104,7 @@ function gh() {
   fi
 }
 
-## gitの変更差分をplintにかける
+## gitの変更差分をpylintにかける
 function gpylint() {
     for file_path in `git diff --name-only HEAD`; do
         case ${file_path} in

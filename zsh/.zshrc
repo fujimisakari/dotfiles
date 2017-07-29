@@ -61,7 +61,7 @@ setopt hist_no_store         # historyコマンドは履歴に登録しない
 setopt hist_reduce_blanks    # 余分な空白は詰めて記録
 setopt hist_ignore_space     # 先頭がスペースの場合、ヒストリに追加しない
 setopt pushd_ignore_dups     # ディレクトリスタックに重複する物は古い方を削除
-setopt extended_history      # ディレクトリスタックに重複する物は古い方を削除
+setopt extended_history      # ヒストリファイルに時刻を記録
 
 
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
