@@ -62,19 +62,19 @@ case "${TERM}" in
                 local FG_COLOR=016
 
                 if [ -n "$_git_info_push" ] || [ -n "$_git_info_pull" ]; then
-                  BG_COLOR=178
+                  BG_COLOR=184
                   FG_COLOR=016
                 fi
 
                 if [[ -n `echo $_vcs_info | grep -Ei "merge|unstaged|staged" 2> /dev/null` ]]; then
-                    BG_COLOR=160
+                    BG_COLOR=196
                     FG_COLOR=255
                 fi
                 # echo "%{%K{$BG_COLOR}%}⮀%{%F{$FG_COLOR}%} $_vcs_info$_git_info_push$_git_info_pull %{%F{$BG_COLOR}%K{magenta}%}⮀"
-                echo "%{\e[48;5;${BG_COLOR}m%}%{\e[38;5;063m%}⮀%{\e[m%}%{\e[48;5;${BG_COLOR}m%} %{\e[38;5;${FG_COLOR}m%}$_vcs_info$_git_info_push$_git_info_pull %{\e[m%}%{\e[m%}%{\e[48;5;237m%}%{\e[38;5;${BG_COLOR}m%}⮀%{\e[m%}%{\e[m%}"
+                echo "%{\e[48;5;${BG_COLOR}m%}%{\e[38;5;063m%}⮀%{\e[m%}%{\e[48;5;${BG_COLOR}m%} %{\e[38;5;${FG_COLOR}m%}$_vcs_info$_git_info_push$_git_info_pull %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${BG_COLOR}m%}⮀%{\e[m%}%{\e[m%}"
             else
                # echo "%{%K{magenta}%}⮀"
-               echo -n "%{\e[48;5;237m%}%{\e[38;5;063m%}⮀%{\e[m%}%{\e[m%}"
+               echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}⮀%{\e[m%}%{\e[m%}"
             fi
         }
 
@@ -109,9 +109,10 @@ case "${TERM}" in
 # %{%f%b%k%}$PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
 # %{%f%b%K{blue}%} %{%F{black}%}$ %{%k%F{blue}⮀%{%f%k%b%} '
         PROMPT_HOST=$'%{\e[48;5;063m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;016m%}%n %{\e[m%}%{\e[m%}'
-        PROMPT_DIR=$'%{\e[48;5;237m%} %{\e[38;5;226m%}%~ %{\e[m%}% %{\e[m%}'
-        PROMPT_SU=$'%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;237m%}⮀%{\e[m%})'
-        PROMPT_SHELL=$'%{\e[48;5;063m%} %{\e[38;5;016m%}$ %{\e[m%}%{\e[m%}%{\e[38;5;063m%}⮀%{\e[m%}'
+        PROMPT_DIR=$'%{\e[48;5;238m%} %{\e[38;5;226m%}%~ %{\e[m%}% %{\e[m%}'
+        PROMPT_SU=$'%(!.%{%k%F{blue}%K{black}%}⮀%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;238m%}⮀%{\e[m%})'
+        PROMPT_SHELL=$'%{\e[48;5;247m%} %{\e[38;5;016m%}$ %{\e[m%}%{\e[m%}%{\e[38;5;247m%}⮀%{\e[m%}'
+        # 128
         PROMPT=$'
 $PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
 $PROMPT_SHELL%{%f%k%b%} '
