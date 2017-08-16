@@ -30,13 +30,19 @@ end
 local function handleGlobalAppEvent(name, event, app)
    if event == hs.application.watcher.activated then
        -- hs.alert.show(name)
-      if name == "Emacs" or name == "iTerm" then
-         disableAllHotkeys()
-      else
-         enableAllHotkeys()
-      end
-      remapKey({'ctrl'}, 'y', keyCode('v', {'cmd'}))
-      remapKey({'ctrl'}, 'm', keyCode('return'))
+       if name == "VirtualBox VM" then
+           disableAllHotkeys()
+       -- elseif name == "Firefox" then
+       --     enableAllHotkeys()
+       else
+           if name == "Emacs" or name == "iTerm" then
+               disableAllHotkeys()
+           else
+               enableAllHotkeys()
+           end
+           remapKey({'ctrl'}, 'y', keyCode('v', {'cmd'}))
+           remapKey({'ctrl'}, 'm', keyCode('return'))
+       end
    end
 end
 
