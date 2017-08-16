@@ -12,11 +12,11 @@ function loadlib() {
 
 ZSHUSERDIR=$HOME/dotfiles/zsh
 loadlib $ZSHUSERDIR/aliases.zsh
-loadlib $ZSHUSERDIR/colors.zsh
-loadlib $ZSHUSERDIR/functions/default.zsh
+loadlib $ZSHUSERDIR/functions/system.zsh
 loadlib $ZSHUSERDIR/functions/docker.zsh
 loadlib $ZSHUSERDIR/functions/emacs.zsh
 loadlib $ZSHUSERDIR/functions/peco.zsh
+loadlib $ZSHUSERDIR/functions/misc.zsh
 loadlib $ZSHUSERDIR/prompt.zsh
 
 
@@ -107,15 +107,7 @@ hosts=( ${(@)${${(M)${(s:# :)${(zj:# :)${(Lf)"$([[ -f ~/.ssh/config ]] && <~/.ss
 zstyle ':completion:*:hosts' hosts $hosts
 
 ## 補完候補に色をつける
-case "${OSTYPE}" in
-    linux*)
-        zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-    ;;
-    darwin*)
-        zstyle ':completion:*' list-colors \
-        'di=34' 'ln=01;36' 'so=32' 'ex=32' 'bd=46;34' 'cd=43;34'
-    ;;
-esac
+zstyle ':completion:*' list-colors "${LS_COLORS}"
 
 
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
