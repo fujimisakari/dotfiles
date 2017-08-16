@@ -20,6 +20,7 @@ dotfiles_list = [
     '.aspell.conf',
     '.my.cnf',
     '.keysnail.js',
+    '.dircolors',
 ]
 for dotfile in dotfiles_list:
     system('ln -sf ~/dotfiles/{} ~/.'.format(dotfile))

@@ -88,6 +88,15 @@ if [ -e "$HOME/dev/google-cloud-platform" ]; then
     source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
 fi
 
+## カラー設定
+if [ -f ~/.dircolors ]; then
+    if type dircolors > /dev/null 2>&1; then
+        eval $(dircolors ~/.dircolors)
+    elif type gdircolors > /dev/null 2>&1; then
+        eval $(gdircolors ~/.dircolors)
+    fi
+fi
+
 ## screen セッション保存Dir
 export SCREENDIR=$HOME/.screens
 
