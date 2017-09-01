@@ -44,3 +44,19 @@ function peco-go-src () {
     zle clear-screen
 }
 zle -N peco-go-src
+
+
+function peco-branch () {
+    local branch=$(git branch -a | peco | tr -d ' ' | tr -d '*')
+    if [ -n "$branch" ]; then
+        if [ -n "$LBUFFER" ]; then
+            local new_left="${LBUFFER%\ } $branch"
+        else
+            local new_left="$branch"
+        fi
+        BUFFER=${new_left}${RBUFFER}
+        CURSOR=${#new_left}
+    fi
+    zle clear-screen
+}
+zle -N peco-branch
