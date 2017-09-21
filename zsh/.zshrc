@@ -19,6 +19,12 @@ loadlib $ZSHUSERDIR/functions/peco.zsh
 loadlib $ZSHUSERDIR/functions/misc.zsh
 loadlib $ZSHUSERDIR/prompt.zsh
 
+case "${OSTYPE}" in
+  linux*)
+    loadlib $ZSHUSERDIR/functions/wifi.zsh
+  ;;
+esac
+
 
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ###  Key Chain Setting

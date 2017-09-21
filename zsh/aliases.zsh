@@ -12,6 +12,7 @@ case "${OSTYPE}" in
     alias ptree='pstree -acGhlunp | more'
     alias df='df -h'
     alias netstat='netstat -antul'
+    alias open='eog'
     alias -g C='| xsel --input --clipboard'
   ;;
   darwin*)
