@@ -6,9 +6,7 @@ function peco-select-history() {
     else
         tac="tail -r"
     fi
-    BUFFER=$(history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER")
+    BUFFER=$(history -n 1 | eval $tac | peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     zle clear-screen
 }
@@ -60,3 +58,49 @@ function peco-branch () {
     zle clear-screen
 }
 zle -N peco-branch
+
+
+function peco-docker-containers () {
+    local container=$(docker ps | tail -n +2 | peco | cut -d" " -f1)
+    if [ -n "$container" ]; then
+        if [ -n "$LBUFFER" ]; then
+            local new_left="${LBUFFER%\ } $container"
+        else
+            local new_left="$container"
+        fi
+        BUFFER=${new_left}${RBUFFER}
+        CURSOR=${#new_left}
+    fi
+    zle clear-screen
+}
+zle -N peco-docker-containers
+
+
+function peco-docker-images () {
+    local image=$(docker images | tail -n +2 | peco | awk -F' ' '{print $3}')
+    if [ -n "$image" ]; then
+        if [ -n "$LBUFFER" ]; then
+            local new_left="${LBUFFER%\ } $image"
+        else
+            local new_left="$image"
+        fi
+        BUFFER=${new_left}${RBUFFER}
+        CURSOR=${#new_left}
+    fi
+    zle clear-screen
+}
+zle -N peco-docker-images
+
+function peco-docker-run () {
+   BUFFER=$(gdic run)
+   CURSOR=$#BUFFER
+   zle clear-screen
+}
+zle -N peco-docker-run
+
+function peco-docker-exec () {
+   BUFFER=$(gdic exec)
+   CURSOR=$#BUFFER
+   zle clear-screen
+}
+zle -N peco-docker-exec

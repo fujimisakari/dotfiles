@@ -47,6 +47,10 @@ alias cpan='perl -MCPAN -e shell'
 alias less='/usr/share/vim/vim[0-9]*/macros/less.sh'
 alias dl='find . -type d | xargs du -hs'
 
+alias dstop='gdic stop'
+alias drm='gdic rm'
+alias drmi='gdic rmi'
+
 ## global aliase
 alias -g L='| lv'
 alias -g G='| grep'
