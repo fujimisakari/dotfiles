@@ -14,7 +14,7 @@ zle -N peco-select-history
 
 
 function peco-ssh() {
-    BUFFER=$(grep '^HOST\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print "ssh " $i;}' | peco)
+    BUFFER=$(grep '^Host\s' ~/.ssh/config| awk '{for(i=2;i<=NF;i++) print "ssh " $i;}' | peco)
     CURSOR=$#BUFFER
     zle clear-screen
 }
