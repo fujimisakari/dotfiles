@@ -58,7 +58,8 @@ if [ x$TERM = xscreen-bce ]; then
   function ssh_screen(){
     eval server=\${$#}
     name="$(echo $server | cut -d '@' -f 2)"
-    screen -t $name ssh -l $USER "$@"
+    # screen -t $name ssh -l $USER "$@"
+    screen -t $name ssh "$@"
   }
   alias ssh=ssh_screen
 fi
