@@ -18,8 +18,6 @@ dotfiles_list = [
     '.peco',
     '.boxes',
     '.aspell.conf',
-    '.my.cnf',
-    '.keysnail.js',
     '.dircolors',
 ]
 for dotfile in dotfiles_list:
