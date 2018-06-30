@@ -17,50 +17,34 @@ esac
 export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 export WERKZEUG_DEBUG_PIN='off'   # for Django-extentions
 
-if [ -e "$HOME/.pyenv" ]; then
+if [[ -e "$HOME/.pyenv" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
     PATH=$PYENV_ROOT/bin:$PATH
     eval "$(pyenv init -)"
 fi
 
-## Elixir
-# if [[ -e "$HOME/.exenv" ]]; then
-#     PATH=$HOME/.exenv/bin:$PATH
-#     eval "$(exenv init -)"
-# fi
-
 ## PHP
-if [ -e "$HOME/.phpenv" ]; then
+if [[ -e "$HOME/.phpenv" ]]; then
     PATH=$HOME/.phpenv/bin:$PATH
     eval "$(phpenv init -)"
+fi
+
+## Ruby
+if [[ -s $HOME/.rbenv ]]; then
+    PATH=$HOME/.rbenv/bin:$PATH
+    eval "$(rbenv init -)"
+fi
+
+## node.js
+if [[ -s $HOME/.nodenv ]]; then
+    PATH=$HOME/.nodenv/bin:$PATH
+    eval "$(nodenv init -)"
 fi
 
 ## anyenv
 if [ -e "$HOME/.anyenv" ]; then
     PATH=$HOME/.anyenv/bin:$PATH
     eval "$(anyenv init -)"
-fi
-
-## Ruby
-if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-    source $HOME/.rvm/scripts/rvm  # Load RVM function
-    PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-    # デフォルトのrubyバージョン、gemライブラリ場所を指定
-    # rvm use 1.8.7
-    rvm gemset use default_env > /dev/null 2>&1
-fi
-
-## Node.js(nodebrew)
-if [[ -s $HOME/.nodebrew ]]; then
-    PATH=$HOME/.nodebrew/current/bin:$PATH
-fi
-# if [[ -s ~/.nvm/nvm.sh ]];
-#     then source ~/.nvm/nvm.sh
-# fi
-
-## Common Lisp
-if [[ -s $HOME/.roswell ]]; then
-    PATH=$HOME/.roswell/bin:$PATH
 fi
 
 ## Go
@@ -74,16 +58,33 @@ if [[ -s $HOME/.goenv ]]; then
    eval "$(goenv init -)"
 fi
 
-export PATH
-
-## Google App Engin
-if [ -e "$HOME/dev/google-cloud-platform" ]; then
-    export CLOUDSDK_PYTHON=/usr/bin/python
-    # The next line updates PATH for the Google Cloud SDK.
-    source "$HOME/dev/google-cloud-platform/google-cloud-sdk/path.zsh.inc"
-    # The next line enables shell command completion for gcloud.
-    source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
+## Common Lisp
+if [[ -s $HOME/.roswell ]]; then
+    PATH=$HOME/.roswell/bin:$PATH
 fi
+
+## Elixir
+# if [[ -e "$HOME/.exenv" ]]; then
+#     PATH=$HOME/.exenv/bin:$PATH
+#     eval "$(exenv init -)"
+# fi
+
+## git-subrepo
+if [ -e $HOME/.git-subrepo ]; then
+    export GIT_SUBREPO_ROOT=$HOME/.git-subrepo
+    export MANPATH=$GIT_SUBREPO_ROOT/man:$MANPATH
+    PATH=$GIT_SUBREPO_ROOT/lib:$PATH
+    source "$GIT_SUBREPO_ROOT/share/enable-completion.sh"
+fi
+
+# ## Google App Engin
+# if [ -e "$HOME/dev/google-cloud-platform" ]; then
+#     export CLOUDSDK_PYTHON=/usr/bin/python
+#     # The next line updates PATH for the Google Cloud SDK.
+#     source "$HOME/dev/google-cloud-platform/google-cloud-sdk/path.zsh.inc"
+#     # The next line enables shell command completion for gcloud.
+#     source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
+# fi
 
 ## カラー設定
 if [ -f ~/.dircolors ]; then
