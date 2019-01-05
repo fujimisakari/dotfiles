@@ -90,7 +90,7 @@ fi
 export SCREENDIR=$HOME/.screens
 
 ## screeninator
-[[ -s "$HOME/.screeninator/scripts/screeninator" ]] && source "$HOME/.screeninator/scripts/screeninator"
+[[ -s "$HOME/.screeninator/screeninator" ]] && source "$HOME/.screeninator/screeninator"
 
 ## HOMEBREW CASKのインストール先
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
