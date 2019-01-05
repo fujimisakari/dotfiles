@@ -152,6 +152,8 @@ bindkey '^Xc' peco-docker-containers  # dockerのコンテナIDを選択
 bindkey '^Xi' peco-docker-images      # dockerのイメージIDを選択
 bindkey '^Xr' peco-docker-run         # dockerコンテナのRun先を選択
 bindkey '^Xe' peco-docker-exec        # dockerコンテナのexec先を選択
+bindkey '^Xn' peco-kubectl-with-ns    # kubectlのnamespaceを選択
+bindkey '^Xp' peco-kubectl-with-pod   # kubectlのpodを選択
 bindkey "^L" peco-cdr                 # 最近行ったディレクトへcd
 bindkey "^X'" peco-go-src             # go関連のリポジトリを参照
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除

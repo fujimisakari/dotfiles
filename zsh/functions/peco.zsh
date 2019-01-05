@@ -104,3 +104,34 @@ function peco-docker-exec () {
    zle clear-screen
 }
 zle -N peco-docker-exec
+
+function peco-kubectl-with-ns() {
+  local ns=$(kubectl get namespace | peco | awk '{ print $1 }')
+  if [ -n "$ns" ]; then
+    if [ -n "$LBUFFER" ]; then
+        local new_left="${LBUFFER%\ } --namespace=$ns"
+    else
+        local new_left="$ns"
+    fi
+    BUFFER=${new_left}${RBUFFER}
+    CURSOR=${#new_left}
+  fi
+  zle clear-screen
+}
+zle -N peco-kubectl-with-ns
+
+function peco-kubectl-with-pod() {
+  local ns=$(kubectl get namespace | peco | awk '{ print $1 }')
+  local pod=$(kubectl get pod --namespace=$ns | peco | awk '{ print $1 }')
+  if [ -n "$pod" ]; then
+    if [ -n "$LBUFFER" ]; then
+        local new_left="${LBUFFER%\ } $pod"
+    else
+        local new_left="$pod"
+    fi
+    BUFFER=${new_left}${RBUFFER}
+    CURSOR=${#new_left}
+  fi
+  zle clear-screen
+}
+zle -N peco-kubectl-with-pod
