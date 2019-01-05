@@ -69,6 +69,11 @@ if [[ -s $HOME/dev/go ]]; then
     PATH=/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin:$PATH
 fi
 
+if [[ -s $HOME/.goenv ]]; then
+   export PATH="$HOME/.goenv/bin:$PATH"
+   eval "$(goenv init -)"
+fi
+
 export PATH
 
 ## Docker
