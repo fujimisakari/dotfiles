@@ -69,4 +69,4 @@
 [commit]
     template = ~/.gitmessage.txt
 [ghq]
-    root = ~/dev/go/src
+    root = ~/projects/merpay/go/src

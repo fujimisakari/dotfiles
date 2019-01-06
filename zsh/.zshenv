@@ -48,8 +48,8 @@ if [ -e "$HOME/.anyenv" ]; then
 fi
 
 ## Go
-if [[ -s $HOME/dev/go ]]; then
-    export GOPATH=$HOME/dev/go
+if [[ -s $HOME/projects/merpay/go ]]; then
+    export GOPATH=$HOME/projects/merpay/go
     PATH=/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin:$PATH
 fi
 
