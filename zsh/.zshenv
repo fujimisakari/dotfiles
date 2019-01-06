@@ -58,6 +58,11 @@ if [[ -s $HOME/.goenv ]]; then
    eval "$(goenv init -)"
 fi
 
+## direnv
+if which direnv > /dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
 ## Common Lisp
 if [[ -s $HOME/.roswell ]]; then
     PATH=$HOME/.roswell/bin:$PATH
