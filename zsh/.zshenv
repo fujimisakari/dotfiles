@@ -18,44 +18,44 @@ export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 export WERKZEUG_DEBUG_PIN='off'   # for Django-extentions
 
 if [[ -e "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    PATH=$PYENV_ROOT/bin:$PATH
-    eval "$(pyenv init -)"
+  export PYENV_ROOT="$HOME/.pyenv"
+  PATH=$PYENV_ROOT/bin:$PATH
+  eval "$(pyenv init -)"
 fi
 
 ## PHP
 if [[ -e "$HOME/.phpenv" ]]; then
-    PATH=$HOME/.phpenv/bin:$PATH
-    eval "$(phpenv init -)"
+  PATH=$HOME/.phpenv/bin:$PATH
+  eval "$(phpenv init -)"
 fi
 
 ## Ruby
 if [[ -s $HOME/.rbenv ]]; then
-    PATH=$HOME/.rbenv/bin:$PATH
-    eval "$(rbenv init -)"
+  PATH=$HOME/.rbenv/bin:$PATH
+  eval "$(rbenv init -)"
 fi
 
 ## node.js
 if [[ -s $HOME/.nodenv ]]; then
-    PATH=$HOME/.nodenv/bin:$PATH
-    eval "$(nodenv init -)"
+  PATH=$HOME/.nodenv/bin:$PATH
+  eval "$(nodenv init -)"
 fi
 
 ## anyenv
 if [ -e "$HOME/.anyenv" ]; then
-    PATH=$HOME/.anyenv/bin:$PATH
-    eval "$(anyenv init -)"
+  PATH=$HOME/.anyenv/bin:$PATH
+  eval "$(anyenv init -)"
 fi
 
 ## Go
 if [[ -s $HOME/projects/merpay/go ]]; then
-    export GOPATH=$HOME/projects/merpay/go
-    PATH=/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin:$PATH
+  export GOPATH=$HOME/projects/merpay/go
+  PATH=/usr/local/opt/go/libexec/bin:$HOME/dev/go/bin:$PATH
 fi
 
 if [[ -s $HOME/.goenv ]]; then
-   export PATH="$HOME/.goenv/bin:$PATH"
-   eval "$(goenv init -)"
+  export PATH="$HOME/.goenv/bin:$PATH"
+  eval "$(goenv init -)"
 fi
 
 ## direnv
@@ -65,21 +65,21 @@ fi
 
 ## Common Lisp
 if [[ -s $HOME/.roswell ]]; then
-    PATH=$HOME/.roswell/bin:$PATH
+  PATH=$HOME/.roswell/bin:$PATH
 fi
 
 ## Elixir
-# if [[ -e "$HOME/.exenv" ]]; then
-#     PATH=$HOME/.exenv/bin:$PATH
-#     eval "$(exenv init -)"
-# fi
+if [[ -e "$HOME/.exenv" ]]; then
+  PATH=$HOME/.exenv/bin:$PATH
+  eval "$(exenv init -)"
+fi
 
 ## git-subrepo
 if [ -e $HOME/.git-subrepo ]; then
-    export GIT_SUBREPO_ROOT=$HOME/.git-subrepo
-    export MANPATH=$GIT_SUBREPO_ROOT/man:$MANPATH
-    PATH=$GIT_SUBREPO_ROOT/lib:$PATH
-    source "$GIT_SUBREPO_ROOT/share/enable-completion.sh"
+  export GIT_SUBREPO_ROOT=$HOME/.git-subrepo
+  export MANPATH=$GIT_SUBREPO_ROOT/man:$MANPATH
+  PATH=$GIT_SUBREPO_ROOT/lib:$PATH
+  source "$GIT_SUBREPO_ROOT/share/enable-completion.sh"
 fi
 
 # ## Google App Engin
@@ -93,11 +93,11 @@ fi
 
 ## カラー設定
 if [ -f ~/.dircolors ]; then
-    if type dircolors > /dev/null 2>&1; then
-        eval $(dircolors ~/.dircolors)
-    elif type gdircolors > /dev/null 2>&1; then
-        eval $(gdircolors ~/.dircolors)
-    fi
+  if type dircolors > /dev/null 2>&1; then
+    eval $(dircolors ~/.dircolors)
+  elif type gdircolors > /dev/null 2>&1; then
+    eval $(gdircolors ~/.dircolors)
+  fi
 fi
 
 ## screen セッション保存Dir

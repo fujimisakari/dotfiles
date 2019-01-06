@@ -4,10 +4,10 @@
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 function loadlib() {
-    lib=${1:?"You have to specify a library file"}
-    if [ -f "$lib" ];then
-        source "$lib"
-    fi
+  lib=${1:?"You have to specify a library file"}
+  if [ -f "$lib" ];then
+    source "$lib"
+  fi
 }
 
 ZSHUSERDIR=$HOME/dotfiles/zsh
@@ -32,22 +32,22 @@ esac
 
 for host_name in "thinkpad" "fujimotoryou-no-MacBook-Pro.local"
 do
-    if [ $HOST = $host_name ]; then
-        if ssh-add -l > /dev/null 2>&1; [ $? -eq 0 ]; then
-            keychain
-            . ~/.keychain/$HOST-sh
-        elif ssh-add -l > /dev/null 2>&1; [ $? -eq 1 ]; then
-            echo "Please input the passphrase to ssh-agent"
-            ssh-add ~/.ssh/id_rsa
-            keychain
-        elif psg ssh-agent > /dev/null 2>&1; [ $? -eq 0 ]; then
-            . ~/.keychain/$HOST-sh
-        else
-            echo "Please input the passphrase to ssh-agent"
-            keychain ~/.ssh/id_rsa
-            . ~/.keychain/$HOST-sh
-        fi
+  if [ $HOST = $host_name ]; then
+    if ssh-add -l > /dev/null 2>&1; [ $? -eq 0 ]; then
+      keychain
+      . ~/.keychain/$HOST-sh
+    elif ssh-add -l > /dev/null 2>&1; [ $? -eq 1 ]; then
+      echo "Please input the passphrase to ssh-agent"
+      ssh-add ~/.ssh/id_rsa
+      keychain
+    elif psg ssh-agent > /dev/null 2>&1; [ $? -eq 0 ]; then
+      . ~/.keychain/$HOST-sh
+    else
+      echo "Please input the passphrase to ssh-agent"
+      keychain ~/.ssh/id_rsa
+      . ~/.keychain/$HOST-sh
     fi
+  fi
 done
 
 
@@ -169,5 +169,5 @@ zstyle ':completion:*' recent-dirs-insert both
 
 ## create emacs env file
 if [[ -s $HOME/.emacs.d ]]; then
-    ~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
+  ~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
 fi

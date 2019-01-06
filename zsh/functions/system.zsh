@@ -32,8 +32,8 @@ esac
 
 ## 上の階層へ移動
 function up-dir() {
-    cd ../
-    zle accept-line
+  cd ../
+  zle accept-line
 }
 zle -N up-dir
 
@@ -49,7 +49,7 @@ function nkf_utf() {
 }
 function nkf_euc() {
   for i in $@; do;
-      nkf -e -Lu --overwrite $i
+    nkf -e -Lu --overwrite $i
   done;
 }
 
