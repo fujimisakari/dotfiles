@@ -25,23 +25,3 @@ function gh() {
     hub browse
   fi
 }
-
-## gitの変更差分をpylintにかける
-function gpylint() {
-  for file_path in `git diff --name-only HEAD`; do
-    case ${file_path} in
-      *.py)
-        /usr/bin/env pylint --output-format=parseable --include-ids=y --reports=n \
-            -E --disable=E1101,E1103,E1002,E1001 ${file_path}
-        if [ $? -ne 0 ]
-        then
-          echo "\033[1;31mpylint がエラーを検出しました\033[m"
-        fi
-      ;;
-    esac
-  done
-}
-
-function mypylint() {
-    find . -name '*.py' | grep -v '__init__' | grep -v 'accounts' | grep -v 'static' | grep -v 'test' | xargs pylint --output-format=parseable -E --disable=E1101,E1103,E1002,E1001
-}

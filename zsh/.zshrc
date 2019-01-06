@@ -25,32 +25,6 @@ case "${OSTYPE}" in
   ;;
 esac
 
-
-###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-###  Key Chain Setting
-###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-for host_name in "thinkpad" "fujimotoryou-no-MacBook-Pro.local"
-do
-  if [ $HOST = $host_name ]; then
-    if ssh-add -l > /dev/null 2>&1; [ $? -eq 0 ]; then
-      keychain
-      . ~/.keychain/$HOST-sh
-    elif ssh-add -l > /dev/null 2>&1; [ $? -eq 1 ]; then
-      echo "Please input the passphrase to ssh-agent"
-      ssh-add ~/.ssh/id_rsa
-      keychain
-    elif psg ssh-agent > /dev/null 2>&1; [ $? -eq 0 ]; then
-      . ~/.keychain/$HOST-sh
-    else
-      echo "Please input the passphrase to ssh-agent"
-      keychain ~/.ssh/id_rsa
-      . ~/.keychain/$HOST-sh
-    fi
-  fi
-done
-
-
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ###  History Setting
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -68,7 +42,6 @@ setopt hist_reduce_blanks    # 余分な空白は詰めて記録
 setopt hist_ignore_space     # 先頭がスペースの場合、ヒストリに追加しない
 setopt pushd_ignore_dups     # ディレクトリスタックに重複する物は古い方を削除
 setopt extended_history      # ヒストリファイルに時刻を記録
-
 
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ###  Completion Setting
@@ -108,13 +81,8 @@ command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X
 ## kill の候補にも色付き表示
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
 
-## .ssh/configに指定したホストをsshなどの補完候補に
-hosts=( ${(@)${${(M)${(s:# :)${(zj:# :)${(Lf)"$([[ -f ~/.ssh/config ]] && <~/.ssh/config)"}%%\#*}}##host(|name) *}#host(|name) }/\*} )
-zstyle ':completion:*:hosts' hosts $hosts
-
 ## 補完候補に色をつける
 zstyle ':completion:*' list-colors "${LS_COLORS}"
-
 
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ###  Other Setting

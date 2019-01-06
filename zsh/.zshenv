@@ -41,12 +41,6 @@ if [[ -s $HOME/.nodenv ]]; then
   eval "$(nodenv init -)"
 fi
 
-## anyenv
-if [ -e "$HOME/.anyenv" ]; then
-  PATH=$HOME/.anyenv/bin:$PATH
-  eval "$(anyenv init -)"
-fi
-
 ## Go
 if [[ -s $HOME/projects/merpay/go ]]; then
   export GOPATH=$HOME/projects/merpay/go
@@ -74,23 +68,6 @@ if [[ -e "$HOME/.exenv" ]]; then
   eval "$(exenv init -)"
 fi
 
-## git-subrepo
-if [ -e $HOME/.git-subrepo ]; then
-  export GIT_SUBREPO_ROOT=$HOME/.git-subrepo
-  export MANPATH=$GIT_SUBREPO_ROOT/man:$MANPATH
-  PATH=$GIT_SUBREPO_ROOT/lib:$PATH
-  source "$GIT_SUBREPO_ROOT/share/enable-completion.sh"
-fi
-
-# ## Google App Engin
-# if [ -e "$HOME/dev/google-cloud-platform" ]; then
-#     export CLOUDSDK_PYTHON=/usr/bin/python
-#     # The next line updates PATH for the Google Cloud SDK.
-#     source "$HOME/dev/google-cloud-platform/google-cloud-sdk/path.zsh.inc"
-#     # The next line enables shell command completion for gcloud.
-#     source "$HOME/dev/google-cloud-platform/google-cloud-sdk/completion.zsh.inc"
-# fi
-
 ## カラー設定
 if [ -f ~/.dircolors ]; then
   if type dircolors > /dev/null 2>&1; then
@@ -111,9 +88,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ## エディタの指定
 export EDITOR=vim
-
-## SVNのエディタ指定
-export SVN_EDITOR=vim
 
 ## PAGER設定
 if [ -x /usr/bin/lv ]; then

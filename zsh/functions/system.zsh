@@ -1,31 +1,12 @@
 
+## cd の後 ls も実行
 case "${OSTYPE}" in
   linux*)
-    ## CPU 使用率の高い方から15つ
-    function psc() {
-      psa | head -n 1
-      psa | sort -r -n -k 3 | grep -v "ps auxww" | grep -v grep | head -n 15
-    }
-
-    ## メモリ占有率の高い方から15つ
-    function psm() {
-      psa | head -n 1
-      psa | sort -r -n -k 4 | grep -v "ps auxww" | grep -v grep | head -n 15
-    }
-
-    ## 全プロセスから引数の文字列を含むものを grep
-    function psg() {
-      psa | head -n 1                                    # ラベルを表示
-      psa | grep $* | grep -v "ps auxww" | grep -v grep  # grep プロセスを除外
-    }
-
-    ## cd の後 ls も実行
     function chpwd() {
       ls -F --color=auto
     }
   ;;
   darwin*)
-    ## cd の後 ls も実行
     function chpwd() { ls -FG }
   ;;
 esac
@@ -36,9 +17,6 @@ function up-dir() {
   zle accept-line
 }
 zle -N up-dir
-
-## 全履歴一覧を出力する
-function histall { history -i -D -E 1 }
 
 ## 引数のファイルを utf8 や euc に変換
 # -w utf8  -e euc -Lu 改行コードをLFにする
@@ -63,10 +41,6 @@ if [ x$TERM = xscreen-bce ]; then
   }
   alias ssh=ssh_screen
 fi
-
-## screenのショートカットコマンド
-function sl { screen -ls }
-function sr { screen -r $1 }
 
 ## 画像サイズを出力する
 function imgsize() {
