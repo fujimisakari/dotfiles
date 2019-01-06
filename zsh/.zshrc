@@ -4,24 +4,24 @@
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 function loadlib() {
-  lib=${1:?"You have to specify a library file"}
-  if [ -f "$lib" ];then
-    source "$lib"
+  local lib=${1:?"You have to specify a library file"}
+  if [ -e "${lib}" ];then
+    source ${lib}
   fi
 }
 
-ZSHUSERDIR=$HOME/dotfiles/zsh
-loadlib $ZSHUSERDIR/aliases.zsh
-loadlib $ZSHUSERDIR/functions/system.zsh
-loadlib $ZSHUSERDIR/functions/docker.zsh
-loadlib $ZSHUSERDIR/functions/emacs.zsh
-loadlib $ZSHUSERDIR/functions/peco.zsh
-loadlib $ZSHUSERDIR/functions/misc.zsh
-loadlib $ZSHUSERDIR/prompt.zsh
+ZSH_USER_DIR=${HOME}/dotfiles/zsh
+loadlib ${ZSH_USER_DIR}/aliases.zsh
+loadlib ${ZSH_USER_DIR}/functions/system.zsh
+loadlib ${ZSH_USER_DIR}/functions/docker.zsh
+loadlib ${ZSH_USER_DIR}/functions/emacs.zsh
+loadlib ${ZSH_USER_DIR}/functions/peco.zsh
+loadlib ${ZSH_USER_DIR}/functions/misc.zsh
+loadlib ${ZSH_USER_DIR}/prompt.zsh
 
 case "${OSTYPE}" in
   linux*)
-    loadlib $ZSHUSERDIR/functions/wifi.zsh
+    loadlib ${ZSH_USER_DIR}/functions/wifi.zsh
   ;;
 esac
 
@@ -47,8 +47,8 @@ setopt extended_history      # ヒストリファイルに時刻を記録
 ###  Completion Setting
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-COMPLETIONDIR=$HOME/dotfiles/zsh/completions
-fpath=($fpath $COMPLETIONDIR)
+COMPLETIONDIR=${HOME}/dotfiles/zsh/completions
+fpath=($fpath ${COMPLETIONDIR})
 
 # 標準の補完設定
 autoload -U compinit
@@ -109,12 +109,11 @@ unsetopt no_clobber          # リダイレクトで上書きを許可
 
 umask 022                             # ファイル作成時のパーミッション
 bindkey -e                            # bindkeyはemacs
-bindkey -r "^J"                       # "^J"のキーバインドを削除
-bindkey -r "^G"                       # "^J"のキーバインドを削除
-bindkey "^[h" backward-kill-word      # M-h で単語ごとに削除
-#bindkey "^h" backward-kill-word      # Ctrl-h で単語ごとに削除
-bindkey "^R" peco-select-history      # コマンド履歴
-bindkey "^Xs" peco-ssh                # ssh対象参照
+bindkey -r '^J'                       # "^J"のキーバインドを削除
+bindkey -r '^G'                       # "^J"のキーバインドを削除
+bindkey '^[h' backward-kill-word      # M-h で単語ごとに削除
+bindkey '^R' peco-select-history      # コマンド履歴
+bindkey '^Xs' peco-ssh                # ssh対象参照
 bindkey '^Xb' peco-branch             # gitブランチ選択
 bindkey '^Xc' peco-docker-containers  # dockerのコンテナIDを選択
 bindkey '^Xi' peco-docker-images      # dockerのイメージIDを選択
@@ -136,6 +135,6 @@ zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
 ## create emacs env file
-if [[ -s $HOME/.emacs.d ]]; then
-  ~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/`echo $USER`_shellenv.el
+if [[ -e "${HOME}/.emacs.d" ]]; then
+  ~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/$(echo ${USER})_shellenv.el
 fi

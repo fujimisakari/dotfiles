@@ -1,9 +1,9 @@
 
 ## emacsの一括バイトコンパイル
 function batchcompile() {
-  for i in $@; do;
+  for i in ${@}; do;
     # echo $i
-    emacs -batch -f batch-byte-compile $i
+    emacs -batch -f batch-byte-compile ${i}
   done;
 }
 
@@ -15,7 +15,7 @@ function e() {
       emacsclient -e "(dired \"${1:a}\")"
     ;;
     darwin*)
-      echo "chdir to $PWD"
+      echo "chdir to ${PWD}"
       /usr/local/bin/emacsclient -e "(dired \"${1:a}\")"
     ;;
   esac
@@ -24,22 +24,23 @@ function e() {
 ## Emacs の現在のバッファに対応するディレクトリをターミナル上の zsh で開く
 ## Chdir to the ``default-directory'' of currently opened in Emacs buffer.
 function t() {
+  local emacs_cwd
   case "${OSTYPE}" in
     linux*)
-      EMACS_CWD=`emacsclient -e "
+      emacs_cwd=`emacsclient -e "
         (if (featurep 'elscreen)
             (elscreen-current-directory)
           (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
-      # EMACS_CWD=`emacsclient -e "(current-directory-to-terminal))" | sed 's/^"\(.*\)"$/\1/'`
+      # emacs_cwd=`emacsclient -e "(current-directory-to-terminal))" | sed 's/^"\(.*\)"$/\1/'`
     ;;
     darwin*)
-      EMACS_CWD=`/usr/local/bin/emacsclient -e "
+      emacs_cwd=`/usr/local/bin/emacsclient -e "
         (if (featurep 'elscreen)
             (elscreen-current-directory)
           (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
-      # EMACS_CWD=`/usr/local/bin/emacsclient -e "(current-directory-to-terminal)" | sed 's/^"\(.*\)"$/\1/'`
+      # emacs_cwd=`/usr/local/bin/emacsclient -e "(current-directory-to-terminal)" | sed 's/^"\(.*\)"$/\1/'`
     esac
 
-  echo "chdir to $EMACS_CWD"
-  cd "$EMACS_CWD"
+  echo "chdir to ${emacs_cwd}"
+  cd "${emacs_cwd}"
 }

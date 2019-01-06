@@ -18,14 +18,25 @@ case "${OSTYPE}" in
     alias find='/usr/local/bin/gfind'
     alias ptree='pstree | lv'
     alias boxes='/usr/local/bin/boxes'
-    alias ssh='ssh -A -l $USER'
+    alias ssh="ssh -A -l ${USER}"
     alias netstat='netstat -n -p tcp'
     alias -g C='| /usr/bin/pbcopy'
   ;;
 esac
 
+## SSHコマンドはscreenの新しい窓で
+if [ "x${TERM}" = xscreen-bce ]; then
+  function ssh_screen(){
+    eval server=\${$#}
+    local name="$(echo ${server} | cut -d '@' -f 2)"
+    # screen -t ${name} ssh -l ${USER} "${@}"
+    screen -t ${name} ssh "${@}"
+  }
+  alias ssh=ssh_screen
+fi
+
 alias h='history -i -D -E -40'
-alias scrin='screen -S $USER -U -t $HOST'
+alias scrin="screen -S ${USER} -U -t ${HOST}"
 alias scp='scp -r'
 alias diff='diff -u'
 alias eng='LANG=C LANGUAGE=C LC_ALL=C LC_TIME=C LC_MESSAGES=C'

@@ -21,37 +21,26 @@ zle -N up-dir
 ## 引数のファイルを utf8 や euc に変換
 # -w utf8  -e euc -Lu 改行コードをLFにする
 function nkf_utf() {
-  for i in $@; do;
-    nkf -w -Lu --overwrite $i
+  for i in ${@}; do;
+    nkf -w -Lu --overwrite ${i}
   done;
 }
 function nkf_euc() {
-  for i in $@; do;
-    nkf -e -Lu --overwrite $i
+  for i in ${@}; do;
+    nkf -e -Lu --overwrite ${i}
   done;
 }
 
-## SSHコマンドはscreenの新しい窓で
-if [ x$TERM = xscreen-bce ]; then
-  function ssh_screen(){
-    eval server=\${$#}
-    name="$(echo $server | cut -d '@' -f 2)"
-    # screen -t $name ssh -l $USER "$@"
-    screen -t $name ssh "$@"
-  }
-  alias ssh=ssh_screen
-fi
-
 ## 画像サイズを出力する
 function imgsize() {
-  for i in $@; do;
-    identify $i | awk '{print $1, $3}'
+  for i in ${@}; do;
+    identify ${i} | awk '{print $1, $3}'
   done;
 }
 
 ## カレント画像サイズを出力する
 function imgsize_all() {
-  for i in `ls`; do
-    identify $i | awk '{print $1, $3}'
+  for i in $(ls); do
+    identify ${i} | awk '{print $1, $3}'
   done
 }
