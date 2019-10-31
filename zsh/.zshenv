@@ -48,6 +48,7 @@ if [[ -s "${HOME}/projects/merpay/go" ]]; then
 fi
 
 if [[ -e "${HOME}/.goenv" ]]; then
+  export GOENV_DISABLE_GOPATH=1
   export PATH=${HOME}/.goenv/bin:${PATH}
   eval "$(goenv init -)"
 fi
