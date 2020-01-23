@@ -35,6 +35,10 @@ if [ "x${TERM}" = xscreen-bce ]; then
   alias ssh=ssh_screen
 fi
 
+if [[ -x `which colordiff` ]]; then
+  alias diff='colordiff -u'
+fi
+
 alias h='history -i -D -E -40'
 alias scrin="screen -S ${USER} -U -t ${HOST}"
 alias scp='scp -r'
