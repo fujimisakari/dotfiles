@@ -35,6 +35,8 @@ fuel/app/tasks/shell.php
 ex_lib
 *.beam
 site-packages
+tmux-*.log
+
 
 # emacs
 .#*
