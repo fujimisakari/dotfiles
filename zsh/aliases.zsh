@@ -39,6 +39,10 @@ if [[ -x `which colordiff` ]]; then
   alias diff='colordiff -u'
 fi
 
+if [[ -x `which tmux` ]]; then
+  alias tmux='tmux -2'
+fi
+
 alias h='history -i -D -E -40'
 alias scrin="screen -S ${USER} -U -t ${HOST}"
 alias scp='scp -r'

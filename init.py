@@ -19,6 +19,7 @@ dotfiles_list = [
     '.boxes',
     '.aspell.conf',
     '.dircolors',
+    '.tmux.conf',
 ]
 for dotfile in dotfiles_list:
     system('ln -sf ~/dotfiles/{} ~/.'.format(dotfile))
