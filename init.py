@@ -26,10 +26,11 @@ for dotfile in dotfiles_list:
 
 platform = platform.system()
 if platform == 'Darwin':
-    system('ln -sf ~/dotfiles/.screeninator_mac/default.screen ~/.screenrc')
     system('ln -sf ~/dotfiles/.swiftlint.yml ~/.')
 elif platform == 'Linux':
-    system('ln -sf ~/dotfiles/.screeninator_linux/default.screen ~/.screenrc')
-    system('ln -sf ~/dotfiles/.screeninator_linux ~/.screeninator')
+    system('ln -sf ~/dotfiles/.ubuntu-config/.Xresources ~/')
+    system('ln -sf ~/dotfiles/.ubuntu-config/.xkeysnailrc.py ~/')
+    system('ln -sf ~/dotfiles/.ubuntu-config/xkeysnail.sh ~/')
+    system('ln -sf ~/dotfiles/.ubuntu-config/xkeysnail_bluetooth.sh ~/')
 
 system('touch $HOME/.screen-exchange')

@@ -1,0 +1,58 @@
+xkb_symbols "thinkpad" {
+  key <CAPS> { [ Control_L ] };
+  key <RTRN> { [ Control_R ] };
+  key <LWIN> { [ Alt_L, Meta_L ] };
+  key <PRSC> { [ Alt_R, Meta_R ] };
+  //key <LALT> { [ Super_L ] };
+  //key <RALT> { [ Super_R ] };
+  key <RCTL> { [ Return ] };
+
+//  replace key <AC04> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ f, F, Right ]
+//  };
+//
+//  replace key <AB05> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ b, B, Left ]
+//  };
+//
+//  replace key <AD10> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ p, P, Up ]
+//  };
+//
+//  replace key <AB06> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ n, N, Down ]
+//  };
+//
+//  replace key <AB07> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ m, M, Return ]
+//  };
+//
+//  replace key <AC01> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ a, A, Home ]
+//  };
+//
+//  replace key <AD03> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ e, E, End ]
+//  };
+//
+//  replace key <AC06> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ h, H, BackSpace ]
+//  };
+//
+//  replace key <AC03> {
+//    type= "SHIFT+CONTROL",
+//    symbols[Group1]= [ d, D, Delete ]
+//  };
+
+  modifier_map Control { Control_L, Control_R, <CAPS> };
+  modifier_map Mod1 { <LWIN>, <PRSC> };
+  //modifier_map Mod4 { Super_L, Super_R };
+};
