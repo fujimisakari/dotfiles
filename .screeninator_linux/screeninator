@@ -1,2 +1,1 @@
 alias start_default='if [[ -n `screen -ls | grep default` ]] ; then `TERM=xterm screen -dr default` ; else `TERM=xterm screen -c ~/.screeninator/default.screen -S default`; fi'
-alias start_suitebook='if [[ -n `screen -ls | grep suitebook` ]] ; then `TERM=xterm screen -dr suitebook` ; else `TERM=xterm screen -c ~/.screeninator/suitebook.screen -S suitebook`; fi'
