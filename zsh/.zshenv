@@ -5,11 +5,14 @@
 
 case "${OSTYPE}" in
   linux*)
-    PATH=${HOME}/dotfiles/bin:${PATH}:/sbin:/usr/sbin
+    PATH=${HOME}/dotfiles/bin:/sbin:/usr/sbin:${PATH}
   ;;
   darwin*)
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
     PATH=/usr/local/opt/coreutils/libexec/gnubin:${HOME}/dotfiles/bin:/usr/local/bin:/sbin:/usr/sbin:${PATH}
+    if [[ -e "/usr/local/opt/llvm/bin" ]]; then
+      PATH=/usr/local/opt/llvm/bin:${PATH}
+    fi
   ;;
 esac
 
@@ -44,7 +47,7 @@ fi
 ## Go
 if [[ -s "${HOME}/projects/merpay/go" ]]; then
   export GOPATH=${HOME}/projects/merpay/go
-  PATH=/usr/local/opt/go/libexec/bin:${HOME}/dev/go/bin:${PATH}
+  PATH=/usr/local/go/bin:${HOME}/dev/go/bin:${PATH}
 fi
 
 if [[ -e "${HOME}/.goenv" ]]; then
