@@ -35,6 +35,9 @@ bind log  o !@hub browse -- commit/%(commit)
 #bind generic R !git revert %(commit)
 #bind generic L !git log %(file)
 
+# commit hash copy
+bind generic w @bash -c "echo -n '%(commit)' | pbcopy"
+
 
 #==================================
 # COLOR CONFIGURATION
