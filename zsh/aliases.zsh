@@ -37,6 +37,8 @@ fi
 
 if [[ -x `which colordiff` ]]; then
   alias diff='colordiff -u'
+else
+  alias diff='diff -u'
 fi
 
 if [[ -x `which tmux` ]]; then
@@ -46,7 +48,6 @@ fi
 alias h='history -i -D -E -40'
 alias scrin="screen -S ${USER} -U -t ${HOST}"
 alias scp='scp -r'
-alias diff='diff -u'
 alias eng='LANG=C LANGUAGE=C LC_ALL=C LC_TIME=C LC_MESSAGES=C'
 alias euc='LANG=ja_JP.eucJP LANGUAGE=ja LC_ALL=ja_JP.eucJP'
 alias utf='LANG=ja_JP.UTF-8 LANGUAGE=ja LC_ALL=ja_JP.UTF-8'
