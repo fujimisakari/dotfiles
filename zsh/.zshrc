@@ -123,6 +123,7 @@ bindkey '^Xn' peco-kubectl-with-ns    # kubectlのnamespaceを選択
 bindkey '^Xp' peco-kubectl-with-pod   # kubectlのpodを選択
 bindkey "^L" peco-cdr                 # 最近行ったディレクトへcd
 bindkey "^X'" peco-go-src             # go関連のリポジトリを参照
+bindkey "\e[3~" delete-char
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'    # / を単語の一部とみなさない記号の環境変数から削除
 typeset -U path cdpath fpath manpath  # 重複する要素を自動的に削除
 
