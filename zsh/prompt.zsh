@@ -9,9 +9,9 @@ zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
 #zstyle ":vcs_info:git:*" check-for-changes true
 # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
-zstyle ":vcs_info:git:*" formats " \uE709 %r \uE0BF  \uE0A0 %b%u%c"
+zstyle ":vcs_info:git:*" formats " \uE709  %r \uE0BF  \uE0A0 %b%u%c"
 # gitリポジトリに対して、コンフリクトなどの情報を表示する
-zstyle ":vcs_info:git:*" actionformats " \uE709 %r \uE0BF  \uE0A0 %b%u%c \uE0BF  %a"
+zstyle ":vcs_info:git:*" actionformats " \uE709  %r \uE0BF  \uE0A0 %b%u%c \uE0BF  %a"
 # addしていない変更があることを示す文字列
 zstyle ":vcs_info:git:*" unstagedstr "\uE0BF  Unstaged"
 # commitしていないstageがあることを示す文字列
@@ -96,6 +96,7 @@ case "${TERM}" in
     #                           太字で白文字で緑背景にして異常終了していれば
     #                           太字で白文字で赤背景にする。
     #   iconチートシート: https://www.nerdfonts.com/cheat-sheet
+    #   256COLORSチートシート: https://jonasjacek.github.io/colors
     prompt_host=$'%{\e[48;5;063m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;016m%}%n %{\e[m%}%{\e[m%}'
     prompt_dir=$'%{\e[48;5;238m%} %{\e[38;5;226m%} \uE5FE  %~ %{\e[m%}% %{\e[m%}'
     prompt_su=$'%(!.%{%k%F{blue}%K{black}%}\uE0B8%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;238m%}\uE0B8%{\e[m%})'
