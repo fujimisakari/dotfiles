@@ -11,7 +11,6 @@ dotfiles_list = [
     '.tigrc',
     '.gitconfig',
     '.gitignore',
-    '.gitmessage.txt',
     '.pylintrc',
     '.globalrc',
     '.ctags',

@@ -65,7 +65,5 @@
   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
   # mergeの際にconflictが起きたファイルをadd
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-[commit]
-  template = ~/.gitmessage.txt
 [ghq]
   root = ~/projects/merpay/go/src
