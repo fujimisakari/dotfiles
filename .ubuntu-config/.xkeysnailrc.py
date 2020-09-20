@@ -52,6 +52,12 @@ define_keymap(re.compile("Gnome-terminal"), {
     K("C-v"): with_mark(K("page_down")),
 }, "Gnome-terminal")
 
+# Keybindings for Emacs
+define_keymap(re.compile("Emacs"), {
+    # mozc
+    K("C-j"): K("F12"),
+}, "Emacs")
+
 # Keybindings for Zeal https://github.com/zealdocs/zeal/
 define_keymap(re.compile("Zeal"), {
     # Ctrl+s to focus search area
@@ -104,6 +110,8 @@ define_keymap(lambda wm_class: wm_class not in ("Gnome-terminal", "Emacs", "URxv
     K("C-g"): [K("esc"), set_mark(False)],
     # Escape
     K("C-q"): escape_next_key,
+    # Enter
+    K("page_down"): K("enter"),
     # C-x YYY
     K("C-x"): {
         # C-x h (select all)
