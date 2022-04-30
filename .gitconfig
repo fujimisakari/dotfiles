@@ -12,6 +12,7 @@
   cam = commit --amend             # 直前のcommitを修正
   co = checkout
   st = status
+  p = "!f() { git rev-parse --abbrev-ref HEAD ; }; git pull origin `f`"
 
   # rebase関連
   rbi = rebase -i
@@ -67,3 +68,5 @@
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 [ghq]
   root = ~/projects/merpay/go/src
+[hub]
+	protocol = https
