@@ -47,6 +47,9 @@ define_keymap(re.compile("Firefox|Google-chrome"), {
 
 # Keybindings for Gnome-terminal
 define_keymap(re.compile("Gnome-terminal"), {
+    # Enter
+    K("page_down"): K("enter"),
+
     # Page up/down
     K("M-v"): with_mark(K("page_up")),
     K("C-v"): with_mark(K("page_down")),
@@ -54,7 +57,7 @@ define_keymap(re.compile("Gnome-terminal"), {
 
 # Keybindings for Emacs
 define_keymap(re.compile("Emacs"), {
-    # mozc
+    # for mozc
     K("C-j"): K("F12"),
 }, "Emacs")
 
