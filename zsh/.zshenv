@@ -45,14 +45,24 @@ if [[ -e "${HOME}/.nodenv" ]]; then
 fi
 
 ## Go
-if [[ -s "${HOME}/projects/merpay/go" ]]; then
-  export GOPATH=${HOME}/projects/merpay/go
-  PATH=/usr/local/go/bin:${HOME}/dev/go/bin:${PATH}
-fi
+case "${OSTYPE}" in
+  linux*)
+    if [[ -s "${HOME}/go" ]]; then
+      export GOPATH=${HOME}/go
+      PATH=${HOME}/go/bin:${PATH}
+    fi
+  ;;
+  darwin*)
+    if [[ -s "${HOME}/projects/merpay/go" ]]; then
+      export GOPATH=${HOME}/projects/merpay/go
+      PATH=/usr/local/go/bin:${HOME}/dev/go/bin:${PATH}
+    fi
+  ;;
+esac
 
 if [[ -e "${HOME}/.goenv" ]]; then
   export GOENV_DISABLE_GOPATH=1
-  export PATH=${HOME}/.goenv/bin:${PATH}
+  PATH=${HOME}/.goenv/bin:${PATH}
   eval "$(goenv init -)"
 fi
 
@@ -71,6 +81,10 @@ if [[ -e "${HOME}/.exenv" ]]; then
   PATH=${HOME}/.exenv/bin:${PATH}
   eval "$(exenv init -)"
 fi
+
+## Cloud SDK
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
 
 ## カラー設定
 if [ -e "${HOME}/.dircolors" ]; then

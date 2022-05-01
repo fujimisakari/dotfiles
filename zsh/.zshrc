@@ -47,8 +47,8 @@ setopt extended_history      # ヒストリファイルに時刻を記録
 ###  Completion Setting
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-COMPLETIONDIR=${HOME}/dotfiles/zsh/completions
-fpath=($fpath ${COMPLETIONDIR})
+#COMPLETIONDIR=${HOME}/dotfiles/zsh/completions
+#fpath=($fpath ${COMPLETIONDIR})
 
 # 標準の補完設定
 autoload -U compinit
@@ -114,7 +114,7 @@ bindkey -r '^G'                       # "^J"のキーバインドを削除
 bindkey '^[h' backward-kill-word      # M-h で単語ごとに削除
 bindkey '^R' peco-select-history      # コマンド履歴
 bindkey '^Xs' peco-ssh                # ssh対象参照
-bindkey '^Xb' peco-branch             # gitブランチ選択
+bindkey '^X^X' peco-branch            # gitブランチ選択
 bindkey '^Xc' peco-docker-containers  # dockerのコンテナIDを選択
 bindkey '^Xi' peco-docker-images      # dockerのイメージIDを選択
 bindkey '^Xr' peco-docker-run         # dockerコンテナのRun先を選択
