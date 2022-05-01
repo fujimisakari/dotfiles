@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding:utf-8 -*-
 
 import platform
@@ -29,7 +29,7 @@ if platform == 'Darwin':
 elif platform == 'Linux':
     system('ln -sf ~/dotfiles/.ubuntu-config/.Xresources ~/')
     system('ln -sf ~/dotfiles/.ubuntu-config/.xkeysnailrc.py ~/')
-    system('ln -sf ~/dotfiles/.ubuntu-config/xkeysnail.sh ~/')
+    system('ln -sf ~/dotfiles/.ubuntu-config/root_xkeysnail.sh ~/')
     system('ln -sf ~/dotfiles/.ubuntu-config/xkeysnail_bluetooth.sh ~/')
 
 system('touch $HOME/.screen-exchange')
