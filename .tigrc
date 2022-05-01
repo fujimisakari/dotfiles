@@ -37,6 +37,7 @@ bind log  o !@hub browse -- commit/%(commit)
 
 # commit hash copy
 bind generic w @bash -c "echo -n '%(commit)' | pbcopy"
+bind generic W @bash -c "echo -n '%(commit)' | xsel --input --clipboard"
 
 
 #==================================
