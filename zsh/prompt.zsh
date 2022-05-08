@@ -98,7 +98,7 @@ case "${TERM}" in
     #   iconチートシート: https://www.nerdfonts.com/cheat-sheet
     #   256COLORSチートシート: https://jonasjacek.github.io/colors
     prompt_host=$'%{\e[48;5;063m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;016m%}%n %{\e[m%}%{\e[m%}'
-    prompt_dir=$'%{\e[48;5;238m%}%{\e[38;5;226m%} \uE5FE %~ %{\e[m%}% %{\e[m%}'
+    prompt_dir=$'%{\e[48;5;238m%}%{\e[38;5;226m%}  \uE5FE  %~ %{\e[m%}% %{\e[m%}'
     prompt_su=$'%(!.%{%k%F{blue}%K{black}%}\uE0B8%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;238m%}◣%{\e[m%})'
     prompt_shell=$'%{\e[48;5;247m%} %{\e[38;5;016m%}$ %{\e[m%}%{\e[m%}%{\e[38;5;247m%}\uE0B8%{\e[m%}'
     if [ `uname` = "Darwin" ]; then
