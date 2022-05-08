@@ -22,6 +22,7 @@ loadlib ${ZSH_USER_DIR}/prompt.zsh
 case "${OSTYPE}" in
   linux*)
     loadlib ${ZSH_USER_DIR}/functions/wifi.zsh
+    loadlib ${ZSH_USER_DIR}/functions/xkeysnail.zsh
   ;;
 esac
 

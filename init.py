@@ -29,7 +29,5 @@ if platform == 'Darwin':
 elif platform == 'Linux':
     system('ln -sf ~/dotfiles/.ubuntu-config/.Xresources ~/')
     system('ln -sf ~/dotfiles/.ubuntu-config/.xkeysnailrc.py ~/')
-    system('ln -sf ~/dotfiles/.ubuntu-config/root_xkeysnail.sh ~/')
-    system('ln -sf ~/dotfiles/.ubuntu-config/xkeysnail_bluetooth.sh ~/')
 
 system('touch $HOME/.screen-exchange')
