@@ -36,7 +36,8 @@ ex_lib
 *.beam
 site-packages
 tmux-*.log
-
+.claude
+.serena
 
 # emacs
 .#*
@@ -63,3 +64,6 @@ elpa
 code-skeletons
 97-work.el
 97-gamewith.el
+
+.envrc
+.env.project
