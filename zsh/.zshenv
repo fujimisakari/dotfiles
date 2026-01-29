@@ -5,13 +5,19 @@
 
 case "${OSTYPE}" in
   linux*)
-    PATH=${HOME}/dotfiles/bin:/sbin:/usr/sbin:${PATH}
+    PATH=${HOME}/.local/bin:${HOME}/dotfiles/bin:/sbin:/usr/sbin:${PATH}
   ;;
   darwin*)
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:${HOME}/dotfiles/bin:/usr/local/bin:/sbin:/usr/sbin:${PATH}
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:${HOME}/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:/sbin:/usr/sbin:/Applications/Emacs.app/Contents/MacOS/bin:${PATH}
     if [[ -e "/usr/local/opt/llvm/bin" ]]; then
       PATH=/usr/local/opt/llvm/bin:${PATH}
+    fi
+    if [[ -e "/opt/homebrew/share/google-cloud-sdk/bin" ]]; then
+      PATH=/opt/homebrew/share/google-cloud-sdk/bin:${PATH}
+    fi
+    if [[ -e "/opt/homebrew/opt/openjdk/bin" ]]; then
+      PATH=/opt/homebrew/opt/openjdk/bin:${PATH}
     fi
   ;;
 esac
@@ -39,14 +45,16 @@ if [[ -e "${HOME}/.rbenv" ]]; then
 fi
 
 ## node.js
-if [[ -e "${HOME}/.nodenv" ]]; then
-  PATH=${HOME}/.nodenv/bin:${PATH}
-  eval "$(nodenv init -)"
+if [[ -e "${HOME}/.nodebrew" ]]; then
+  PATH=${HOME}/.nodebrew/current/bin:${PATH}
 fi
 
 ## Go
 case "${OSTYPE}" in
   linux*)
+    if [[ -s "/usr/local/go" ]]; then
+      PATH=/usr/local/go/bin:${PATH}
+    fi
     if [[ -s "${HOME}/go" ]]; then
       export GOPATH=${HOME}/go
       PATH=${HOME}/go/bin:${PATH}
@@ -55,7 +63,7 @@ case "${OSTYPE}" in
   darwin*)
     if [[ -s "${HOME}/projects/merpay/go" ]]; then
       export GOPATH=${HOME}/projects/merpay/go
-      PATH=/usr/local/go/bin:${HOME}/dev/go/bin:${PATH}
+      PATH=/usr/local/go/bin:${HOME}/dev/go/bin:${HOME}/projects/merpay/go/bin:${PATH}
     fi
   ;;
 esac
@@ -81,6 +89,9 @@ if [[ -e "${HOME}/.exenv" ]]; then
   PATH=${HOME}/.exenv/bin:${PATH}
   eval "$(exenv init -)"
 fi
+
+## GITHUB MCP で利用している
+export GITHUB_TOKEN=$(gh auth token 2>/dev/null)
 
 ## Cloud SDK
 if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
@@ -120,3 +131,10 @@ export LC_ALL="${LANG}"
 ## -1 : 尋ねない
 ##  0 : ウィンドウから溢れるときは尋ねる
 export LISTMAX=0
+
+## LIBRARY_PATHを設定する
+## 警告が多く出る原因の一つとして、libgccjitが正しくリンクされていないことも考えられます。以下のコマンドでLIBRARY_PATHを設定し、Emacsの起動時に適切なライブラリを読み込ませると警告が減ることがあります。
+if [ -e "/opt/homebrew" ]; then
+  export LIBRARY_PATH=/opt/homebrew/lib/gcc/$(brew list gcc | grep 'libgccjit.so' | sed 's/.*libgccjit.so.//')
+fi
+
