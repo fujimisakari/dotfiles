@@ -13,12 +13,10 @@ case "${OSTYPE}" in
     alias -g C='| xsel --input --clipboard'
   ;;
   darwin*)
-    alias ls='/usr/local/bin/gls -vF --color=auto'
-    alias ll='/usr/local/bin/gls -lavFh --color'
-    alias find='/usr/local/bin/gfind'
+    alias ls='gls -vF --color=auto'
+    alias ll='gls -lavFh --color'
+    alias find='gfind'
     alias ptree='pstree | lv'
-    alias boxes='/usr/local/bin/boxes'
-    alias ssh="ssh -A -l ${USER}"
     alias netstat='netstat -n -p tcp'
     alias -g C='| /usr/bin/pbcopy'
   ;;
