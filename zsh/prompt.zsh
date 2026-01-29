@@ -9,67 +9,49 @@ zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
 #zstyle ":vcs_info:git:*" check-for-changes true
 
+# OS別セパレータ・アイコン設定
 case `uname` in
   Darwin)
-    # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
-    zstyle ":vcs_info:git:*" formats " \uE709  %r \uE0BF  \uE0A0 %b%u%c"
-    # gitリポジトリに対して、コンフリクトなどの情報を表示する
-    zstyle ":vcs_info:git:*" actionformats " \uE709  %r \uE0BF  \uE0A0 %b%u%c \uE0BF  %a"
-    # addしていない変更があることを示す文字列
-    zstyle ":vcs_info:git:*" unstagedstr "\uE0BF  Unstaged"
-    # commitしていないstageがあることを示す文字列
-    zstyle ":vcs_info:git:*" stagedstr "\uE0BF  Staged"
+    _git_sep="\uE0BF"
+    _git_corner="\uE0B8"
+    zstyle ":vcs_info:git:*" formats " \uE709  %r ${_git_sep}  \uE0A0 %b%u%c"
+    zstyle ":vcs_info:git:*" actionformats " \uE709  %r ${_git_sep}  \uE0A0 %b%u%c ${_git_sep}  %a"
+    zstyle ":vcs_info:git:*" unstagedstr "${_git_sep}  Unstaged"
+    zstyle ":vcs_info:git:*" stagedstr "${_git_sep}  Staged"
   ;;
   Linux)
-    zstyle ":vcs_info:git:*" formats "\uE709 %r ╲ \uE0A0 %b%u%c"
-    zstyle ":vcs_info:git:*" actionformats " \uE709  %r ╲ \uE0A0 %b%u%c ╲ %a"
-    zstyle ":vcs_info:git:*" unstagedstr "╲ Unstaged"
-    zstyle ":vcs_info:git:*" stagedstr "╲ Staged"
+    _git_sep="╲"
+    _git_corner="◣"
+    zstyle ":vcs_info:git:*" formats "\uE709 %r ${_git_sep} \uE0A0 %b%u%c"
+    zstyle ":vcs_info:git:*" actionformats " \uE709  %r ${_git_sep} \uE0A0 %b%u%c ${_git_sep} %a"
+    zstyle ":vcs_info:git:*" unstagedstr "${_git_sep} Unstaged"
+    zstyle ":vcs_info:git:*" stagedstr "${_git_sep} Staged"
   ;;
 esac
 
-function git_is_track_branch() {
-  if [ "$(git remote 2>/dev/null)" != "" ]; then
-    local target_tracking_branch="origin/$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    for tracking_branch in $(git branch -ar) ; do
-      if [ "${target_tracking_branch}" = "${tracking_branch}" ]; then
-        echo "true"
-      fi
-    done
-  fi
-}
+# push/pull情報を効率的に取得
+function _git_status_info() {
+  local current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+  local remote_branch="origin/${current_branch}"
 
-function git_info_pull() {
-  if [ -n "$(git_is_track_branch)" ]; then
-    local current_branch="$(git rev-parse --abbrev-ref HEAD)"
-    local head_rev="$(git rev-parse HEAD)"
-    local origin_rev="$(git rev-parse origin/$current_branch)"
-    if [ "${head_rev}" != "${origin_rev}" ] && [ "$(git_info_push)" = "" ]; then
-      case `uname` in
-        Darwin)
-          echo " \uE0BF  Can Be Pulled"
-        ;;
-        Linux)
-          echo " ╲ Can Be Pulled"
-        ;;
-      esac
+  # リモートブランチが存在するか確認
+  if git rev-parse --verify "${remote_branch}" &>/dev/null; then
+    local ahead behind
+    ahead=$(git rev-list "${remote_branch}..HEAD" 2>/dev/null | wc -l | tr -d ' ')
+    behind=$(git rev-list "HEAD..${remote_branch}" 2>/dev/null | wc -l | tr -d ' ')
+
+    if [ "${ahead}" -gt 0 ]; then
+      echo " ${_git_sep}  Can Be Pushed(${ahead})"
+    elif [ "${behind}" -gt 0 ]; then
+      echo " ${_git_sep}  Can Be Pulled"
     fi
-  fi
-}
-
-function git_info_push() {
-  if [ -n "$(git_is_track_branch)" ]; then
-    local current_branch="$(git rev-parse --abbrev-ref HEAD)"
-    local push_count=$(git rev-list origin/"${current_branch}".."${current_branch}" 2>/dev/null | wc -l | tr -d ' ')
-    if [ "${push_count}" -gt 0 ]; then
-      case `uname` in
-        Darwin)
-          echo " \uE0BF  Can Be Pushed(${push_count})"
-        ;;
-        Linux)
-          echo " ╲ Can Be Pushed(${push_count})"
-        ;;
-      esac
+  else
+    # リモートブランチがない場合、origin/HEADからの差分を表示
+    local commits=$(git rev-list origin/HEAD..HEAD 2>/dev/null | wc -l | tr -d ' ')
+    if [ "${commits}" -gt 0 ]; then
+      echo " ${_git_sep}  Unpushed Branch(${commits})"
+    else
+      echo " ${_git_sep}  Unpushed Branch"
     fi
   fi
 }
@@ -77,13 +59,13 @@ function git_info_push() {
 function update_git_info() {
   LANG=en_US.UTF-8 vcs_info
   local vcs_info=${vcs_info_msg_0_}
-  local git_info_push=$(git_info_push)
-  local git_info_pull=$(git_info_pull)
+
   if [ -n "${vcs_info}" ]; then
+    local git_status=$(_git_status_info)
     local bg_color=034
     local fg_color=016
 
-    if [ -n "${git_info_push}" ] || [ -n "${git_info_pull}" ]; then
+    if [ -n "${git_status}" ]; then
       bg_color=184
       fg_color=016
     fi
@@ -93,23 +75,9 @@ function update_git_info() {
         fg_color=255
     fi
 
-    case `uname` in
-      Darwin)
-        echo "%{\e[48;5;${bg_color}m%}%{\e[38;5;063m%}\uE0B8%{\e[m%}%{\e[48;5;${bg_color}m%} %{\e[38;5;${fg_color}m%}${vcs_info}${git_info_push}${git_info_pull} %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${bg_color}m%}\uE0B8%{\e[m%}%{\e[m%}"
-      ;;
-      Linux)
-        echo "%{\e[48;5;${bg_color}m%}%{\e[38;5;063m%}◣%{\e[m%}%{\e[48;5;${bg_color}m%} %{\e[38;5;${fg_color}m%}${vcs_info}${git_info_push}${git_info_pull} %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${bg_color}m%}◣%{\e[m%}%{\e[m%}"
-      ;;
-    esac
+    echo "%{\e[48;5;${bg_color}m%}%{\e[38;5;063m%}${_git_corner}%{\e[m%}%{\e[48;5;${bg_color}m%} %{\e[38;5;${fg_color}m%}${vcs_info}${git_status} %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${bg_color}m%}${_git_corner}%{\e[m%}%{\e[m%}"
   else
-    case `uname` in
-      Darwin)
-        echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}\uE0B8%{\e[m%}%{\e[m%}"
-      ;;
-      Linux)
-        echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}◣%{\e[m%}%{\e[m%}"
-      ;;
-    esac
+    echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}${_git_corner}%{\e[m%}%{\e[m%}"
   fi
 }
 
