@@ -20,12 +20,12 @@ zle -N up-dir
 
 ## 引数のファイルを utf8 や euc に変換
 # -w utf8  -e euc -Lu 改行コードをLFにする
-function nkf_utf() {
+function nkf-utf() {
   for i in ${@}; do;
     nkf -w -Lu --overwrite ${i}
   done;
 }
-function nkf_euc() {
+function nkf-euc() {
   for i in ${@}; do;
     nkf -e -Lu --overwrite ${i}
   done;
@@ -39,7 +39,7 @@ function imgsize() {
 }
 
 ## カレント画像サイズを出力する
-function imgsize_all() {
+function imgsize-all() {
   for i in $(ls); do
     identify ${i} | awk '{print $1, $3}'
   done

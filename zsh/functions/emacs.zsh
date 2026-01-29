@@ -1,6 +1,6 @@
 
 ## emacsの一括バイトコンパイル
-function batchcompile() {
+function batch-compile() {
   for i in ${@}; do;
     # echo $i
     emacs -batch -f batch-byte-compile ${i}
