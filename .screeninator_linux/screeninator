@@ -1,1 +1,0 @@
-alias start_default='if [[ -n `screen -ls | grep default` ]] ; then `TERM=xterm screen -dr default` ; else `TERM=xterm screen -c ~/.screeninator/default.screen -S default`; fi'
