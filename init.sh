@@ -1,4 +1,16 @@
 #!/bin/bash
+set -eu
+
+DOTFILES_DIR="${HOME}/dotfiles"
+
+# エラー時のメッセージ
+error() {
+    echo "Error: $1" >&2
+    exit 1
+}
+
+# dotfilesディレクトリの存在確認
+[[ -d "$DOTFILES_DIR" ]] || error "dotfiles directory not found: $DOTFILES_DIR"
 
 # 共通設定
 dotfiles=(
@@ -14,18 +26,25 @@ dotfiles=(
 )
 
 for dotfile in "${dotfiles[@]}"; do
-    ln -sf ~/dotfiles/"$dotfile" ~/.
+    src="${DOTFILES_DIR}/${dotfile}"
+    [[ -e "$src" ]] || { echo "Warning: $src not found, skipping"; continue; }
+    ln -sf "$src" ~/. && echo "Linked: $dotfile"
 done
 
 # OS固有設定
 case "$(uname)" in
     Darwin)
-        ln -sf ~/dotfiles/.gitconfig.local ~/.
+        src="${DOTFILES_DIR}/.gitconfig.local"
+        [[ -e "$src" ]] && ln -sf "$src" ~/. && echo "Linked: .gitconfig.local"
         ;;
     Linux)
-        ln -sf ~/dotfiles/.ubuntu-config/.Xresources ~/
-        ln -sf ~/dotfiles/.ubuntu-config/.xkeysnailrc.py ~/
+        for file in .Xresources .xkeysnailrc.py; do
+            src="${DOTFILES_DIR}/.ubuntu-config/${file}"
+            [[ -e "$src" ]] && ln -sf "$src" ~/. && echo "Linked: $file"
+        done
         ;;
 esac
 
 touch "$HOME/.screen-exchange"
+
+echo "Setup complete!"
