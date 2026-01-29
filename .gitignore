@@ -20,6 +20,7 @@ python2.7
 *.svn
 *.pyc
 *.swp
+*.jar
 *.test
 ~$*
 Physics2DSettings.asset
