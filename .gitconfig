@@ -6,7 +6,7 @@
 [color]
   ui = auto
 [core]
-	excludesfile = /Users/rfujimoto/.gitignore
+  excludesfile = ~/.gitignore
   autocrlf = input                 # CRLFを自動変換
   quotepath = false                # 日本語ファイル名を表示できるようにする
 [alias]
@@ -68,17 +68,3 @@
   edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
   # mergeの際にconflictが起きたファイルをadd
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-[ghq]
-  root = ~/projects/merpay/go/src
-[hub]
-	protocol = ssh
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-[gpg "ssh"]
-	allowedSignersFile = /Users/rfujimoto/.ssh/id_ed25519.pub
-[commit]
-	gpgsign = true
-[tag]
-	gpgSign = true
-[gpg]
-	program = /opt/homebrew/bin/gpg
