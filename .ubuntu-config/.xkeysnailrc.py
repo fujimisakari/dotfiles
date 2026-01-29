@@ -21,6 +21,7 @@ define_modmap({
     Key.ENTER: Key.RIGHT_CTRL,
     Key.SYSRQ: Key.RIGHT_ALT,
     Key.LEFT_META: Key.LEFT_ALT,
+    Key.RIGHT_ALT: Key.ENTER,
 })
 
 # Keybindings for Firefox/Chrome
@@ -68,7 +69,7 @@ define_keymap(re.compile("Zeal"), {
 }, "Zeal")
 
 # Emacs-like keybindings in non-Emacs applications
-define_keymap(lambda wm_class: wm_class not in ("Gnome-terminal", "Emacs", "URxvt"), {
+define_keymap(lambda wm_class: wm_class not in ("Emacs", "Gnome-terminal", "URxvt"), {
     # Cursor
     K("C-b"): with_mark(K("left")),
     K("C-f"): with_mark(K("right")),
