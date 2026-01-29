@@ -16,7 +16,7 @@ function e() {
     ;;
     darwin*)
       echo "chdir to ${PWD}"
-      /usr/local/bin/emacsclient -e "(dired \"${1:a}\")"
+      emacsclient -e "(dired \"${1:a}\")"
     ;;
   esac
 }
@@ -29,15 +29,15 @@ function t() {
     linux*)
       emacs_cwd=`emacsclient -e "
         (if (featurep 'elscreen)
-            (elscreen-current-directory)
-          (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
+            (my/elscreen-current-directory)
+          (my/non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
       # emacs_cwd=`emacsclient -e "(current-directory-to-terminal))" | sed 's/^"\(.*\)"$/\1/'`
     ;;
     darwin*)
-      emacs_cwd=`/usr/local/bin/emacsclient -e "
+      emacs_cwd=`emacsclient -e "
         (if (featurep 'elscreen)
-            (elscreen-current-directory)
-          (non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
+            (my/elscreen-current-directory)
+          (my/non-elscreen-current-directory))" | sed 's/^"\(.*\)"$/\1/'`
       # emacs_cwd=`/usr/local/bin/emacsclient -e "(current-directory-to-terminal)" | sed 's/^"\(.*\)"$/\1/'`
     esac
 
