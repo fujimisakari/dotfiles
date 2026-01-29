@@ -1,4 +1,20 @@
 #!/bin/bash
 
-default_branch=`git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'`
-hub browse -- `git log --merges --oneline --reverse --ancestry-path $1...$default_branch | grep 'Merge pull request #' | head -n 1 | cut -f5 -d' ' | sed -e 's%#%pull/%'`
+default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+
+# PR番号の取得
+prNum1=$(git log --merges --oneline --reverse --ancestry-path $1...$default_branch | grep 'Merge pull request #' | head -n 1 | cut -f5 -d' ' | sed -e 's%#%pull/%')
+prNum2=$(git log $1 --pretty=format:"%h %s" | head -n 1 | grep -oE '#[0-9]+' | sed 's/#//')
+
+# 実行ロジック
+if [[ -n "$prNum1" ]]; then
+    prNum="$prNum1"
+elif [[ -n "$prNum2" ]]; then
+    prNum="pull/$prNum2"
+else
+    echo "対象無し"
+    exit 0
+fi
+
+# PRを開く
+hub browse -- "$prNum"
