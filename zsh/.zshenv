@@ -26,29 +26,6 @@ esac
 export PYTHONDONTWRITEBYTECODE=1  # pycは作らない
 export WERKZEUG_DEBUG_PIN='off'   # for Django-extentions
 
-if [[ -e "${HOME}/.pyenv" ]]; then
-  export PYENV_ROOT=${HOME}/.pyenv
-  PATH=${PYENV_ROOT}/bin:${PATH}
-  eval "$(pyenv init -)"
-fi
-
-## PHP
-if [[ -e "${HOME}/.phpenv" ]]; then
-  PATH=${HOME}/.phpenv/bin:${PATH}
-  eval "$(phpenv init -)"
-fi
-
-## Ruby
-if [[ -e "${HOME}/.rbenv" ]]; then
-  PATH=${HOME}/.rbenv/bin:${PATH}
-  eval "$(rbenv init -)"
-fi
-
-## node.js
-if [[ -e "${HOME}/.nodebrew" ]]; then
-  PATH=${HOME}/.nodebrew/current/bin:${PATH}
-fi
-
 ## Go
 case "${OSTYPE}" in
   linux*)
@@ -68,12 +45,6 @@ case "${OSTYPE}" in
   ;;
 esac
 
-if [[ -e "${HOME}/.goenv" ]]; then
-  export GOENV_DISABLE_GOPATH=1
-  PATH=${HOME}/.goenv/bin:${PATH}
-  eval "$(goenv init -)"
-fi
-
 ## direnv
 if which direnv > /dev/null 2>&1; then
   eval "$(direnv hook zsh)"
@@ -82,12 +53,6 @@ fi
 ## Common Lisp
 if [[ -e "${HOME}/.roswell" ]]; then
   PATH=${HOME}/.roswell/bin:${PATH}
-fi
-
-## Elixir
-if [[ -e "${HOME}/.exenv" ]]; then
-  PATH=${HOME}/.exenv/bin:${PATH}
-  eval "$(exenv init -)"
 fi
 
 ## GITHUB MCP で利用している
