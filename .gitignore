@@ -67,3 +67,4 @@ code-skeletons
 
 .envrc
 .env.project
+.gitconfig.local

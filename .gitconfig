@@ -1,10 +1,12 @@
 [user]
   name = Fujimisakari
   email = fujimisakari@gmail.com
+[include]
+  path = ~/.gitconfig.local
 [color]
   ui = auto
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/rfujimoto/.gitignore
   autocrlf = input                 # CRLFを自動変換
   quotepath = false                # 日本語ファイル名を表示できるようにする
 [alias]
@@ -69,4 +71,14 @@
 [ghq]
   root = ~/projects/merpay/go/src
 [hub]
-	protocol = https
+	protocol = ssh
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[gpg "ssh"]
+	allowedSignersFile = /Users/rfujimoto/.ssh/id_ed25519.pub
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg

@@ -20,6 +20,7 @@ for dotfile in dotfiles_list:
 platform = platform.system()
 if platform == 'Darwin':
     system('ln -sf ~/dotfiles/.gitconfig ~/.')
+    system('ln -sf ~/dotfiles/.gitconfig.local ~/.')
 elif platform == 'Linux':
     system('ln -sf ~/dotfiles/.ubuntu-config/.Xresources ~/')
     system('ln -sf ~/dotfiles/.ubuntu-config/.xkeysnailrc.py ~/')
