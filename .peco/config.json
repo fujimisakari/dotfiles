@@ -2,9 +2,9 @@
     "Style": {
         "Basic": ["on_default", "default"],
         "SavedSelection": ["bold", "on_yellow", "white"],
-        "Selected": ["underline", "on_white", "black"],
+        "Selected": ["underline", "on_237", "white"],
         "Query": ["yellow", "bold"],
-        "Matched": ["blue", "bold"]
+        "Matched": ["69", "bold"]
     },
     "Keymap": {
         "C-f": "peco.ForwardChar",
@@ -23,5 +23,6 @@
         "C-m": "peco.Finish",
         "C-g": "peco.Cancel",
         "C-;": "peco.ToggleSingleKeyJump"
-    }
+    },
+    "Use256Color": true
 }
