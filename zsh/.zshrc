@@ -1,4 +1,5 @@
-
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ###  Load Each Setting File
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -140,3 +141,16 @@ zstyle ':completion:*' recent-dirs-insert both
 if [[ -e "${HOME}/.emacs.d" ]]; then
   ~/.emacs.d/bin/env_genarator.py emacs > ~/.emacs.d/share/shellenv/$(echo ${USER})_shellenv.el
 fi
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Created by `pipx` on 2025-04-05 11:55:05
+export PATH="$PATH:/home/fujimisakari/.local/bin"
+
+## 最優先パス設定（/etc/zprofile の path_helper の後に実行されるようにここで設定）
+PATH=${HOME}/.local/bin:${PATH}
