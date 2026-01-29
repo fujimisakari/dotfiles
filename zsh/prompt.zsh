@@ -8,14 +8,25 @@ autoload vcs_info
 zstyle ":vcs_info:*" enable git
 # commitしていない変更をチェックする
 #zstyle ":vcs_info:git:*" check-for-changes true
-# gitリポジトリに対して、変更情報とリポジトリ情報を表示する
-zstyle ":vcs_info:git:*" formats "\uE709 %r ╲ \uE0A0 %b%u%c"
-# gitリポジトリに対して、コンフリクトなどの情報を表示する
-zstyle ":vcs_info:git:*" actionformats "\uE709 %r ╲ \uE0A0 %b%u%c ╲ %a"
-# addしていない変更があることを示す文字列
-zstyle ":vcs_info:git:*" unstagedstr "╲ Unstaged"
-# commitしていないstageがあることを示す文字列
-zstyle ":vcs_info:git:*" stagedstr "╲ Staged"
+
+case `uname` in
+  Darwin)
+    # gitリポジトリに対して、変更情報とリポジトリ情報を表示する
+    zstyle ":vcs_info:git:*" formats " \uE709  %r \uE0BF  \uE0A0 %b%u%c"
+    # gitリポジトリに対して、コンフリクトなどの情報を表示する
+    zstyle ":vcs_info:git:*" actionformats " \uE709  %r \uE0BF  \uE0A0 %b%u%c \uE0BF  %a"
+    # addしていない変更があることを示す文字列
+    zstyle ":vcs_info:git:*" unstagedstr "\uE0BF  Unstaged"
+    # commitしていないstageがあることを示す文字列
+    zstyle ":vcs_info:git:*" stagedstr "\uE0BF  Staged"
+  ;;
+  Linux)
+    zstyle ":vcs_info:git:*" formats "\uE709 %r ╲ \uE0A0 %b%u%c"
+    zstyle ":vcs_info:git:*" actionformats " \uE709  %r ╲ \uE0A0 %b%u%c ╲ %a"
+    zstyle ":vcs_info:git:*" unstagedstr "╲ Unstaged"
+    zstyle ":vcs_info:git:*" stagedstr "╲ Staged"
+  ;;
+esac
 
 function git_is_track_branch() {
   if [ "$(git remote 2>/dev/null)" != "" ]; then
@@ -34,7 +45,14 @@ function git_info_pull() {
     local head_rev="$(git rev-parse HEAD)"
     local origin_rev="$(git rev-parse origin/$current_branch)"
     if [ "${head_rev}" != "${origin_rev}" ] && [ "$(git_info_push)" = "" ]; then
-      echo " ╲ Can Be Pulled"
+      case `uname` in
+        Darwin)
+          echo " \uE0BF  Can Be Pulled"
+        ;;
+        Linux)
+          echo " ╲ Can Be Pulled"
+        ;;
+      esac
     fi
   fi
 }
@@ -44,7 +62,14 @@ function git_info_push() {
     local current_branch="$(git rev-parse --abbrev-ref HEAD)"
     local push_count=$(git rev-list origin/"${current_branch}".."${current_branch}" 2>/dev/null | wc -l | tr -d ' ')
     if [ "${push_count}" -gt 0 ]; then
-      echo " ╲ Can Be Pushed(${push_count})"
+      case `uname` in
+        Darwin)
+          echo " \uE0BF  Can Be Pushed(${push_count})"
+        ;;
+        Linux)
+          echo " ╲ Can Be Pushed(${push_count})"
+        ;;
+      esac
     fi
   fi
 }
@@ -67,9 +92,24 @@ function update_git_info() {
         bg_color=196
         fg_color=255
     fi
-    echo "%{\e[48;5;${bg_color}m%}%{\e[38;5;063m%}◣%{\e[m%}%{\e[48;5;${bg_color}m%} %{\e[38;5;${fg_color}m%}${vcs_info}${git_info_push}${git_info_pull} %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${bg_color}m%}◣%{\e[m%}%{\e[m%}"
+
+    case `uname` in
+      Darwin)
+        echo "%{\e[48;5;${bg_color}m%}%{\e[38;5;063m%}\uE0B8%{\e[m%}%{\e[48;5;${bg_color}m%} %{\e[38;5;${fg_color}m%}${vcs_info}${git_info_push}${git_info_pull} %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${bg_color}m%}\uE0B8%{\e[m%}%{\e[m%}"
+      ;;
+      Linux)
+        echo "%{\e[48;5;${bg_color}m%}%{\e[38;5;063m%}◣%{\e[m%}%{\e[48;5;${bg_color}m%} %{\e[38;5;${fg_color}m%}${vcs_info}${git_info_push}${git_info_pull} %{\e[m%}%{\e[m%}%{\e[48;5;238m%}%{\e[38;5;${bg_color}m%}◣%{\e[m%}%{\e[m%}"
+      ;;
+    esac
   else
-    echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}◣%{\e[m%}%{\e[m%}"
+    case `uname` in
+      Darwin)
+        echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}\uE0B8%{\e[m%}%{\e[m%}"
+      ;;
+      Linux)
+        echo -n "%{\e[48;5;238m%}%{\e[38;5;063m%}◣%{\e[m%}%{\e[m%}"
+      ;;
+    esac
   fi
 }
 
@@ -97,18 +137,30 @@ case "${TERM}" in
     #                           太字で白文字で赤背景にする。
     #   iconチートシート: https://www.nerdfonts.com/cheat-sheet
     #   256COLORSチートシート: https://jonasjacek.github.io/colors
-    prompt_host=$'%{\e[48;5;063m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;016m%}%n %{\e[m%}%{\e[m%}'
-    prompt_dir=$'%{\e[48;5;238m%}%{\e[38;5;226m%}  \uE5FE  %~ %{\e[m%}% %{\e[m%}'
-    prompt_su=$'%(!.%{%k%F{blue}%K{black}%}\uE0B8%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;238m%}◣%{\e[m%})'
-    prompt_shell=$'%{\e[48;5;247m%} %{\e[38;5;016m%}$ %{\e[m%}%{\e[m%}%{\e[38;5;247m%}\uE0B8%{\e[m%}'
-    if [ `uname` = "Darwin" ]; then
-      prompt_shell=$'%{\e[48;5;247m%} %{\e[38;5;016m%}\uE711  %{\e[m%}%{\e[m%}%{\e[38;5;247m%}◣%{\e[m%}'
-    elif [ `uname` = "Linux" ]; then
-      prompt_shell=$'%{\e[48;5;247m%} %{\e[38;5;016m%}\uF31B  %{\e[m%}%{\e[m%}%{\e[38;5;247m%}◣%{\e[m%}'
-    fi
-    PROMPT=$'
+    case `uname` in
+      Darwin)
+        prompt_host=$'%{\e[48;5;063m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;016m%}%n %{\e[m%}%{\e[m%}'
+        prompt_dir=$'%{\e[48;5;238m%} %{\e[38;5;226m%} \uE5FE  %~ %{\e[m%}% %{\e[m%}'
+        prompt_su=$'%(!.%{%k%F{blue}%K{black}%}\uE0B8%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;238m%}\uE0B8%{\e[m%})'
+        prompt_shell=$'%{\e[48;5;247m%} %{\e[38;5;016m%}\uE711  %{\e[m%}%{\e[m%}%{\e[38;5;247m%}\uE0B8%{\e[m%}'
+        PROMPT=$'
 ${prompt_host}$(update_git_info)${prompt_dir}${prompt_su}%{${reset_color}%}
 ${prompt_shell}  %{%f%k%b%}'
+      ;;
+      Linux)
+        prompt_host=$'%{\e[48;5;063m%} %(?.%{\e[38;5;077m%}✔.%{\e[38;5;196m%}✘) %{\e[38;5;016m%}%n %{\e[m%}%{\e[m%}'
+        prompt_dir=$'%{\e[48;5;238m%}%{\e[38;5;226m%} \uE5FE %~ %{\e[m%}% %{\e[m%}'
+        prompt_su=$'%(!.%{%k%F{blue}%K{black}%}\uE0B8%{%F{yellow}%} ⚡ %{%k%F{black}%}.%{\e[38;5;238m%}◣%{\e[m%})'
+        prompt_shell=$'%{\e[48;5;247m%} %{\e[38;5;016m%}\uF31B  %{\e[m%}%{\e[m%}%{\e[38;5;247m%}◣%{\e[m%}'
+        PROMPT=$'
+${prompt_host}$(update_git_info)${prompt_dir}${prompt_su}%{${reset_color}%}
+${prompt_shell}  %{%f%k%b%}'
+      ;;
+      *)
+        PROMPT="${green}%m${magenta}%# %{${reset_color}%}"
+        PROMPT2="${white}%_>%{${reset_color}%}"
+      ;;
+    esac
     SPROMPT='${white}%r is correct? [n,y,a,e]: %{${reset_color}%}'
   ;;
   # trampでの接続用
