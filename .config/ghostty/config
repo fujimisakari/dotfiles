@@ -1,0 +1,79 @@
+# Font settings
+font-family = "Comic Code"
+font-family = "Osaka-Mono"
+font-size = 16.5
+font-style = regular
+font-style-bold = bold
+font-style-bold-italic = bold italic
+font-style-italic = italic
+
+# Cell spacing (horizontal, vertical)
+adjust-cell-width = -10%
+adjust-cell-height = 8%
+
+# Window settings
+window-width = 100
+window-height = 40
+window-padding-x = 0
+window-padding-y = 0
+macos-titlebar-style = hidden
+
+# Background transparency
+background-opacity = 0.72
+
+# Cursor settings
+cursor-style = block
+cursor-style-blink = true
+cursor-color = #bbbbbb
+cursor-text = #ffffff
+
+# Terminal settings
+term = xterm-256color
+scrollback-limit = 10000000
+
+# Bell settings (disable all bell features)
+bell-features = no-attention,no-title
+
+# Colors - Background and Foreground
+background = #000000
+foreground = #bbbbbb
+
+# Selection colors
+selection-background = #b5d5ff
+selection-foreground = #000000
+
+# Bold color
+bold-is-bright = false
+
+# ANSI Colors (0-7: normal, 8-15: bright)
+# Black
+palette = 0=#000000
+palette = 8=#555555
+
+# Red
+palette = 1=#ee6263
+palette = 9=#ff5555
+
+# Green
+palette = 2=#00ee75
+palette = 10=#04f97f
+
+# Yellow
+palette = 3=#cdcd00
+palette = 11=#fefb00
+
+# Blue
+palette = 4=#4068e0
+palette = 12=#5555ff
+
+# Magenta
+palette = 5=#ee79e9
+palette = 13=#ff76ff
+
+# Cyan
+palette = 6=#00e4ed
+palette = 14=#00f5fe
+
+# White
+palette = 7=#bbbbbb
+palette = 15=#ffffff
