@@ -60,11 +60,6 @@ if which nodenv > /dev/null 2>&1; then
   eval "$(nodenv init - --no-rehash zsh)"
 fi
 
-## Common Lisp
-if [[ -e "${HOME}/.roswell" ]]; then
-  PATH=${HOME}/.roswell/bin:${PATH}
-fi
-
 ## GITHUB MCP で利用している
 export GITHUB_TOKEN=$(gh auth token 2>/dev/null)
 
