@@ -1,4 +1,5 @@
 
+
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ###  Enviroment Setting
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,6 +9,9 @@ case "${OSTYPE}" in
     PATH=${HOME}/.local/bin:${HOME}/dotfiles/bin:/sbin:/usr/sbin:${PATH}
   ;;
   darwin*)
+    # /etc/zprofile の path_helper による PATH 並び替えを抑止
+    # (これがないと /etc/paths.d/homebrew の /opt/homebrew/bin が nodenv shims より前に来る)
+    setopt no_global_rcs
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
     PATH=/usr/local/opt/coreutils/libexec/gnubin:${HOME}/dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:/sbin:/usr/sbin:/Applications/Emacs.app/Contents/MacOS/bin:${PATH}
     if [[ -e "/usr/local/opt/llvm/bin" ]]; then
@@ -48,6 +52,12 @@ esac
 ## direnv
 if which direnv > /dev/null 2>&1; then
   eval "$(direnv hook zsh)"
+fi
+
+# nodenv
+if which nodenv > /dev/null 2>&1; then
+  export PATH=${HOME}/.nodenv/shims:$PATH
+  eval "$(nodenv init - --no-rehash zsh)"
 fi
 
 ## Common Lisp
