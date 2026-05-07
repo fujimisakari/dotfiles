@@ -46,13 +46,8 @@ function _git_status_info() {
       echo " ${_git_sep}  Can Be Pulled"
     fi
   else
-    # リモートブランチがない場合、origin/HEADからの差分を表示
-    local commits=$(git rev-list origin/HEAD..HEAD 2>/dev/null | wc -l | tr -d ' ')
-    if [ "${commits}" -gt 0 ]; then
-      echo " ${_git_sep}  Unpushed Branch(${commits})"
-    else
-      echo " ${_git_sep}  Unpushed Branch"
-    fi
+    # リモートブランチがない場合、カレントブランチ未Push表示
+    echo " ${_git_sep}  Unpushed Branch"
   fi
 }
 
