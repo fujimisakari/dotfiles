@@ -31,7 +31,7 @@ esac
 ###  History Setting
 ###;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-HISTFILE=~/Dropbox/zsh_history
+HISTFILE=~/.zsh_history
 HISTSIZE=300000              # ヒストリに保存するコマンド数
 SAVEHIST=300000              # ヒストリファイルに保存するコマンド数
 setopt hist_ignore_all_dups  # 重複するコマンド行は古い方を削除
