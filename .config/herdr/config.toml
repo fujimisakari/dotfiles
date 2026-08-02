@@ -1,0 +1,138 @@
+# herdr configuration
+# ~/.config/herdr/config.toml に配置する (このリポジトリからシンボリックリンク)
+#
+# .tmux.conf の挙動を可能な限り再現する設定。
+# tmux の概念との対応: window → tab / session → workspace / pane はそのまま。
+# 反映: herdr server reload-config  (プレフィックスキーからは prefix+r)
+
+# オンボーディング表示は不要
+onboarding = false
+
+##############################
+# Theme (StatusBar 相当)
+##############################
+# tmux では自前でステータスバーの色を組んでいたが、herdr はテーマ + サイドバーで管理する。
+# "terminal" は外側ターミナル(Ghostty)の配色をそのまま使うため、既存の見た目に一番近い。
+[theme]
+name = "terminal"
+
+##############################
+# Terminal (default shell 等)
+##############################
+auto_switch = false
+[terminal]
+# 新規ペインは $SHELL (= zsh) を使う。空文字で $SHELL を継承。
+default_shell = ""
+shell_mode = "auto"
+# 新規ペイン/タブ/ワークスペースは元のペインの cwd を引き継ぐ
+new_cwd = "follow"
+
+##############################
+# Update
+##############################
+[update]
+channel = "stable"
+
+##############################
+# KeyBinding
+##############################
+[keys]
+# prefix キーを C-z に変更 (.tmux.conf: set -g prefix C-z)
+prefix = "ctrl+z"
+
+# 設定ファイルのリロード (.tmux.conf: bind r source-file)
+reload_config = "prefix+r"
+
+# ウィンドウ(=tab)の切り替え (.tmux.conf: C-M-l / C-M-h をプレフィックス無しで)
+next_tab = "ctrl+alt+l"
+previous_tab = "ctrl+alt+h"
+
+# 番号での tab 切り替え (tmux の prefix+数字 相当)
+switch_tab = "prefix+1..9"
+
+# 新規 tab (.tmux.conf は tmux 標準の prefix+c を踏襲)
+new_tab = "prefix+c"
+
+# ウィンドウ(=tab)の削除 (.tmux.conf: bind X kill-window)
+close_tab = "prefix+shift+x"
+
+# セッション終了に近い操作。tmux の bind Q(kill-session) の指の記憶に合わせる。
+# ※ herdr の session そのものの kill は `herdr session` CLI で行う。
+close_workspace = "prefix+shift+q"
+
+# デタッチ (tmux の detach-client 相当)
+detach = "prefix+q"
+
+# ペインの分割
+#   | で左右分割 (.tmux.conf: bind | split-window -h)
+#   - で上下分割 (.tmux.conf: bind - split-window -v)
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+
+# ペインの削除
+close_pane = "prefix+x"
+
+# vim キーバインドでペイン移動 (.tmux.conf: bind h/j/k/l select-pane)
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# ペインのリサイズ。
+# tmux は prefix+H/J/K/L で直接リサイズだったが、herdr は「リサイズモード」に入り
+# h/j/k/l で調整する方式。tmux の r(reload) を prefix+r に譲ったので shift+r に置く。
+resize_mode = "prefix+shift+r"
+
+# ペインのズーム (tmux の resize-pane -Z 相当)
+zoom = "prefix+z"
+
+# スクロールバックを $EDITOR で開く (tmux のコピーモード相当の閲覧手段)
+edit_scrollback = "prefix+e"
+
+# サイドバーの表示/非表示トグル
+toggle_sidebar = "prefix+b"
+
+##############################
+# UI
+##############################
+[ui]
+# tmux のカレントウィンドウ色 (#9999ff) をアクセントカラーに踏襲
+accent = "#9999ff"
+# サイドバーはワークスペース/タブ一覧。tmux のステータスバー位置(top)とは異なる概念。
+sidebar_width = 26
+# たたんだときは幅ゼロで完全に消す ("compact" だと細い状態表示が残る)
+sidebar_collapsed_mode = "hidden"
+# 単一タブのときはタブバーを隠す (tmux の renumber-windows で番号を詰めていた感覚に近い、すっきり表示)
+hide_tab_bar_when_single_tab = true
+
+# 通知: .tmux.conf の allow-passthrough は Claude Code → Ghostty のデスクトップ通知用だった。
+# herdr では外側ターミナル(Ghostty)にデスクトップ通知を依頼する "terminal" を使う。
+[ui.toast]
+delivery = "terminal"
+
+##############################
+# Session (persistence)
+##############################
+# tmux-resurrect / continuum によるセッション永続化に相当。
+# サーバー再起動後もエージェントのペインを復元する。
+[session]
+resume_agents_on_restore = true
+
+##############################
+# Experimental (日本語 IME 対策)
+##############################
+# prefix が Ctrl-z のため、日本語 IME 有効時でも prefix コマンドが効くように
+# prefix モード中だけ ASCII 入力ソースへ一時切り替えする (macOS のみ)。
+[experimental]
+switch_ascii_input_source_in_prefix = true
+# Claude Code / codex などが自前カーソルを描くと IME 変換候補が追従しない問題への対策。
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude", "codex"]
+
+##############################
+# Advanced
+##############################
+# スクロールバック上限。Ghostty の scrollback-limit (10MB) に合わせる。
+# (.tmux.conf の history-limit 100000 行に相当する保持量)
+[advanced]
+scrollback_limit_bytes = 10000000
