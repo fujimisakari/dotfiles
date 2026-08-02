@@ -17,6 +17,7 @@ window-height = 40
 window-padding-x = 0
 window-padding-y = 0
 macos-titlebar-style = hidden
+window-decoration = false
 
 # Background transparency
 background-opacity = 0.72
