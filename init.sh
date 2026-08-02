@@ -23,12 +23,13 @@ dotfiles=(
     '.peco'
     '.dircolors'
     '.tmux.conf'
+    '.hammerspoon'
 )
 
 for dotfile in "${dotfiles[@]}"; do
     src="${DOTFILES_DIR}/${dotfile}"
     [[ -e "$src" ]] || { echo "Warning: $src not found, skipping"; continue; }
-    ln -sf "$src" ~/. && echo "Linked: $dotfile"
+    ln -sfn "$src" ~/. && echo "Linked: $dotfile"
 done
 
 # OS固有設定
