@@ -36,8 +36,50 @@ local function drawBorder(win)
   border:show()
 end
 
+--------------------------------------------------------------------------------
+-- フォーカスが移った瞬間、そのウィンドウの左上に一瞬だけバッジを出す
+-- 「このウィンドウにフォーカスが当たった」ことを 1 秒ほど視覚的に知らせる
+--------------------------------------------------------------------------------
+local flash = nil
+local flashTimer = nil
+
+local function clearFlash()
+  if flashTimer then flashTimer:stop(); flashTimer = nil end
+  if flash then flash:delete(); flash = nil end
+end
+
+local function flashFocusBadge(win)
+  if not isRealWindow(win) then return end
+  clearFlash()
+
+  local label = win:application():name() or "focused"
+  local f = win:frame()
+
+  local w, h = 220, 34
+  local margin = 12
+  flash = hs.canvas.new({ x = f.x + margin, y = f.y + margin, w = w, h = h })
+  flash:appendElements({
+    type = "rectangle",
+    action = "fill",
+    fillColor = { red = 0.56, green = 0.41, blue = 0.72, alpha = 0.95 }, -- 中間よりやや明るめの紫
+    roundedRectRadii = { xRadius = 8, yRadius = 8 },
+  }, {
+    type = "text",
+    text = "◉ " .. label,
+    textColor = { white = 1, alpha = 1 },
+    textSize = 15,
+    textAlignment = "left",
+    frame = { x = 12, y = 7, w = w - 20, h = h - 10 },
+  })
+  flash:level(hs.canvas.windowLevels.overlay)
+  flash:show()
+
+  -- 1 秒後に消す
+  flashTimer = hs.timer.doAfter(1.0, clearFlash)
+end
+
 local wf = hs.window.filter.new()
-wf:subscribe(hs.window.filter.windowFocused,   function(win) drawBorder(win) end)
+wf:subscribe(hs.window.filter.windowFocused,   function(win) drawBorder(win); flashFocusBadge(win) end)
 wf:subscribe(hs.window.filter.windowMoved,     function(win) drawBorder(win) end)
 wf:subscribe(hs.window.filter.windowUnfocused, function(win)
   -- 通常ウィンドウが外れたときだけ枠を消す（IME候補が閉じても維持）
