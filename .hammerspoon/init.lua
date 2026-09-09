@@ -111,7 +111,12 @@ local function cycleWindowsInSpace(sameAppOnly)
   for i, w in ipairs(wins) do
     if w:id() == focused:id() then idx = i; break end
   end
-  wins[(idx % #wins) + 1]:focus()
+  local target = wins[(idx % #wins) + 1]
+
+  -- Emacs はウィンドウの role を AXTextField として報告するため win:focus() だけでは
+  -- 前面化できないことがある。アプリの activate() を併用して確実に前面へ持ってくる。
+  target:application():activate()
+  target:focus()
 end
 
 -- 全アプリのウィンドウを Space 内で順送り（Ghostty / Emacs / Settings をまたいで移動）
