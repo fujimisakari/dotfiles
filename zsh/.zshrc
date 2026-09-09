@@ -151,3 +151,6 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 
 ## 最優先パス設定（macOS の path_helper 対策）
 PATH=${HOME}/.local/bin:${PATH}
+
+## API キーなど秘匿情報の読み込み（実体は git 管理外）
+loadlib ${HOME}/.config/litellm/env
