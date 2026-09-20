@@ -48,6 +48,8 @@ define_keymap(re.compile("Firefox|Google-chrome"), {
 
 # Keybindings for Gnome-terminal
 define_keymap(re.compile("Gnome-terminal"), {
+    # Insert a half-width space through Mozc
+    K("M-space"): K("Shift-space"),
     # Enter
     K("page_down"): K("enter"),
 
@@ -60,6 +62,8 @@ define_keymap(re.compile("Gnome-terminal"), {
 define_keymap(re.compile("Emacs"), {
     # for mozc
     K("C-j"): K("F12"),
+    # Insert a half-width space through Mozc
+    K("M-space"): K("Shift-space"),
 }, "Emacs")
 
 # Keybindings for Zeal https://github.com/zealdocs/zeal/
@@ -106,6 +110,8 @@ define_keymap(lambda wm_class: wm_class not in ("Emacs", "Gnome-terminal", "URxv
     K("C-Shift-ro"): K("C-z"),
     # Mark
     K("C-space"): set_mark(True),
+    # Insert a half-width space while using Mozc (Mozc interprets Shift+Space this way)
+    K("M-space"): K("Shift-space"),
     # Search
     K("C-s"): K("F3"),
     K("C-r"): K("Shift-F3"),
