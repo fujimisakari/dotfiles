@@ -24,12 +24,15 @@ local function drawBorder(win)
   if not isRealWindow(win) then return end                -- 対象外なら枠は今のまま維持
   clearBorder()
   local f = win:frame()
-  border = hs.canvas.new(f)
+  local w = 2                                             -- 枠の太さ
+  local pad = w                                           -- 枠が切れないようキャンバスを外側に広げる
+  border = hs.canvas.new({ x = f.x - pad, y = f.y - pad, w = f.w + pad * 2, h = f.h + pad * 2 })
   border:appendElements({
     type = "rectangle",
     action = "stroke",
+    frame = { x = pad, y = pad, w = f.w, h = f.h },
     strokeColor = { red = 0.75, green = 0.55, blue = 0.95, alpha = 1 }, -- 薄めの紫の枠
-    strokeWidth = 1.5,
+    strokeWidth = w,
     roundedRectRadii = { xRadius = 8, yRadius = 8 },
   })
   border:level(hs.canvas.windowLevels.overlay) -- 常に前面
