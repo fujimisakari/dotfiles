@@ -1,3 +1,6 @@
+-- `hs` CLI から設定を問い合わせ/操作できるようにする (デバッグ用)
+require("hs.ipc")
+
 -- フォーカス中のウィンドウを赤枠でハイライトする
 -- 似た画面が並んでいても、今アクティブなウィンドウが一目で分かる
 
@@ -99,13 +102,34 @@ hs.alert.show("Hammerspoon: フォーカス枠ハイライト 有効")
 -- macOS 標準の ⌘` は別 Space のウィンドウに移ると Space ごと切り替わるが、
 -- setCurrentSpace(true) で候補を現在の Space に限定するため Space 切替が起きない
 --------------------------------------------------------------------------------
+-- ウィンドウフィルタは AX オブザーバを張る重いオブジェクトなので、押下ごとに作らず
+-- 一度だけ作って使い回す。毎回 new() するとオブザーバの張り直しが積み上がり、
+-- コールバック内でエラー (hs.logger の stack overflow) になって「その押下だけ何も
+-- 起きない」という間欠的な取りこぼしが発生する。
+local spaceFilters = setmetatable({}, { __mode = "v" })
+local function spaceFilter(appName)
+  local key = appName or "*"
+  if not spaceFilters[key] then
+    spaceFilters[key] = hs.window.filter.new(appName):setCurrentSpace(true)
+  end
+  return spaceFilters[key]
+end
+
 local function cycleWindowsInSpace(sameAppOnly)
   local focused = hs.window.focusedWindow()
   if not focused then return end
 
   local appName = sameAppOnly and focused:application():name() or nil
-  local wf = hs.window.filter.new(appName):setCurrentSpace(true)
-  local wins = wf:getWindows(hs.window.filter.sortByCreated) -- 安定した順序
+  local wf = spaceFilter(appName)
+
+  -- ivy-posframe などの Emacs 子フレームは AX 上 subrole=AXDialog の別ウィンドウとして
+  -- 現れる。これが候補に混ざると「Emacs の次」がその不可視ウィンドウになり、focus() でも
+  -- 何も起きないため alt+tab が空振りする。枠表示と同じ isRealWindow の基準で
+  -- 通常ウィンドウだけに絞る。
+  local wins = {}
+  for _, w in ipairs(wf:getWindows(hs.window.filter.sortByCreated)) do -- 安定した順序
+    if isRealWindow(w) then table.insert(wins, w) end
+  end
 
   if #wins < 2 then return end
 
@@ -116,14 +140,61 @@ local function cycleWindowsInSpace(sameAppOnly)
   end
   local target = wins[(idx % #wins) + 1]
 
-  -- Emacs はウィンドウの role を AXTextField として報告するため win:focus() だけでは
-  -- 前面化できないことがある。アプリの activate() を併用して確実に前面へ持ってくる。
+  -- win:focus() だけでは前面化しきれないことがあるため、アプリの activate() も併用する。
   target:application():activate()
   target:focus()
 end
 
--- 全アプリのウィンドウを Space 内で順送り（Ghostty / Emacs / Settings をまたいで移動）
-hs.hotkey.bind({ "alt" }, "tab", function() cycleWindowsInSpace(false) end)
+--------------------------------------------------------------------------------
+-- ⌥Tab の受け方
+--   * hs.hotkey (Carbon の system hotkey) 単独では取りこぼす。実測で 9 回の押下に対し
+--     発火 6 回で、落ちた 3 回はいずれも「直前の押下でアプリを切り替えた直後」だった。
+--   * eventtap 単独では OS 側に無効化されたときに操作ごと死ぬ (Ghostty でも効かなくなる)。
+--   そこで eventtap を主、hs.hotkey を保険として両方張る。eventtap が生きている間は
+--   イベントを消費するので hs.hotkey は発火せず、二重遷移にはならない。万一両方来ても
+--   下の debounce で弾く。
+--------------------------------------------------------------------------------
+local TAB_KEYCODE = hs.keycodes.map.tab
+local lastCycleNs = 0
+
+local function triggerCycle()
+  -- eventtap と hs.hotkey の 2 つの経路があるため、近接した重複呼び出しを弾く
+  local now = hs.timer.absoluteTime()
+  if (now - lastCycleNs) < 150e6 then return end -- 150ms
+  lastCycleNs = now
+  cycleWindowsInSpace(false)
+end
+
+local altTabTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(e)
+  -- 全打鍵を通るので、tab 以外は最小コストで抜ける
+  if e:getKeyCode() ~= TAB_KEYCODE then return false end
+  local f = e:getFlags()
+  if not f.alt or f.cmd or f.ctrl or f.shift then return false end
+  -- キーリピートで届いた keyDown は無視する。hs.hotkey は押下とリピートを別扱いするが
+  -- eventtap には両方そのまま来るため、押しっぱなしだと 33ms 間隔で連続遷移してしまう。
+  if e:getProperty(hs.eventtap.event.properties.keyboardEventAutorepeat) ~= 0 then
+    return true
+  end
+  -- AX 問い合わせをコールバック内で同期実行するとタップが OS に無効化されうるので、
+  -- 消費だけ即座に返し、ウィンドウ切り替えは次のループに回す。
+  hs.timer.doAfter(0, triggerCycle)
+  return true -- 消費して Emacs の <M-tab> に渡さない
+end)
+altTabTap:start()
+
+-- eventtap が無効化されても操作が死なないよう system hotkey も張っておく
+hs.hotkey.bind({ "alt" }, "tab", triggerCycle)
+
+-- 無効化されたタップを早めに復帰させる
+hs.timer.doEvery(5, function()
+  if not altTabTap:isEnabled() then altTabTap:start() end
+end)
+
+-- 状態を外から確認できるようにする (hs -c "return altTabStatus()")
+_G.altTabStatus = function()
+  return string.format("eventtap=%s / hotkey=%d件",
+    tostring(altTabTap:isEnabled()), #hs.hotkey.getHotkeys())
+end
 
 -- 同一アプリのウィンドウだけを順送りしたい場合はこちらを有効化
 -- hs.hotkey.bind({ "alt", "shift" }, "tab", function() cycleWindowsInSpace(true) end)
