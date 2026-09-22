@@ -127,9 +127,20 @@ local function cycleWindowsInSpace(sameAppOnly)
   -- 何も起きないため alt+tab が空振りする。枠表示と同じ isRealWindow の基準で
   -- 通常ウィンドウだけに絞る。
   local wins = {}
-  for _, w in ipairs(wf:getWindows(hs.window.filter.sortByCreated)) do -- 安定した順序
+  for _, w in ipairs(wf:getWindows()) do
     if isRealWindow(w) then table.insert(wins, w) end
   end
+
+  -- 巡回順は画面上の位置で決める。sortByCreated だとウィンドウを起動した順が
+  -- そのまま並びになるため、同じ配置でも起動の仕方で巡回方向が変わってしまう。
+  -- 列優先 (左の列から右へ、各列は上から下へ) にすると配置だけで順序が決まり、
+  -- 起動順に依存しない。同座標のときは id で並べて順序を安定させる。
+  table.sort(wins, function(a, b)
+    local fa, fb = a:frame(), b:frame()
+    if fa.x ~= fb.x then return fa.x < fb.x end
+    if fa.y ~= fb.y then return fa.y < fb.y end
+    return (a:id() or 0) < (b:id() or 0)
+  end)
 
   if #wins < 2 then return end
 
